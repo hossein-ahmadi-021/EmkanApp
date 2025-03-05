@@ -19,7 +19,7 @@ export default async function Home({
         <source src="/videos/landing-bg-1.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="relative z-10 pt-24">
+      <div className="relative z-10 pt-12">
         <div className="text-red-500">{dict.home.title}</div>
         <div className="">{dict.home.description}</div>
       </div>
