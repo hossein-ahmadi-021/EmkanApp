@@ -2,7 +2,8 @@ export type IconNames =
   | "LogoIcon"
   | "HambergerIcon"
   | "SearchIcon"
-  | "ReagonIcon";
+  | "ReagonIcon"
+  | "InsideIcon";
 
 export interface IconType {
   width: string;

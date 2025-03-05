@@ -4,6 +4,7 @@ import LogoIcon from "@/assets/icons/logo";
 import HambergerIcon from "@/assets/icons/hamberger";
 import SearchIcon from "@/assets/icons/search";
 import ReagonIcon from "@/assets/icons/reagon";
+import InsideIcon from "@/assets/icons/inside";
 
 export const iconList: Record<
   IconNames,
@@ -13,6 +14,7 @@ export const iconList: Record<
   HambergerIcon,
   SearchIcon,
   ReagonIcon,
+  InsideIcon,
 };
 
 export const colors: Record<IconColorsType, string> = {
