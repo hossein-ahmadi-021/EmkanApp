@@ -1,15 +1,27 @@
 import { ReactNode } from "react";
 import { IconNames } from "@/types/public/icon.types";
 import AppIcon from "@/common/appIcon";
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   children?: ReactNode;
   icon?: IconNames;
+  className?: string;
 }
 
-export default function AppButton({ icon, children }: Props) {
+export default function AppButton({ icon, children, className }: Props) {
+  const buttonClasses = twMerge(
+    "rounded-full bg-primary text-lg flex items-center gap-3",
+    clsx({
+      "ps-6": icon,
+      "p-4": !icon,
+    }),
+    className,
+  );
+
   return (
-    <button className="rounded-full bg-primary text-lg flex items-center gap-3 ps-6">
+    <button className={buttonClasses}>
       {children}
       {icon && <AppIcon name={icon} width="48px" height="48px" />}
     </button>
