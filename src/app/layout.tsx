@@ -45,6 +45,44 @@ const peydaFont = localFont({
   variable: "--font-peyda",
 });
 
+const yekanFont = localFont({
+  src: [
+    {
+      path: "/_fonts/yekan/YekanBakh-Thin.ttf",
+      weight: "100",
+    },
+    {
+      path: "/_fonts/yekan/YekanBakh-Thin.ttf",
+      weight: "200",
+    },
+    {
+      path: "/_fonts/yekan/YekanBakh_Light.ttf",
+      weight: "300",
+    },
+    {
+      path: "/_fonts/yekan/YekanBakh-Regular.ttf",
+      weight: "400",
+    },
+    {
+      path: "/_fonts/yekan/YekanBakh-Regular.ttf",
+      weight: "500",
+    },
+    {
+      path: "/_fonts/yekan/YekanBakh-SemiBold.ttf",
+      weight: "600",
+    },
+    {
+      path: "/_fonts/yekan/YekanBakh-Bold.ttf",
+      weight: "700",
+    },
+    {
+      path: "/_fonts/yekan/YekanBakh-ExtraBold.ttf",
+      weight: "900",
+    },
+  ],
+  variable: "--font-yekan",
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -52,7 +90,9 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className={`${peydaFont.className} `}>{children}</body>
+      <body className={`${peydaFont.className} ${yekanFont.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

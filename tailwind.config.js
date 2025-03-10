@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        peyda: ["var(--font-inter)"],
+        peyda: ["var(--font-peyda)"],
+        yekan: ["var(--font-yekan)"],
       },
       colors: {
         primary: "#104946",

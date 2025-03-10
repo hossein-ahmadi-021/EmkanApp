@@ -3,7 +3,11 @@ export type IconNames =
   | "HambergerIcon"
   | "SearchIcon"
   | "ReagonIcon"
-  | "InsideIcon";
+  | "InsideIcon"
+  | "PlayIcon"
+  | "PauseIcon"
+  | "MuteIcon"
+  | "VolumeIcon";
 
 export interface IconType {
   width: string;
