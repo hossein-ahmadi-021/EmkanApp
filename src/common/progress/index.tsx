@@ -8,11 +8,11 @@ import { useLangStore } from "@/store/langStore";
 interface ProgressProps
   extends Omit<
     React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
-    "onClick" // Omit the default onClick type
+    "onClick"
   > {
   className?: string;
   value?: number;
-  onClick?: (value: number) => void; // Define a custom onClick prop
+  onClick?: (value: number) => void;
 }
 
 const Progress = React.forwardRef<
@@ -23,14 +23,13 @@ const Progress = React.forwardRef<
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    const clickX = event.clientX - rect.left; // Get click position from the left
+    const clickX = event.clientX - rect.left;
 
-    // Adjust clickX for RTL (calculate from the right)
     const adjustedClickX = isRTL ? rect.width - clickX : clickX;
 
-    const newValue = (adjustedClickX / rect.width) * 100; // Calculate the percentage clicked
+    const newValue = (adjustedClickX / rect.width) * 100;
     if (onClick) {
-      onClick(newValue); // Pass the calculated value to the parent
+      onClick(newValue);
     }
   };
 
@@ -41,15 +40,15 @@ const Progress = React.forwardRef<
         "relative h-2 w-full overflow-hidden rounded-full bg-primary/20",
         className,
       )}
-      onClick={handleClick} // Attach click handler
+      onClick={handleClick}
       {...props}
     >
       <ProgressPrimitive.Indicator
         className="h-full w-full flex-1 bg-white transition-all"
         style={{
           transform: isRTL
-            ? `translateX(${100 - (value || 0)}%)` // Fill from the right for RTL
-            : `translateX(-${100 - (value || 0)}%)`, // Fill from the left for LTR
+            ? `translateX(${100 - (value || 0)}%)`
+            : `translateX(-${100 - (value || 0)}%)`,
         }}
       />
     </ProgressPrimitive.Root>
