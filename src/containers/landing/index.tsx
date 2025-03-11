@@ -3,17 +3,17 @@ import { useRef, useState } from "react";
 import AppIcon from "@/common/appIcon";
 import { Progress } from "@/common/progress";
 import LandingInfoBox from "@/containers/landing/landingInfoBox";
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   dict: {
-    home: {
-      infoCards: {
-        title: string;
-        subTitle: string;
-        desc: string;
-      }[];
-      tabs: { title: string; id: number }[];
-    };
+    infoCards: {
+      title: string;
+      subTitle: string;
+      desc: string;
+    }[];
+    tabs: { title: string; id: number }[];
   };
 }
 
@@ -65,12 +65,12 @@ export default function LandingSection({ dict }: Props) {
       <div className="relative z-10 py-36 text-white">
         <LandingInfoBox
           data={{
-            title: dict.home.infoCards[activeTab].title,
-            subTitle: dict.home.infoCards[activeTab].subTitle,
-            desc: dict.home.infoCards[activeTab].desc,
+            title: dict.infoCards[activeTab].title,
+            subTitle: dict.infoCards[activeTab].subTitle,
+            desc: dict.infoCards[activeTab].desc,
           }}
         />
-        <div className="mt-[146px]">
+        <div className="">
           <div className="flex items-center gap-5">
             <div
               onClick={pause ? handlePlay : handlePause}
@@ -102,19 +102,27 @@ export default function LandingSection({ dict }: Props) {
           </div>
         </div>
         <div className="flex items-center mt-5">
-          {dict.home.tabs.map((item) => {
+          {dict.tabs.map((item: any) => {
             const isActive = item.id === activeTab;
+
+            const titleClass = twMerge(
+              "text-2xl",
+              clsx({
+                "font-bold": isActive,
+                "font-normal": !isActive,
+              }),
+            );
 
             return (
               <div
                 key={item.title}
                 onClick={() => setActiveTab(item.id)}
-                className="flex items-center justify-center gap-5 cursor-pointer grow select-none"
+                className="flex items-center justify-center gap-5 cursor-pointer grow select-none font-normal"
               >
                 {isActive && (
                   <AppIcon name="SymbolIcon" width="12px" height="24px" />
                 )}
-                <div className="text-2xl font-bold">{item.title}</div>
+                <div className={titleClass}>{item.title}</div>
               </div>
             );
           })}
