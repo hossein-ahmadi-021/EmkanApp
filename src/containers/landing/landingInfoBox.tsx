@@ -41,7 +41,7 @@ export default function LandingInfoBox({ data, rtl }: Props) {
           variants={animateStart}
           initial="hidden"
           animate="visible"
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           className="bg-[#B2FFE26E] rounded-full h-[100px] w-[100px] flex justify-center items-center mt-10 absolute"
         >
           <AppIcon color="primary" name="PlayIcon" width="20px" height="20px" />

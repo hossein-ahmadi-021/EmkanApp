@@ -12,7 +12,7 @@ interface Props {
 
 export default function AppButton({ icon, children, className }: Props) {
   const buttonClasses = twMerge(
-    "rounded-full bg-primary cursor-pointer text-lg flex items-center justify-between gap-3 h-[50px]",
+    "rounded-full bg-primary cursor-pointer text-lg flex items-center justify-between gap-3",
     clsx({
       "ps-6": icon,
       "p-4": !icon,

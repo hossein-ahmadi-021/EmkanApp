@@ -21,9 +21,14 @@ interface Props {
 }
 
 export default function LandingSection({ dict, rtl }: Props) {
-  const variants = {
+  const clickTabsVariant = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  };
+
+  const loadTabsVariants = {
+    hidden: { y: "100%" },
+    visible: { y: 0 },
   };
 
   // States
@@ -59,7 +64,7 @@ export default function LandingSection({ dict, rtl }: Props) {
   };
 
   return (
-    <>
+    <section className="h-screen">
       <video
         ref={videoRef}
         autoPlay
@@ -85,69 +90,76 @@ export default function LandingSection({ dict, rtl }: Props) {
             />
           );
         })}
-        <div className="flex items-center gap-5">
-          <div
-            onClick={pause ? handlePlay : handlePause}
-            className="cursor-pointer"
-          >
-            <AppIcon
-              name={pause ? "PlayIcon" : "PauseIcon"}
-              width="15px"
-              height="18px"
-            />
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={loadTabsVariants}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="flex items-center gap-5">
+            <div
+              onClick={pause ? handlePlay : handlePause}
+              className="cursor-pointer"
+            >
+              <AppIcon
+                name={pause ? "PlayIcon" : "PauseIcon"}
+                width="15px"
+                height="18px"
+              />
+            </div>
+            <div
+              onClick={() => setMuted((prev) => !prev)}
+              className="cursor-pointer"
+            >
+              <AppIcon
+                name={muted ? "MuteIcon" : "VolumeIcon"}
+                width="18px"
+                height="18px"
+              />
+            </div>
+            <div className="grow h-4 flex items-center group">
+              <Progress
+                value={volume * 100}
+                onClick={handleVolumeChange}
+                className="cursor-pointer h-[2px] group-hover:h-4 transition-all"
+              />
+            </div>
           </div>
-          <div
-            onClick={() => setMuted((prev) => !prev)}
-            className="cursor-pointer"
-          >
-            <AppIcon
-              name={muted ? "MuteIcon" : "VolumeIcon"}
-              width="18px"
-              height="18px"
-            />
-          </div>
-          <div className="grow h-4 flex items-center group">
-            <Progress
-              value={volume * 100}
-              onClick={handleVolumeChange}
-              className="cursor-pointer h-[2px] group-hover:h-4 transition-all"
-            />
-          </div>
-        </div>
-        <div className="flex items-center mt-[1.74vh]">
-          {dict.tabs.map((item: any) => {
-            const isActive = item.id === activeTab;
+          <div className="flex items-center mt-[1.74vh]">
+            {dict.tabs.map((item: any) => {
+              const isActive = item.id === activeTab;
 
-            const titleClass = twMerge(
-              "text-2xl",
-              clsx({
-                "font-bold": isActive,
-                "font-normal": !isActive,
-              }),
-            );
+              const titleClass = twMerge(
+                "text-2xl",
+                clsx({
+                  "font-bold": isActive,
+                  "font-normal": !isActive,
+                }),
+              );
 
-            return (
-              <div
-                key={item.title}
-                onClick={() => setActiveTab(item.id)}
-                className="flex items-center justify-center gap-5 cursor-pointer grow select-none font-normal text-2xl"
-              >
-                {isActive && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={variants}
-                    transition={{ duration: 0.7 }}
-                  >
-                    <AppIcon name="SymbolIcon" width="12px" height="24px" />
-                  </motion.div>
-                )}
-                <div className={titleClass}>{item.title}</div>
-              </div>
-            );
-          })}
-        </div>
+              return (
+                <div
+                  key={item.title}
+                  onClick={() => setActiveTab(item.id)}
+                  className="flex items-center justify-center gap-5 cursor-pointer grow select-none font-normal text-2xl"
+                >
+                  {isActive && (
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      variants={clickTabsVariant}
+                      transition={{ duration: 0.7 }}
+                    >
+                      <AppIcon name="SymbolIcon" width="12px" height="24px" />
+                    </motion.div>
+                  )}
+                  <div className={titleClass}>{item.title}</div>
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
       </div>
-    </>
+    </section>
   );
 }

@@ -12,7 +12,7 @@ export default async function Home({
   const dict = await getDictionary(lang, "home");
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="">
       <LandingSection rtl={isRtl} dict={dict} />
     </div>
   );
