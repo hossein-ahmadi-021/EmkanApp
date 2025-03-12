@@ -42,7 +42,7 @@ export default function LandingInfoBox({ data, rtl }: Props) {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.7 }}
-          className="bg-[#B2FFE26E] rounded-full h-[100px] w-[100px] flex justify-center items-center mt-10 absolute"
+          className="bg-[#B2FFE26E] rounded-full h-[100px] w-[100px] flex justify-center items-center mt-10 "
         >
           <AppIcon color="primary" name="PlayIcon" width="20px" height="20px" />
         </motion.div>

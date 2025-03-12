@@ -1,6 +1,6 @@
 import { getDictionary } from "@/lib/dictionaries/dictionary";
-import LandingSection from "@/containers/landing";
 import { checkRtl } from "@/lib/utils/lang";
+import Landing from "@/containers/landing";
 
 export default async function Home({
   params,
@@ -11,9 +11,5 @@ export default async function Home({
   const isRtl = checkRtl(lang);
   const dict = await getDictionary(lang, "home");
 
-  return (
-    <div className="">
-      <LandingSection rtl={isRtl} dict={dict} />
-    </div>
-  );
+  return <Landing rtl={isRtl} dict={dict} />;
 }

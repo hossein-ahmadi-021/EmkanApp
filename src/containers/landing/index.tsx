@@ -1,11 +1,8 @@
 "use client";
-import { useRef, useState } from "react";
-import AppIcon from "@/common/appIcon";
-import { Progress } from "@/common/progress";
-import LandingInfoBox from "@/containers/landing/landingInfoBox";
-import clsx from "clsx";
-import { twMerge } from "tailwind-merge";
-import { motion } from "framer-motion";
+
+import LandingSectionOne from "@/containers/landing/landingSectionOne";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface Props {
   rtl: boolean;
@@ -20,146 +17,195 @@ interface Props {
   };
 }
 
-export default function LandingSection({ dict, rtl }: Props) {
-  const clickTabsVariant = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
+export default function Landing({ dict, rtl }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    container: containerRef,
+  });
 
-  const loadTabsVariants = {
-    hidden: { y: "100%" },
-    visible: { y: 0 },
-  };
+  // Define opacity transitions for each section
+  const section1 = useTransform(scrollYProgress, [0, 0.2], [1, 0]); // Fade out as you scroll down
+  const section2 = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]); // Fade in as you scroll down
+  const section3 = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
+  const section4 = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
+  const section5 = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
 
-  // States
-  const [activeTab, setActiveTab] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [volume, setVolume] = useState(0.1);
-  const [pause, setPause] = useState(false);
-  const [muted, setMuted] = useState(true);
-
-  // Handlers
-  const handlePause = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      setPause(true);
-    }
-  };
-
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setPause(false);
-    }
-  };
-
-  const handleVolumeChange = (newVolume: number) => {
-    if (videoRef.current) {
-      const volumeValue = newVolume / 100;
-      setVolume(volumeValue);
-      if (volumeValue > 0 && muted) {
-        setMuted(false);
-      }
+  // Function to scroll to the next section
+  const scrollToNextSection = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        top: window.innerHeight, // Scroll by one viewport height
+        behavior: "smooth",
+      });
     }
   };
 
   return (
-    <section className="h-screen">
-      <video
-        ref={videoRef}
-        autoPlay
-        muted={muted}
-        loop
-        className="fixed inset-0 w-full h-full object-cover -z-10"
+    <motion.div
+      ref={containerRef}
+      className="bg-red-700 overflow-y-hidden"
+      style={{
+        height: "100vh",
+        overflowY: "scroll",
+        scrollSnapType: "y mandatory", // Enable vertical snap scrolling
+        scrollBehavior: "smooth", // Smooth scrolling
+      }}
+    >
+      {/* Section 1 */}
+      <motion.section
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+          fontSize: "2rem",
+          opacity: section1,
+          scrollSnapAlign: "start", // Snap to the start of the container
+        }}
       >
-        <source src="/videos/landing-bg-1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="z-10 text-white">
-        {dict.infoCards.map((item) => {
-          if (item.id !== activeTab) return null;
-          return (
-            <LandingInfoBox
-              rtl={rtl}
-              key={item.id}
-              data={{
-                title: item.title,
-                subTitle: item.subTitle,
-                desc: item.desc,
-              }}
-            />
-          );
-        })}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={loadTabsVariants}
-          transition={{ duration: 0.7 }}
+        <LandingSectionOne rtl={rtl} dict={dict} />
+        <button
+          onClick={scrollToNextSection}
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            fontSize: "1rem",
+            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
         >
-          <div className="flex items-center gap-5">
-            <div
-              onClick={pause ? handlePlay : handlePause}
-              className="cursor-pointer"
-            >
-              <AppIcon
-                name={pause ? "PlayIcon" : "PauseIcon"}
-                width="15px"
-                height="18px"
-              />
-            </div>
-            <div
-              onClick={() => setMuted((prev) => !prev)}
-              className="cursor-pointer"
-            >
-              <AppIcon
-                name={muted ? "MuteIcon" : "VolumeIcon"}
-                width="18px"
-                height="18px"
-              />
-            </div>
-            <div className="grow h-4 flex items-center group">
-              <Progress
-                value={volume * 100}
-                onClick={handleVolumeChange}
-                className="cursor-pointer h-[2px] group-hover:h-4 transition-all"
-              />
-            </div>
-          </div>
-          <div className="flex items-center mt-[1.74vh]">
-            {dict.tabs.map((item: any) => {
-              const isActive = item.id === activeTab;
+          Scroll Down
+        </button>
+      </motion.section>
 
-              const titleClass = twMerge(
-                "text-2xl",
-                clsx({
-                  "font-bold": isActive,
-                  "font-normal": !isActive,
-                }),
-              );
+      {/* Section 2 */}
+      <motion.section
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "hsl(60, 50%, 50%)",
+          color: "white",
+          fontSize: "2rem",
+          opacity: section2,
+          scrollSnapAlign: "start", // Snap to the start of the container
+        }}
+      >
+        Section 2
+        <button
+          onClick={scrollToNextSection}
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            fontSize: "1rem",
+            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Scroll Down
+        </button>
+      </motion.section>
 
-              return (
-                <div
-                  key={item.title}
-                  onClick={() => setActiveTab(item.id)}
-                  className="flex items-center justify-center gap-5 cursor-pointer grow select-none font-normal text-2xl"
-                >
-                  {isActive && (
-                    <motion.div
-                      initial="hidden"
-                      animate="visible"
-                      variants={clickTabsVariant}
-                      transition={{ duration: 0.7 }}
-                    >
-                      <AppIcon name="SymbolIcon" width="12px" height="24px" />
-                    </motion.div>
-                  )}
-                  <div className={titleClass}>{item.title}</div>
-                </div>
-              );
-            })}
-          </div>
-        </motion.div>
-      </div>
-    </section>
+      {/* Section 3 */}
+      <motion.section
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "hsl(120, 50%, 50%)",
+          color: "white",
+          fontSize: "2rem",
+          opacity: section3,
+          scrollSnapAlign: "start", // Snap to the start of the container
+        }}
+      >
+        Section 3
+        <button
+          onClick={scrollToNextSection}
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            fontSize: "1rem",
+            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Scroll Down
+        </button>
+      </motion.section>
+
+      {/* Section 4 */}
+      <motion.section
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "hsl(180, 50%, 50%)",
+          color: "white",
+          fontSize: "2rem",
+          opacity: section4,
+          scrollSnapAlign: "start", // Snap to the start of the container
+        }}
+      >
+        Section 4
+        <button
+          onClick={scrollToNextSection}
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            fontSize: "1rem",
+            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Scroll Down
+        </button>
+      </motion.section>
+
+      {/* Section 5 */}
+      <motion.section
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "hsl(240, 50%, 50%)",
+          color: "white",
+          fontSize: "2rem",
+          opacity: section5,
+          scrollSnapAlign: "start", // Snap to the start of the container
+        }}
+      >
+        Section 5
+      </motion.section>
+    </motion.div>
   );
 }
