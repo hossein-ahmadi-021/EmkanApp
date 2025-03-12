@@ -123,12 +123,31 @@
 /*---break---*/
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+
+    body {
+        @apply bg-background text-foreground;
     }
+}
+
+::-webkit-scrollbar {
+    height: 0;
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a9abab;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #818282;
 }
 
 /*---custom variables---*/
@@ -142,5 +161,4 @@
     --text-tiny: 10px;
     --text-1-5xl: 22px;
 }
-
 

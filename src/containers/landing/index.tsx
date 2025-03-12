@@ -5,19 +5,27 @@ import { Progress } from "@/common/progress";
 import LandingInfoBox from "@/containers/landing/landingInfoBox";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
+import { motion } from "framer-motion";
 
 interface Props {
+  rtl: boolean;
   dict: {
     infoCards: {
       title: string;
       subTitle: string;
       desc: string;
+      id: number;
     }[];
     tabs: { title: string; id: number }[];
   };
 }
 
-export default function LandingSection({ dict }: Props) {
+export default function LandingSection({ dict, rtl }: Props) {
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
   // States
   const [activeTab, setActiveTab] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -62,46 +70,51 @@ export default function LandingSection({ dict }: Props) {
         <source src="/videos/landing-bg-1.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="relative z-10 py-36 text-white">
-        <LandingInfoBox
-          data={{
-            title: dict.infoCards[activeTab].title,
-            subTitle: dict.infoCards[activeTab].subTitle,
-            desc: dict.infoCards[activeTab].desc,
-          }}
-        />
-        <div className="">
-          <div className="flex items-center gap-5">
-            <div
-              onClick={pause ? handlePlay : handlePause}
-              className="cursor-pointer"
-            >
-              <AppIcon
-                name={pause ? "PlayIcon" : "PauseIcon"}
-                width="15px"
-                height="18px"
-              />
-            </div>
-            <div
-              onClick={() => setMuted((prev) => !prev)}
-              className="cursor-pointer"
-            >
-              <AppIcon
-                name={muted ? "MuteIcon" : "VolumeIcon"}
-                width="18px"
-                height="18px"
-              />
-            </div>
-            <div className="grow h-4 flex items-center group">
-              <Progress
-                value={volume * 100}
-                onClick={handleVolumeChange}
-                className="cursor-pointer h-[2px] group-hover:h-4 transition-all"
-              />
-            </div>
+      <div className="z-10 text-white">
+        {dict.infoCards.map((item) => {
+          if (item.id !== activeTab) return null;
+          return (
+            <LandingInfoBox
+              rtl={rtl}
+              key={item.id}
+              data={{
+                title: item.title,
+                subTitle: item.subTitle,
+                desc: item.desc,
+              }}
+            />
+          );
+        })}
+        <div className="flex items-center gap-5">
+          <div
+            onClick={pause ? handlePlay : handlePause}
+            className="cursor-pointer"
+          >
+            <AppIcon
+              name={pause ? "PlayIcon" : "PauseIcon"}
+              width="15px"
+              height="18px"
+            />
+          </div>
+          <div
+            onClick={() => setMuted((prev) => !prev)}
+            className="cursor-pointer"
+          >
+            <AppIcon
+              name={muted ? "MuteIcon" : "VolumeIcon"}
+              width="18px"
+              height="18px"
+            />
+          </div>
+          <div className="grow h-4 flex items-center group">
+            <Progress
+              value={volume * 100}
+              onClick={handleVolumeChange}
+              className="cursor-pointer h-[2px] group-hover:h-4 transition-all"
+            />
           </div>
         </div>
-        <div className="flex items-center mt-5">
+        <div className="flex items-center mt-[1.74vh]">
           {dict.tabs.map((item: any) => {
             const isActive = item.id === activeTab;
 
@@ -117,10 +130,17 @@ export default function LandingSection({ dict }: Props) {
               <div
                 key={item.title}
                 onClick={() => setActiveTab(item.id)}
-                className="flex items-center justify-center gap-5 cursor-pointer grow select-none font-normal"
+                className="flex items-center justify-center gap-5 cursor-pointer grow select-none font-normal text-2xl"
               >
                 {isActive && (
-                  <AppIcon name="SymbolIcon" width="12px" height="24px" />
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={variants}
+                    transition={{ duration: 0.7 }}
+                  >
+                    <AppIcon name="SymbolIcon" width="12px" height="24px" />
+                  </motion.div>
                 )}
                 <div className={titleClass}>{item.title}</div>
               </div>

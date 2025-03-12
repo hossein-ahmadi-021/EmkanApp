@@ -3,12 +3,10 @@ import { Dictionaries } from "@/types/public/Dictionaries/dictionaries.types";
 
 const dictionaries: Dictionaries = {
   en: {
-    home: () =>
-      import("./dictionaries/en/home.json").then((module) => module.default),
+    home: () => import("./en/home.json").then((module) => module.default),
   },
   fa: {
-    home: () =>
-      import("./dictionaries/fa/home.json").then((module) => module.default),
+    home: () => import("./fa/home.json").then((module) => module.default),
   },
 };
 

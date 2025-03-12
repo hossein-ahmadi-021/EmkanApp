@@ -1,11 +1,22 @@
+"use client";
+import { motion } from "framer-motion";
 import AppIcon from "@/common/appIcon";
 import AppButton from "@/common/appButton";
 
-interface Props {}
+export default function AppHeader() {
+  const variants = {
+    hidden: { y: "-100%" },
+    visible: { y: 0 },
+  };
 
-export default function AppHeader(props: Props) {
   return (
-    <header className="absolute top-2 rounded-full inset-x-0 w-full bg-glass-white backdrop-blur text-white whitespace-nowrap">
+    <motion.header
+      initial="hidden"
+      animate="visible"
+      variants={variants}
+      transition={{ duration: 0.7 }}
+      className="absolute top-2 rounded-full inset-x-0 w-full bg-glass-white backdrop-blur text-white whitespace-nowrap"
+    >
       <div className="p-4 w-full flex items-center justify-between h-20">
         <div className="flex items-center gap-[75px]">
           <div className="flex items-center gap-2.5">
@@ -32,6 +43,6 @@ export default function AppHeader(props: Props) {
           <AppButton icon="InsideIcon">تماس با امکان</AppButton>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
