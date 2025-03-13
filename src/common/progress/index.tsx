@@ -44,7 +44,7 @@ const Progress = React.forwardRef<
       {...props}
     >
       <ProgressPrimitive.Indicator
-        className="h-full w-full flex-1 bg-white transition-all"
+        className="h-full w-full flex-1 bg-white transition-all duration-300"
         style={{
           transform: isRTL
             ? `translateX(${100 - (value || 0)}%)`

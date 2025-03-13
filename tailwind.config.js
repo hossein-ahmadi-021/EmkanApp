@@ -11,9 +11,9 @@ module.exports = {
         "glass-white": "#FDFBF533",
       },
       fontSize: {
-        xBase: "17px",
-        tiny: "10px",
-        "1-5xl": "22px",
+        tiny: "0.625rem",
+        xBase: "1.0625rem",
+        "1-5xl": "1.375rem",
       },
     },
   },

@@ -120,7 +120,26 @@
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Expected generated CSS */
+@keyframes arrow-bounce {
+    0%{
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(40px);
+        opacity: 1;
+    }
+}
+
+.animate-bounce-slow {
+    animation: arrow-bounce 2.2s infinite;
+}
+
+
 /*---break---*/
+
+
 
 @layer base {
     * {
@@ -157,8 +176,8 @@
     --color-glass-white: #FDFBF533;
 
     /*font sizes*/
-    --text-xBase: 17px;
-    --text-tiny: 10px;
-    --text-1-5xl: 22px;
+    --text-tiny: 0.625rem;
+    --text-xBase: 1.0625rem;
+    --text-1-5xl: 1.375rem;
 }
 

@@ -10,6 +10,7 @@ import MuteIcon from "@/assets/icons/mute";
 import PlayIcon from "@/assets/icons/play";
 import VolumeIcon from "@/assets/icons/volume";
 import SymbolIcon from "@/assets/icons/symbol";
+import ArrowIcon from "@/assets/icons/arrow";
 
 export const iconList: Record<
   IconNames,
@@ -25,6 +26,7 @@ export const iconList: Record<
   MuteIcon,
   VolumeIcon,
   SymbolIcon,
+  ArrowIcon,
 };
 
 export const colors: Record<IconColorsType, string> = {

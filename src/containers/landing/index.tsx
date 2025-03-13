@@ -3,6 +3,7 @@
 import LandingSectionOne from "@/containers/landing/sectionOne/landingSectionOne";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import AppIcon from "@/common/appIcon";
 
 interface Props {
   rtl: boolean;
@@ -102,12 +103,24 @@ export default function Landing({ dict, rtl }: Props) {
 }
 
 function ScrollButton({ onClick }: { onClick: () => void }) {
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
   return (
-    <div
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={variants}
+      transition={{ duration: 3 }}
       onClick={onClick}
-      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-5 py-3 text-[1.13vh] text-white rounded-md cursor-pointer transition-all"
+      className="absolute bottom-2 left-1/2 transform -translate-x-1/2 px-5 py-3 text-[1.13vh] text-white rounded-md cursor-pointer transition-all"
     >
-      دیدن پایین
-    </div>
+      <div className="absolute left-1/2 -translate-x-1/2 animate-bounce-slow">
+        <AppIcon name="ArrowIcon" width="24px" height="24px" />
+      </div>
+      <div>دیدن پایین</div>
+    </motion.div>
   );
 }
