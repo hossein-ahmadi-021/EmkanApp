@@ -1,7 +1,7 @@
 "use client";
 
-import LandingSectionOne from "@/containers/landing/landingSectionOne";
-import { useRef, useEffect, useState, useCallback } from "react";
+import LandingSectionOne from "@/containers/landing/sectionOne/landingSectionOne";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -40,7 +40,7 @@ export default function Landing({ dict, rtl }: Props) {
 
       setTimeout(() => {
         isScrolling.current = false;
-      }, 700); // Matches animation duration
+      }, 700);
     },
     [totalSections],
   );
@@ -72,49 +72,29 @@ export default function Landing({ dict, rtl }: Props) {
         <motion.section className="w-full h-screen flex justify-center items-center text-white relative">
           <LandingSectionOne rtl={rtl} dict={dict} />
           <ScrollButton onClick={() => handleScroll("down")} />
-          <NavigationUpButton
-            visible={currentSection > 0}
-            onClick={() => handleScroll("up")}
-          />
         </motion.section>
 
         {/* Section 2 */}
         <motion.section className="w-full h-screen flex justify-center items-center bg-yellow-500 text-white relative">
           Section 2
           <ScrollButton onClick={() => handleScroll("down")} />
-          <NavigationUpButton
-            visible={currentSection > 0}
-            onClick={() => handleScroll("up")}
-          />
         </motion.section>
 
         {/* Section 3 */}
         <motion.section className="w-full h-screen flex justify-center items-center bg-green-500 text-white relative">
           Section 3
           <ScrollButton onClick={() => handleScroll("down")} />
-          <NavigationUpButton
-            visible={currentSection > 0}
-            onClick={() => handleScroll("up")}
-          />
         </motion.section>
 
         {/* Section 4 */}
         <motion.section className="w-full h-screen flex justify-center items-center bg-teal-500 text-white relative">
           Section 4
           <ScrollButton onClick={() => handleScroll("down")} />
-          <NavigationUpButton
-            visible={currentSection > 0}
-            onClick={() => handleScroll("up")}
-          />
         </motion.section>
 
         {/* Section 5 */}
         <motion.section className="w-full h-screen flex justify-center items-center bg-blue-500 text-white relative">
           Section 5
-          <NavigationUpButton
-            visible={currentSection > 0}
-            onClick={() => handleScroll("up")}
-          />
         </motion.section>
       </motion.div>
     </motion.div>
@@ -123,30 +103,11 @@ export default function Landing({ dict, rtl }: Props) {
 
 function ScrollButton({ onClick }: { onClick: () => void }) {
   return (
-    <button
+    <div
       onClick={onClick}
-      className="absolute bottom-10 left-1/2 transform -translate-x-1/2 px-5 py-3 text-lg bg-white/20 text-white rounded-md cursor-pointer hover:bg-white/30 transition-all"
+      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-5 py-3 text-[1.13vh] text-white rounded-md cursor-pointer transition-all"
     >
-      Scroll Down
-    </button>
-  );
-}
-
-function NavigationUpButton({
-  visible,
-  onClick,
-}: {
-  visible: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`absolute top-10 left-1/2 transform -translate-x-1/2 px-5 py-3 text-lg bg-white/20 text-white rounded-md cursor-pointer hover:bg-white/30 transition-all ${
-        !visible ? "opacity-0 pointer-events-none" : ""
-      }`}
-    >
-      Scroll Up
-    </button>
+      دیدن پایین
+    </div>
   );
 }

@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { Progress } from "@/common/progress";
 import { twMerge } from "tailwind-merge";
 import ResponsiveLayout from "@/layout/responsiveLayout";
-import LandingInfoBox from "@/containers/landing/landingInfoBox";
+import LandingInfoBox from "@/containers/landing/sectionOne/landingInfoBox";
 import AppIcon from "@/common/appIcon";
 import clsx from "clsx";
 
@@ -28,7 +28,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
   };
 
   const loadTabsVariants = {
-    hidden: { y: "100%" },
+    hidden: { y: "120%" },
     visible: { y: 0 },
   };
 
