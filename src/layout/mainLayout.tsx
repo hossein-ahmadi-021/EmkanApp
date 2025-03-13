@@ -14,7 +14,7 @@ export function MainLayout({ children, lang, dir }: Props) {
       <div lang={lang} dir={dir}>
         <ResponsiveLayout>
           <div className="relative">
-            <AppHeader />
+            <AppHeader dir={dir} />
           </div>
           <main className="pt-20">{children}</main>
         </ResponsiveLayout>
