@@ -1,8 +1,8 @@
 "use client";
 
 import LandingSectionOne from "@/containers/landing/landingSectionOne";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect, useState, useCallback } from "react";
+import { motion } from "framer-motion";
 
 interface Props {
   rtl: boolean;
@@ -18,194 +18,135 @@ interface Props {
 }
 
 export default function Landing({ dict, rtl }: Props) {
+  const [currentSection, setCurrentSection] = useState(0);
+  const totalSections = 5;
+  const isScrolling = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    container: containerRef,
-  });
 
-  // Define opacity transitions for each section
-  const section1 = useTransform(scrollYProgress, [0, 0.2], [1, 0]); // Fade out as you scroll down
-  const section2 = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]); // Fade in as you scroll down
-  const section3 = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
-  const section4 = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
-  const section5 = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
+  const handleScroll = useCallback(
+    (direction: "up" | "down") => {
+      if (isScrolling.current) return;
+      isScrolling.current = true;
 
-  // Function to scroll to the next section
-  const scrollToNextSection = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({
-        top: window.innerHeight, // Scroll by one viewport height
-        behavior: "smooth",
+      setCurrentSection((prev) => {
+        if (direction === "down" && prev < totalSections - 1) {
+          return prev + 1;
+        }
+        if (direction === "up" && prev > 0) {
+          return prev - 1;
+        }
+        return prev;
       });
-    }
-  };
+
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 700); // Matches animation duration
+    },
+    [totalSections],
+  );
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      handleScroll(e.deltaY > 0 ? "down" : "up");
+    };
+
+    container.addEventListener("wheel", handleWheel, { passive: false });
+    return () => container.removeEventListener("wheel", handleWheel);
+  }, [handleScroll]);
 
   return (
     <motion.div
       ref={containerRef}
-      className="bg-red-700 overflow-y-hidden"
-      style={{
-        height: "100vh",
-        overflowY: "scroll",
-        scrollSnapType: "y mandatory", // Enable vertical snap scrolling
-        scrollBehavior: "smooth", // Smooth scrolling
-      }}
+      className="relative h-screen overflow-y-hidden"
     >
-      {/* Section 1 */}
-      <motion.section
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "white",
-          fontSize: "2rem",
-          opacity: section1,
-          scrollSnapAlign: "start", // Snap to the start of the container
-        }}
+      <motion.div
+        animate={{ y: `-${currentSection * 100}vh` }}
+        transition={{ type: "tween", duration: 0.7, ease: "easeInOut" }}
+        className="relative w-full h-full"
       >
-        <LandingSectionOne rtl={rtl} dict={dict} />
-        <button
-          onClick={scrollToNextSection}
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            padding: "10px 20px",
-            fontSize: "1rem",
-            backgroundColor: "rgba(255, 255, 255, 0.2)",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Scroll Down
-        </button>
-      </motion.section>
+        {/* Section 1 */}
+        <motion.section className="w-full h-screen flex justify-center items-center bg-red-500 text-white relative">
+          <LandingSectionOne rtl={rtl} dict={dict} />
+          <ScrollButton onClick={() => handleScroll("down")} />
+          <NavigationUpButton
+            visible={currentSection > 0}
+            onClick={() => handleScroll("up")}
+          />
+        </motion.section>
 
-      {/* Section 2 */}
-      <motion.section
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "hsl(60, 50%, 50%)",
-          color: "white",
-          fontSize: "2rem",
-          opacity: section2,
-          scrollSnapAlign: "start", // Snap to the start of the container
-        }}
-      >
-        Section 2
-        <button
-          onClick={scrollToNextSection}
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            padding: "10px 20px",
-            fontSize: "1rem",
-            backgroundColor: "rgba(255, 255, 255, 0.2)",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Scroll Down
-        </button>
-      </motion.section>
+        {/* Section 2 */}
+        <motion.section className="w-full h-screen flex justify-center items-center bg-yellow-500 text-white relative">
+          Section 2
+          <ScrollButton onClick={() => handleScroll("down")} />
+          <NavigationUpButton
+            visible={currentSection > 0}
+            onClick={() => handleScroll("up")}
+          />
+        </motion.section>
 
-      {/* Section 3 */}
-      <motion.section
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "hsl(120, 50%, 50%)",
-          color: "white",
-          fontSize: "2rem",
-          opacity: section3,
-          scrollSnapAlign: "start", // Snap to the start of the container
-        }}
-      >
-        Section 3
-        <button
-          onClick={scrollToNextSection}
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            padding: "10px 20px",
-            fontSize: "1rem",
-            backgroundColor: "rgba(255, 255, 255, 0.2)",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Scroll Down
-        </button>
-      </motion.section>
+        {/* Section 3 */}
+        <motion.section className="w-full h-screen flex justify-center items-center bg-green-500 text-white relative">
+          Section 3
+          <ScrollButton onClick={() => handleScroll("down")} />
+          <NavigationUpButton
+            visible={currentSection > 0}
+            onClick={() => handleScroll("up")}
+          />
+        </motion.section>
 
-      {/* Section 4 */}
-      <motion.section
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "hsl(180, 50%, 50%)",
-          color: "white",
-          fontSize: "2rem",
-          opacity: section4,
-          scrollSnapAlign: "start", // Snap to the start of the container
-        }}
-      >
-        Section 4
-        <button
-          onClick={scrollToNextSection}
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            padding: "10px 20px",
-            fontSize: "1rem",
-            backgroundColor: "rgba(255, 255, 255, 0.2)",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Scroll Down
-        </button>
-      </motion.section>
+        {/* Section 4 */}
+        <motion.section className="w-full h-screen flex justify-center items-center bg-teal-500 text-white relative">
+          Section 4
+          <ScrollButton onClick={() => handleScroll("down")} />
+          <NavigationUpButton
+            visible={currentSection > 0}
+            onClick={() => handleScroll("up")}
+          />
+        </motion.section>
 
-      {/* Section 5 */}
-      <motion.section
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "hsl(240, 50%, 50%)",
-          color: "white",
-          fontSize: "2rem",
-          opacity: section5,
-          scrollSnapAlign: "start", // Snap to the start of the container
-        }}
-      >
-        Section 5
-      </motion.section>
+        {/* Section 5 */}
+        <motion.section className="w-full h-screen flex justify-center items-center bg-blue-500 text-white relative">
+          Section 5
+          <NavigationUpButton
+            visible={currentSection > 0}
+            onClick={() => handleScroll("up")}
+          />
+        </motion.section>
+      </motion.div>
     </motion.div>
+  );
+}
+
+function ScrollButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="absolute bottom-10 left-1/2 transform -translate-x-1/2 px-5 py-3 text-lg bg-white/20 text-white rounded-md cursor-pointer hover:bg-white/30 transition-all"
+    >
+      Scroll Down
+    </button>
+  );
+}
+
+function NavigationUpButton({
+  visible,
+  onClick,
+}: {
+  visible: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`absolute top-10 left-1/2 transform -translate-x-1/2 px-5 py-3 text-lg bg-white/20 text-white rounded-md cursor-pointer hover:bg-white/30 transition-all ${
+        !visible ? "opacity-0 pointer-events-none" : ""
+      }`}
+    >
+      Scroll Up
+    </button>
   );
 }
