@@ -127,13 +127,13 @@
         opacity: 0;
     }
     100% {
-        transform: translateY(40px);
+        transform: translateY(30px);
         opacity: 1;
     }
 }
 
 .animate-bounce-slow {
-    animation: arrow-bounce 2.2s infinite;
+    animation: arrow-bounce 2.1s infinite;
 }
 
 
