@@ -1,11 +1,12 @@
 "use client";
-import { useRef, useState } from "react";
-import AppIcon from "@/common/appIcon";
-import { Progress } from "@/common/progress";
-import LandingInfoBox from "@/containers/landing/landingInfoBox";
-import clsx from "clsx";
-import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { Progress } from "@/common/progress";
+import { twMerge } from "tailwind-merge";
+import ResponsiveLayout from "@/layout/responsiveLayout";
+import LandingInfoBox from "@/containers/landing/landingInfoBox";
+import AppIcon from "@/common/appIcon";
+import clsx from "clsx";
 
 interface Props {
   rtl: boolean;
@@ -64,7 +65,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
   };
 
   return (
-    <div style={{ height: "100%" }}>
+    <div>
       <video
         ref={videoRef}
         autoPlay
@@ -75,7 +76,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
         <source src="/videos/landing-bg-1.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="z-10 text-white">
+      <ResponsiveLayout className="z-10 text-white">
         {dict.infoCards.map((item) => {
           if (item.id !== activeTab) return null;
           return (
@@ -159,7 +160,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
             })}
           </div>
         </motion.div>
-      </div>
+      </ResponsiveLayout>
     </div>
   );
 }

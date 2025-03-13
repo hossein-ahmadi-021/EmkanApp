@@ -61,7 +61,7 @@ export default function Landing({ dict, rtl }: Props) {
   return (
     <motion.div
       ref={containerRef}
-      className="relative h-screen overflow-y-hidden"
+      className="fixed inset-0 -z-10 overflow-y-hidden"
     >
       <motion.div
         animate={{ y: `-${currentSection * 100}vh` }}
@@ -69,7 +69,7 @@ export default function Landing({ dict, rtl }: Props) {
         className="relative w-full h-full"
       >
         {/* Section 1 */}
-        <motion.section className="w-full h-screen flex justify-center items-center bg-red-500 text-white relative">
+        <motion.section className="w-full h-screen flex justify-center items-center text-white relative">
           <LandingSectionOne rtl={rtl} dict={dict} />
           <ScrollButton onClick={() => handleScroll("down")} />
           <NavigationUpButton
