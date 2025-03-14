@@ -1,10 +1,10 @@
 "use client";
-
 import LandingSectionOne from "@/containers/landing/sectionOne/landingSectionOne";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import AppIcon from "@/common/appIcon";
 import { homeSectionDictTypes } from "@/types/landing/landing.types";
+import { useHeaderStore } from "@/store/headerStore";
 
 interface Props {
   rtl: boolean;
@@ -12,6 +12,7 @@ interface Props {
 }
 
 export default function Landing({ dict, rtl }: Props) {
+  const resetHeaderColor = useHeaderStore((state) => state.reset);
   const [currentSection, setCurrentSection] = useState(0);
   const totalSections = 5;
   const isScrolling = useRef(false);
@@ -52,6 +53,20 @@ export default function Landing({ dict, rtl }: Props) {
     return () => container.removeEventListener("wheel", handleWheel);
   }, [handleScroll]);
 
+  useEffect(() => {
+    if (currentSection === 0) {
+      useHeaderStore.setState({ importantColor: "white" });
+    } else if (currentSection === 1) {
+      useHeaderStore.setState({ importantColor: "primary" });
+    }
+  }, [currentSection]);
+
+  useEffect(() => {
+    return () => {
+      resetHeaderColor();
+    };
+  }, []);
+
   return (
     <motion.div
       ref={containerRef}
@@ -69,7 +84,7 @@ export default function Landing({ dict, rtl }: Props) {
         </motion.section>
 
         {/* Section 2 */}
-        <motion.section className="w-full h-screen flex justify-center items-center bg-yellow-500 text-white relative">
+        <motion.section className="w-full h-screen flex justify-center items-center bg-white text-white relative">
           Section 2
           <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>

@@ -17,6 +17,7 @@ import { twMerge } from "tailwind-merge";
 import { headerRouteOptions } from "@/components/header/headerRouteOptions";
 import { existRoutes } from "@/types/public/header.type";
 import { clsx } from "clsx";
+import { useHeaderStore } from "@/store/headerStore";
 
 interface Props {
   dir: "rtl" | "ltr";
@@ -30,6 +31,7 @@ interface Props {
 }
 
 export default function AppHeader({ dict, dir, lang }: Props) {
+  const { importantColor } = useHeaderStore();
   const router = useRouter();
   const pathname = usePathname();
   const isRtl = dir === "rtl";
@@ -54,22 +56,28 @@ export default function AppHeader({ dict, dir, lang }: Props) {
 
   //themes
   const headerOptions = headerRouteOptions[routePath];
-  const isPrimary = headerOptions.theme === "primary";
+  const isPrimary =
+    headerOptions.theme === "primary" || importantColor == "primary";
   const isSub = headerOptions.type === "sub";
   const headerClasses = twMerge(
-    "absolute inset-x-0 w-full backdrop-blur whitespace-nowrap",
+    "header-transition absolute inset-x-0 w-full backdrop-blur whitespace-nowrap",
     clsx({
       "top-2 rounded-full": headerOptions.type === "main",
       "bg-white border-b": headerOptions.type === "sub",
-      ...(headerOptions?.type === "main" && {
-        "bg-[#13595733] text-primary": headerOptions?.theme === "primary",
-        "bg-[#FDFBF533] text-white": headerOptions?.theme === "white",
-      }),
+      ...(headerOptions?.type === "main" && !importantColor
+        ? {
+            "bg-[#13595733] text-primary": headerOptions?.theme === "primary",
+            "bg-[#FDFBF533] text-white": headerOptions?.theme === "white",
+          }
+        : {
+            "bg-[#13595733] text-primary": importantColor === "primary",
+            "bg-[#FDFBF533] text-white": importantColor === "white",
+          }),
     }),
   );
 
   const variants = {
-    hidden: { y: "-100%" },
+    hidden: { y: "-110%" },
     visible: { y: 0 },
   };
 
@@ -83,7 +91,7 @@ export default function AppHeader({ dict, dir, lang }: Props) {
           transition={{ duration: 0.7 }}
           className={headerClasses}
         >
-          <div className="p-4 w-full flex items-center justify-between h-20">
+          <div className="p-4 w-full flex items-center justify-between h-20 duration-700">
             <div className="flex items-center gap-[75px]">
               {isSub && (
                 <AppIcon
@@ -94,12 +102,21 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                 />
               )}
               <div className="flex items-center gap-2.5">
-                <AppIcon
-                  color={isPrimary ? "primary" : "white"}
-                  name="LogoIcon"
-                  width="44px"
-                  height="44px"
-                />
+                {isPrimary ? (
+                  <AppIcon
+                    color={"primary"}
+                    name="LogoIcon"
+                    width="44px"
+                    height="44px"
+                  />
+                ) : (
+                  <AppIcon
+                    color={"white"}
+                    name="LogoIcon"
+                    width="44px"
+                    height="44px"
+                  />
+                )}
                 <div>
                   <h1 className="text-lg font-bold">{dict.company}</h1>
                   <h4 className="text-tiny">

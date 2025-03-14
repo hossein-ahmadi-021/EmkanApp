@@ -136,6 +136,11 @@
     animation: arrow-bounce 2.1s infinite;
 }
 
+.header-transition {
+    transition: background-color 0.7s ease-in-out;
+}
+
+
 
 /*---break---*/
 
