@@ -16,6 +16,7 @@ import Link from "next/link";
 
 interface Props {
   dir: "rtl" | "ltr";
+  lang: reagonTypes;
   dict: {
     company: string;
     links: { id: number; name: string; link: string }[];
@@ -24,7 +25,7 @@ interface Props {
   };
 }
 
-export default function AppHeader({ dict, dir }: Props) {
+export default function AppHeader({ dict, dir, lang }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const isRtl = dir === "rtl";
@@ -72,7 +73,7 @@ export default function AppHeader({ dict, dir }: Props) {
           <div className="flex items-center gap-[30px]">
             <AppIcon name="SearchIcon" width="24px" height="24px" />
             <DialogTrigger className="flex items-center gap-1 cursor-pointer">
-              <div className="text-sm">English</div>
+              <div className="text-sm">{langNames[lang]}</div>
               <AppIcon name="ReagonIcon" width="24px" height="24px" />
             </DialogTrigger>
             <AppButton icon="InsideIcon">{dict.contactUs}</AppButton>
@@ -101,3 +102,8 @@ export default function AppHeader({ dict, dir }: Props) {
     </Dialog>
   );
 }
+
+const langNames = {
+  en: "English",
+  fa: "فارسی",
+};

@@ -18,7 +18,7 @@ export async function MainLayout({ children, lang, dir }: Props) {
       <div lang={lang} dir={dir}>
         <ResponsiveLayout>
           <div className="relative">
-            <AppHeader dict={dict} dir={dir} />
+            <AppHeader lang={lang} dict={dict} dir={dir} />
           </div>
           <main className="pt-20">{children}</main>
         </ResponsiveLayout>
