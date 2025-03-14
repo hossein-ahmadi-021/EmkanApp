@@ -9,7 +9,8 @@ export type IconNames =
   | "MuteIcon"
   | "VolumeIcon"
   | "SymbolIcon"
-  | "ArrowIcon";
+  | "ArrowIcon"
+  | "CloseIcon";
 
 export interface IconType {
   width: string;

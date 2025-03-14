@@ -17,9 +17,7 @@ export async function MainLayout({ children, lang, dir }: Props) {
     <LangProvider lang={lang}>
       <div lang={lang} dir={dir}>
         <ResponsiveLayout>
-          <div className="relative">
-            <AppHeader lang={lang} dict={dict} dir={dir} />
-          </div>
+          <AppHeader lang={lang} dict={dict} dir={dir} />
           <main className="pt-20">{children}</main>
         </ResponsiveLayout>
         {/*<footer className="bg-white h-20">*/}

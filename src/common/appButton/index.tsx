@@ -22,13 +22,13 @@ export default function AppButton({ icon, children, className }: Props) {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left; // X position within the button
-    const y = e.clientY - rect.top; // Y position within the button
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     setRipple({ key: Date.now(), x, y });
   };
 
   const buttonClasses = twMerge(
-    "rounded-full bg-primary cursor-pointer text-lg flex items-center justify-between gap-3 relative overflow-hidden",
+    "rounded-full bg-primary cursor-pointer text-lg flex items-center justify-between gap-3 relative overflow-hidden text-white",
     clsx({
       "ps-6": icon,
       "p-4": !icon,
@@ -58,8 +58,8 @@ export default function AppButton({ icon, children, className }: Props) {
           style={{
             width: "100px",
             height: "100px",
-            left: ripple.x - 50, // Center horizontally
-            top: ripple.y - 50, // Center vertically
+            left: ripple.x - 50,
+            top: ripple.y - 50,
           }}
           onAnimationComplete={() => setRipple(null)}
         />
