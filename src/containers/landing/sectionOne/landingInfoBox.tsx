@@ -8,6 +8,7 @@ interface Props {
     title: string;
     subTitle: string;
     desc: string;
+    btnTitle: string;
   };
 }
 
@@ -56,8 +57,8 @@ export default function LandingInfoBox({ data, rtl }: Props) {
           className="text-justify"
         >
           <p className="border-t pt-6 text-[1.91vh] leading-9">{data.desc}</p>
-          <AppButton className="mt-6 w-[326px]" icon="InsideIcon">
-            درباره مکران بیشتر بدانید
+          <AppButton className="mt-6 min-w-[326px]" icon="InsideIcon">
+            {data.btnTitle}
           </AppButton>
         </motion.div>
       </div>

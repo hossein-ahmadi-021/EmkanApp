@@ -12,16 +12,23 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
 import { locales } from "@/lib/constants/public";
+import Link from "next/link";
 
 interface Props {
   dir: "rtl" | "ltr";
+  dict: {
+    company: string;
+    links: { id: number; name: string; link: string }[];
+    contactUs: string;
+    modalTitle: string;
+  };
 }
 
-export default function AppHeader({ dir }: Props) {
+export default function AppHeader({ dict, dir }: Props) {
   const pathname = usePathname();
   const router = useRouter();
-
   const isRtl = dir === "rtl";
+
   const variants = {
     hidden: { y: "-100%" },
     visible: { y: 0 },
@@ -47,7 +54,7 @@ export default function AppHeader({ dir }: Props) {
             <div className="flex items-center gap-2.5">
               <AppIcon name="LogoIcon" width="44px" height="44px" />
               <div>
-                <h1 className="text-lg font-bold">گروه تجربه توسعه امکان</h1>
+                <h1 className="text-lg font-bold">{dict.company}</h1>
                 <h4 className="text-tiny">
                   Emkan Development Experience Group
                 </h4>
@@ -55,10 +62,11 @@ export default function AppHeader({ dir }: Props) {
             </div>
             <div className="flex items-center gap-10">
               <AppIcon name="HambergerIcon" width="30px" height="16px" />
-              <div className="cursor-pointer">توسعه سرزمینی</div>
-              <div className="cursor-pointer">راهبری اقتصادی</div>
-              <div className="cursor-pointer">شکل دهی آینده</div>
-              <div className="cursor-pointer">تمدن سازی</div>
+              {dict.links.map((item) => (
+                <Link key={item.id} href={item.link} className="cursor-pointer">
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="flex items-center gap-[30px]">
@@ -67,14 +75,12 @@ export default function AppHeader({ dir }: Props) {
               <div className="text-sm">English</div>
               <AppIcon name="ReagonIcon" width="24px" height="24px" />
             </DialogTrigger>
-            <AppButton icon="InsideIcon">تماس با امکان</AppButton>
+            <AppButton icon="InsideIcon">{dict.contactUs}</AppButton>
           </div>
         </div>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className={`text-base`}>
-              زبان مورد نظر را انتخاب کنید
-            </DialogTitle>
+            <DialogTitle className={`text-base`}>{dict.modalTitle}</DialogTitle>
           </DialogHeader>
           <div className={`flex gap-2 text-sm ${isRtl && "flex-row-reverse"}`}>
             <div

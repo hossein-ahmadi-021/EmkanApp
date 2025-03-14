@@ -7,18 +7,11 @@ import ResponsiveLayout from "@/layout/responsiveLayout";
 import LandingInfoBox from "@/containers/landing/sectionOne/landingInfoBox";
 import AppIcon from "@/common/appIcon";
 import clsx from "clsx";
+import { homeSectionDictTypes } from "@/types/landing/landing.types";
 
 interface Props {
   rtl: boolean;
-  dict: {
-    infoCards: {
-      title: string;
-      subTitle: string;
-      desc: string;
-      id: number;
-    }[];
-    tabs: { title: string; id: number }[];
-  };
+  dict: homeSectionDictTypes;
 }
 
 export default function LandingSectionOne({ dict, rtl }: Props) {
@@ -87,6 +80,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
                 title: item.title,
                 subTitle: item.subTitle,
                 desc: item.desc,
+                btnTitle: item.btnTitle,
               }}
             />
           );
@@ -150,6 +144,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
                       animate="visible"
                       variants={clickTabsVariant}
                       transition={{ duration: 0.7 }}
+                      className={rtl ? "" : "rotate-180"}
                     >
                       <AppIcon name="SymbolIcon" width="12px" height="24px" />
                     </motion.div>

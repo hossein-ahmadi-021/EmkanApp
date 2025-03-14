@@ -3,6 +3,7 @@ import { IconNames } from "@/types/public/icon.types";
 import AppIcon from "@/common/appIcon";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useLangStore } from "@/store/langStore";
 
 interface Props {
   children?: ReactNode;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export default function AppButton({ icon, children, className }: Props) {
+  const { isRTL } = useLangStore();
+
   const buttonClasses = twMerge(
     "rounded-full bg-primary cursor-pointer text-lg flex items-center justify-between gap-3",
     clsx({
@@ -23,7 +26,11 @@ export default function AppButton({ icon, children, className }: Props) {
   return (
     <button className={buttonClasses}>
       {children}
-      {icon && <AppIcon name={icon} width="48px" height="48px" />}
+      {icon && (
+        <div className={isRTL ? "" : "rotate-180"}>
+          <AppIcon name={icon} width="48px" height="48px" />
+        </div>
+      )}
     </button>
   );
 }

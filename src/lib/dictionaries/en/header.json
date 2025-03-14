@@ -1,0 +1,27 @@
+{
+  "company": "Emkan Experience Group",
+  "links": [
+    {
+      "id": 1,
+      "name": "Territorial",
+      "link": ""
+    },
+    {
+      "id": 2,
+      "name": "Economic Leadership",
+      "link": ""
+    },
+    {
+      "id": 3,
+      "name": "Shaping the Future",
+      "link": ""
+    },
+    {
+      "id": 4,
+      "name": "Civilization Building",
+      "link": ""
+    }
+  ],
+  "contactUs": "Contact Us",
+  "modalTitle": "choose your language"
+}

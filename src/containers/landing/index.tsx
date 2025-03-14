@@ -4,18 +4,11 @@ import LandingSectionOne from "@/containers/landing/sectionOne/landingSectionOne
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import AppIcon from "@/common/appIcon";
+import { homeSectionDictTypes } from "@/types/landing/landing.types";
 
 interface Props {
   rtl: boolean;
-  dict: {
-    infoCards: {
-      title: string;
-      subTitle: string;
-      desc: string;
-      id: number;
-    }[];
-    tabs: { title: string; id: number }[];
-  };
+  dict: homeSectionDictTypes;
 }
 
 export default function Landing({ dict, rtl }: Props) {
@@ -72,25 +65,25 @@ export default function Landing({ dict, rtl }: Props) {
         {/* Section 1 */}
         <motion.section className="w-full h-screen flex justify-center items-center text-white relative">
           <LandingSectionOne rtl={rtl} dict={dict} />
-          <ScrollButton onClick={() => handleScroll("down")} />
+          <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>
 
         {/* Section 2 */}
         <motion.section className="w-full h-screen flex justify-center items-center bg-yellow-500 text-white relative">
           Section 2
-          <ScrollButton onClick={() => handleScroll("down")} />
+          <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>
 
         {/* Section 3 */}
         <motion.section className="w-full h-screen flex justify-center items-center bg-green-500 text-white relative">
           Section 3
-          <ScrollButton onClick={() => handleScroll("down")} />
+          <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>
 
         {/* Section 4 */}
         <motion.section className="w-full h-screen flex justify-center items-center bg-teal-500 text-white relative">
           Section 4
-          <ScrollButton onClick={() => handleScroll("down")} />
+          <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>
 
         {/* Section 5 */}
@@ -102,7 +95,13 @@ export default function Landing({ dict, rtl }: Props) {
   );
 }
 
-function ScrollButton({ onClick }: { onClick: () => void }) {
+function ScrollButton({
+  dict,
+  onClick,
+}: {
+  onClick: () => void;
+  dict: homeSectionDictTypes;
+}) {
   const variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -120,7 +119,7 @@ function ScrollButton({ onClick }: { onClick: () => void }) {
       <div className="absolute left-1/2 -translate-x-1/2 animate-bounce-slow">
         <AppIcon name="ArrowIcon" width="24px" height="24px" />
       </div>
-      <div>دیدن پایین</div>
+      <div>{dict?.scrollTitle}</div>
     </motion.div>
   );
 }

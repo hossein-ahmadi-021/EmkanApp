@@ -1,39 +1,44 @@
 {
   "infoCards": [
     {
+      "btnTitle": "Learn more about Emkan",
       "title": "Iran's Economic Transformation",
-      "subTitle": "The Beginning of a New Era of Development and Global Prominence",
-      "desc": "Possibility is a platform for balanced development, targeted investment, and redefining Iran's position in the global value chain. With transformative strategies, advanced infrastructure, and international collaborations, we are building a sustainable future for Iran. A future where Iran will be one of the leading economic powers in the region and the world.",
+      "subTitle": "The Beginning of a New Era of Development and a Glorious Global Position",
+      "desc": "Emkan is a platform for balanced development, targeted investment, and redefining Iran's position in the global value chain. With transformative strategies, advanced infrastructure, and international collaborations, we are building a sustainable future for Iran. A future where Iran will be one of the leading economic powers in the region and the world.",
       "id": 0
     },
     {
+      "btnTitle": "Learn more about Territorial Development",
       "title": "Territorial Development",
       "subTitle": "Our Mission for Iran's Future: A Path Toward Sustainable Development",
-      "desc": "The future of Iran will be built through balanced and sustainable development. At Possibility, we focus on the Makran coast, free zones, and Iranian islands, creating infrastructure that will drive the national economy. This is not just a project but a strategy for distributing opportunities, attracting investments, and establishing new economic hubs.",
+      "desc": "The future of Iran will be built through balanced and sustainable development. At Emkan, we focus on the Makran coast, free zones, and Iranian islands, creating infrastructure that will drive the national economy. This is not just a project but a strategy to distribute opportunities, attract investment, and establish new economic hubs.",
       "id": 1
     },
     {
+      "btnTitle": "Learn more about Economic Leadership",
       "title": "Economic Leadership",
       "subTitle": "Iran's Path to Becoming One of the Top 10 Global Economic Powers",
-      "desc": "Iran is ready for economic transformation. At Possibility, through modern investments, development of free zones, and integration with the global value chain, we are redefining the country's economic position. Diversifying the economy and reducing dependence on oil are our paths to a sustainable future.",
+      "desc": "Iran is ready for economic transformation. At Emkan, we are redefining the country's economic position through modern investment, development of free zones, and integration into the global value chain. Diversifying the economy and reducing dependence on oil are our paths to a sustainable future.",
       "id": 2
     },
     {
+      "btnTitle": "Learn more about Shaping the Future",
       "title": "Shaping the Future",
       "subTitle": "Architecting Iran's Tomorrow on the Path of Progress and Transformation",
-      "desc": "At Possibility, we design and guide the future. By focusing on innovation, digitalization, and the development of smart cities, we shape Iran's growth and competitiveness. Empowering the new generation, strengthening the entrepreneurial ecosystem, and building sustainable infrastructure are our visions for a progressive and leading future.",
+      "desc": "At Emkan, we design and guide the future. By focusing on innovation, digitalization, and the development of smart cities, we shape Iran's path to growth and competitiveness. Empowering the new generation, strengthening the entrepreneurial ecosystem, and building sustainable infrastructure are our visions for a progressive and leading future.",
       "id": 3
     },
     {
+      "btnTitle": "Learn more about Civilization Building",
       "title": "Civilization Building",
       "subTitle": "From a Glorious Past to a Powerful Future for Iran",
-      "desc": "Civilization-building is a strategic process rooted in the history and identity of a nation. At Possibility, we guide Iran's civilization toward a bright future through innovation, economic progress, and cultural cohesion. The future Iran will be an advanced and powerful player on the global stage.",
+      "desc": "Civilization building is a strategic process rooted in the history and identity of a nation. At Emkan, we guide Iran's civilization toward a bright future through innovation, economic progress, and cultural cohesion. The future Iran will be an advanced and powerful player on the global stage.",
       "id": 4
     }
   ],
   "tabs": [
     {
-      "title": "Possibility for Iran",
+      "title": "Emkan for Iran",
       "id": 0
     },
     {
@@ -52,5 +57,6 @@
       "title": "Civilization Building",
       "id": 4
     }
-  ]
+  ],
+  "scrollTitle": "Scroll Down"
 }

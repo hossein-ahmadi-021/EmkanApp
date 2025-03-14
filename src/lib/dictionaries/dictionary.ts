@@ -3,9 +3,11 @@ import { Dictionaries } from "@/types/public/Dictionaries/dictionaries.types";
 
 const dictionaries: Dictionaries = {
   en: {
+    header: () => import("./en/header.json").then((module) => module.default),
     home: () => import("./en/home.json").then((module) => module.default),
   },
   fa: {
+    header: () => import("./fa/header.json").then((module) => module.default),
     home: () => import("./fa/home.json").then((module) => module.default),
   },
 };

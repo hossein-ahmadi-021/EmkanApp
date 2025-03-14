@@ -1,20 +1,24 @@
 import AppHeader from "@/components/header/appHeader";
 import { LangProvider } from "@/layout/langProvider";
 import ResponsiveLayout from "@/layout/responsiveLayout";
+import { getDictionary } from "@/lib/dictionaries/dictionary";
+import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
 
 interface Props {
   children: React.ReactNode;
-  lang: string;
+  lang: reagonTypes;
   dir: "rtl" | "ltr";
 }
 
-export function MainLayout({ children, lang, dir }: Props) {
+export async function MainLayout({ children, lang, dir }: Props) {
+  const dict = await getDictionary(lang, "header");
+
   return (
     <LangProvider lang={lang}>
       <div lang={lang} dir={dir}>
         <ResponsiveLayout>
           <div className="relative">
-            <AppHeader dir={dir} />
+            <AppHeader dict={dict} dir={dir} />
           </div>
           <main className="pt-20">{children}</main>
         </ResponsiveLayout>
