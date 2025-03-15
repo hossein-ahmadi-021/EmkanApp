@@ -1,8 +1,14 @@
 import { IconType } from "@/types/public/icon.types";
 
-export default function HambergerIcon({ width, height, color }: IconType) {
+export default function HambergerIcon({
+  width,
+  height,
+  color,
+  className,
+}: IconType) {
   return (
     <svg
+      className={className}
       width={width}
       height={height}
       viewBox="0 0 32 18"

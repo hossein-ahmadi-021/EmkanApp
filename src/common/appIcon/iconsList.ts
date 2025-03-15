@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { IconColorsType, IconNames, IconType } from "@/types/public/icon.types";
+import { IconNames, IconType } from "@/types/public/icon.types";
 import LogoIcon from "@/assets/icons/logo";
 import HambergerIcon from "@/assets/icons/hamberger";
 import SearchIcon from "@/assets/icons/search";
@@ -15,7 +15,7 @@ import CloseIcon from "@/assets/icons/close";
 
 export const iconList: Record<
   IconNames,
-  ({ width, height, color }: IconType) => ReactElement
+  ({ width, height, className }: IconType) => ReactElement
 > = {
   LogoIcon,
   HambergerIcon,
@@ -29,9 +29,4 @@ export const iconList: Record<
   SymbolIcon,
   ArrowIcon,
   CloseIcon,
-};
-
-export const colors: Record<IconColorsType, string> = {
-  white: "#fff",
-  primary: "#104946",
 };

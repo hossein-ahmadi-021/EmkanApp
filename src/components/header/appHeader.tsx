@@ -102,21 +102,12 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                 />
               )}
               <div className="flex items-center gap-2.5">
-                {isPrimary ? (
-                  <AppIcon
-                    color={"primary"}
-                    name="LogoIcon"
-                    width="44px"
-                    height="44px"
-                  />
-                ) : (
-                  <AppIcon
-                    color={"white"}
-                    name="LogoIcon"
-                    width="44px"
-                    height="44px"
-                  />
-                )}
+                <AppIcon
+                  color={isPrimary ? "primary" : "white"}
+                  name="LogoIcon"
+                  width="44px"
+                  height="44px"
+                />
                 <div>
                   <h1 className="text-lg font-bold">{dict.company}</h1>
                   <h4 className="text-tiny">

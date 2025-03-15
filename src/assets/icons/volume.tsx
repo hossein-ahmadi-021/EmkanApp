@@ -1,9 +1,10 @@
 import { IconType } from "@/types/public/icon.types";
 
-export default function VolumeIcon({ width, height, color }: IconType) {
+export default function VolumeIcon({ width, height, className }: IconType) {
   return (
     <svg
-      fill={color}
+      className={className}
+      fill="currentColor"
       width={width}
       height={height}
       viewBox="0 0 24 24"

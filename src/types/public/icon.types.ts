@@ -15,7 +15,7 @@ export type IconNames =
 export interface IconType {
   width: string;
   height: string;
-  color?: string;
+  className?: string;
 }
 
 export type IconColorsType = "white" | "primary";
