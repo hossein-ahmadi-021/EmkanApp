@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import AppIcon from "@/common/appIcon";
 import { homeSectionDictTypes } from "@/types/landing/landing.types";
 import { useHeaderStore } from "@/store/headerStore";
+import LandingSectionTwo from "@/containers/landing/sectionTwo/landingSectionTwo";
 
 interface Props {
   rtl: boolean;
@@ -67,6 +68,8 @@ export default function Landing({ dict, rtl }: Props) {
     };
   }, []);
 
+  console.log(currentSection === 1);
+
   return (
     <motion.div
       ref={containerRef}
@@ -84,8 +87,12 @@ export default function Landing({ dict, rtl }: Props) {
         </motion.section>
 
         {/* Section 2 */}
-        <motion.section className="w-full h-screen flex justify-center items-center bg-white text-white relative">
-          Section 2
+        <motion.section className="w-full h-screen flex justify-center items-center text-white relative overflow-hidden">
+          <LandingSectionTwo
+            isActive={currentSection === 1}
+            rtl={rtl}
+            dict={dict}
+          />
           <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>
 

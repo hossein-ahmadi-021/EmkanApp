@@ -82,13 +82,16 @@
 /*---break---*/
 
 @theme inline {
+    --color-primary: #104946;
+    --color-disablePrimary: #D3D8D2;
+    --color-dimPrimary: #F1F2ED;
+    --color-glass-white: #FDFBF533;
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
-    --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
@@ -141,7 +144,6 @@
 }
 
 
-
 /*---break---*/
 
 
@@ -152,6 +154,29 @@
 
     body {
         @apply bg-background text-foreground;
+    }
+
+    /* Define variables in root */
+    :root {
+        --text-tiny: 0.625rem;
+        --text-xBase: 1.0625rem;
+        --text-1-5xl: 1.375rem;
+    }
+
+    /* Register Tailwind utilities */
+    .text-tiny {
+        font-size: var(--text-tiny);
+        line-height: 1.4;
+    }
+
+    .text-xBase {
+        font-size: var(--text-xBase);
+        line-height: 1.5;
+    }
+
+    .text-1\.5xl {
+        font-size: var(--text-1-5xl);
+        line-height: 1.6;
     }
 }
 
@@ -173,15 +198,4 @@
     background: #818282;
 }
 
-/*---custom variables---*/
-@theme {
-    /*colors*/
-    --color-primary: #104946;
-    --color-glass-white: #FDFBF533;
-
-    /*font sizes*/
-    --text-tiny: 0.625rem;
-    --text-xBase: 1.0625rem;
-    --text-1-5xl: 1.375rem;
-}
 

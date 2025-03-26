@@ -109,7 +109,7 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                   height="44px"
                 />
                 <div>
-                  <h1 className="text-lg font-bold">{dict.company}</h1>
+                  <h1 className="text-lg font-semibold">{dict.company}</h1>
                   <h4 className="text-tiny">
                     Emkan Development Experience Group
                   </h4>

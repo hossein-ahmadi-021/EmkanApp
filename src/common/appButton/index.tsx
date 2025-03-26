@@ -1,18 +1,28 @@
-import { ReactNode, useState } from "react";
-import { motion } from "framer-motion";
 import { IconNames } from "@/types/public/icon.types";
-import clsx from "clsx";
+import React, { ReactNode, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { useLangStore } from "@/store/langStore";
 import AppIcon from "@/common/appIcon";
+import clsx from "clsx";
+import { useLangStore } from "@/store/langStore";
+import { motion } from "framer-motion";
 
 interface Props {
   children?: ReactNode;
   icon?: IconNames;
   className?: string;
+  type?: "normal" | "dashed";
+  theme?: "primary" | "gold";
 }
 
-export default function AppButton({ icon, children, className }: Props) {
+export default function AppButton({
+  icon,
+  children,
+  className,
+  type = "normal",
+  theme = "primary",
+}: Props) {
+  const isDashed = type === "dashed";
+  const isGold = theme === "gold";
   const { isRTL } = useLangStore();
   const [ripple, setRipple] = useState<{
     key: number;
@@ -28,14 +38,23 @@ export default function AppButton({ icon, children, className }: Props) {
   };
 
   const buttonClasses = twMerge(
-    "rounded-full bg-primary cursor-pointer text-lg flex items-center justify-between gap-3 relative overflow-hidden text-white",
+    "rounded-full cursor-pointer flex items-center justify-between gap-3 relative overflow-hidden text-lg font-normal",
+    clsx({
+      ...(isGold
+        ? {
+            "bg-[#BDAA88] text-white": !isDashed,
+            "bg-white border border-[#BDAA88] text-[#BDAA88]": isDashed,
+          }
+        : {
+            "bg-primary text-white": !isDashed,
+            "bg-[#10494633] border border-primary text-primary": isDashed,
+          }),
+    }),
     clsx({
       "ps-6": icon,
-      "p-4": !icon,
+      "px-4 py-[15px]": !icon,
     }),
-    className,
   );
-
   return (
     <motion.button
       className={buttonClasses}
@@ -64,8 +83,7 @@ export default function AppButton({ icon, children, className }: Props) {
           onAnimationComplete={() => setRipple(null)}
         />
       )}
-
-      {children}
+      <div className={className}>{children}</div>
       {icon && (
         <div className={isRTL ? "" : "rotate-180"}>
           <AppIcon name={icon} width="48px" height="48px" />

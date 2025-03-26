@@ -14,17 +14,17 @@ interface Props {
   dict: homeSectionDictTypes;
 }
 
+const clickTabsVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const loadTabsVariants = {
+  hidden: { opacity: 0, y: "120%" },
+  visible: { opacity: 1, y: 0 },
+};
+
 export default function LandingSectionOne({ dict, rtl }: Props) {
-  const clickTabsVariant = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
-
-  const loadTabsVariants = {
-    hidden: { y: "120%" },
-    visible: { y: 0 },
-  };
-
   // States
   const [activeTab, setActiveTab] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);

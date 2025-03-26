@@ -12,6 +12,7 @@ import VolumeIcon from "@/assets/icons/volume";
 import SymbolIcon from "@/assets/icons/symbol";
 import ArrowIcon from "@/assets/icons/arrow";
 import CloseIcon from "@/assets/icons/close";
+import HalfCircleIcon from "@/assets/icons/halfCircle";
 
 export const iconList: Record<
   IconNames,
@@ -29,4 +30,5 @@ export const iconList: Record<
   SymbolIcon,
   ArrowIcon,
   CloseIcon,
+  HalfCircleIcon,
 };

@@ -56,8 +56,10 @@ export default function LandingInfoBox({ data, rtl }: Props) {
           transition={{ duration: 0.7 }}
           className="text-justify"
         >
-          <p className="border-t pt-6 text-[1.91vh] leading-9">{data.desc}</p>
-          <AppButton className="mt-6 min-w-[326px]" icon="InsideIcon">
+          <p className="border-t mb-6 pt-6 text-[1.91vh] leading-9">
+            {data.desc}
+          </p>
+          <AppButton className="min-w-[326px]" icon="InsideIcon">
             {data.btnTitle}
           </AppButton>
         </motion.div>

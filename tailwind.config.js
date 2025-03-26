@@ -8,6 +8,8 @@ module.exports = {
       },
       colors: {
         primary: "#104946",
+        dimPrimary: "#F1F2ED",
+        disablePrimary: "#D3D8D2",
         "glass-white": "#FDFBF533",
       },
       fontSize: {
