@@ -11,7 +11,8 @@ export type IconNames =
   | "SymbolIcon"
   | "ArrowIcon"
   | "CloseIcon"
-  | "HalfCircleIcon";
+  | "HalfCircleIcon"
+  | "LocationIcon";
 
 export interface IconType {
   width: string;
@@ -19,4 +20,4 @@ export interface IconType {
   className?: string;
 }
 
-export type IconColorsType = "white" | "primary";
+export type IconColorsType = "white" | "primary" | "gold";

@@ -7,6 +7,7 @@ import { useLangStore } from "@/store/langStore";
 import { motion } from "framer-motion";
 
 interface Props {
+  onClick?: () => void;
   children?: ReactNode;
   icon?: IconNames;
   className?: string;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export default function AppButton({
+  onClick,
   icon,
   children,
   className,
@@ -35,6 +37,7 @@ export default function AppButton({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setRipple({ key: Date.now(), x, y });
+    onClick && onClick();
   };
 
   const buttonClasses = twMerge(
@@ -56,39 +59,37 @@ export default function AppButton({
     }),
   );
   return (
-    <motion.button
-      className={buttonClasses}
-      onClick={handleClick}
-      whileTap={{ scale: 0.95 }}
-    >
-      {ripple && (
-        <motion.span
-          key={ripple.key}
-          className="absolute bg-white/30 rounded-full pointer-events-none"
-          initial={{
-            scale: 0,
-            opacity: 1,
-          }}
-          animate={{
-            scale: 4,
-            opacity: 0,
-          }}
-          transition={{ duration: 0.5 }}
-          style={{
-            width: "100px",
-            height: "100px",
-            left: ripple.x - 50,
-            top: ripple.y - 50,
-          }}
-          onAnimationComplete={() => setRipple(null)}
-        />
-      )}
-      <div className={className}>{children}</div>
-      {icon && (
-        <div className={isRTL ? "" : "rotate-180"}>
-          <AppIcon name={icon} width="48px" height="48px" />
-        </div>
-      )}
-    </motion.button>
+    <button onClick={handleClick}>
+      <motion.div className={buttonClasses} whileTap={{ scale: 0.95 }}>
+        {ripple && (
+          <motion.span
+            key={ripple.key}
+            className="absolute bg-white/30 rounded-full pointer-events-none"
+            initial={{
+              scale: 0,
+              opacity: 1,
+            }}
+            animate={{
+              scale: 4,
+              opacity: 0,
+            }}
+            transition={{ duration: 0.5 }}
+            style={{
+              width: "100px",
+              height: "100px",
+              left: ripple.x - 50,
+              top: ripple.y - 50,
+            }}
+            onAnimationComplete={() => setRipple(null)}
+          />
+        )}
+        <div className={className}>{children}</div>
+        {icon && (
+          <div className={isRTL ? "" : "rotate-180"}>
+            <AppIcon name={icon} width="48px" height="48px" />
+          </div>
+        )}
+      </motion.div>
+    </button>
   );
 }

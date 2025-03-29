@@ -68,8 +68,6 @@ export default function Landing({ dict, rtl }: Props) {
     };
   }, []);
 
-  console.log(currentSection === 1);
-
   return (
     <motion.div
       ref={containerRef}

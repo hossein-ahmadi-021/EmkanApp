@@ -1,5 +1,6 @@
 import { IconColorsType, IconNames, IconType } from "@/types/public/icon.types";
 import { iconList } from "@/common/appIcon/iconsList";
+import { twMerge } from "tailwind-merge";
 
 export default function AppIcon({
   name,
@@ -9,10 +10,16 @@ export default function AppIcon({
 }: { name: IconNames; color?: IconColorsType } & IconType) {
   const IconComponent = iconList[name];
 
-  return (
-    <IconComponent
-      className={`transition-colors duration-700 text-${color} ${className}`}
-      {...rest}
-    />
+  const theme = {
+    white: "text-white",
+    primary: "text-primary",
+    gold: "text-gold",
+  };
+
+  const iconClassNames = twMerge(
+    `transition-colors duration-700 ${theme[color]}`,
+    className,
   );
+
+  return <IconComponent className={iconClassNames} {...rest} />;
 }

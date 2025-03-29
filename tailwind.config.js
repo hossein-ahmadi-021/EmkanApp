@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         primary: "#104946",
+        gold: "#C3B293",
         dimPrimary: "#F1F2ED",
         disablePrimary: "#D3D8D2",
         "glass-white": "#FDFBF533",

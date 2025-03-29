@@ -13,6 +13,7 @@ import SymbolIcon from "@/assets/icons/symbol";
 import ArrowIcon from "@/assets/icons/arrow";
 import CloseIcon from "@/assets/icons/close";
 import HalfCircleIcon from "@/assets/icons/halfCircle";
+import LocationIcon from "@/assets/icons/location";
 
 export const iconList: Record<
   IconNames,
@@ -31,4 +32,5 @@ export const iconList: Record<
   ArrowIcon,
   CloseIcon,
   HalfCircleIcon,
+  LocationIcon,
 };
