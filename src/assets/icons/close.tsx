@@ -1,11 +1,6 @@
 import { IconType } from "@/types/public/icon.types";
 
-export default function CloseIcon({
-  width,
-  height,
-  color,
-  className,
-}: IconType) {
+export default function CloseIcon({ width, height, className }: IconType) {
   return (
     <svg
       className={className}
@@ -17,7 +12,6 @@ export default function CloseIcon({
     >
       <path
         d="M30.9926 30.6645L1.32812 1"
-        stroke={color}
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -25,7 +19,6 @@ export default function CloseIcon({
       />
       <path
         d="M30.6645 1.33557L1 31.0001"
-        stroke={color}
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"

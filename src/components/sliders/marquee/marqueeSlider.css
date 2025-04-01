@@ -1,0 +1,14 @@
+.marquee-container {
+    overflow: hidden !important;
+}
+
+.marquee-container .swiper-wrapper {
+    transition-timing-function: linear !important;
+    display: flex !important;
+    animation: none !important;
+}
+
+.slide-item {
+    flex-shrink: 0 !important;
+    width: auto !important;
+}

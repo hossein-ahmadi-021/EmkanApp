@@ -12,7 +12,10 @@ export type IconNames =
   | "ArrowIcon"
   | "CloseIcon"
   | "HalfCircleIcon"
-  | "LocationIcon";
+  | "LocationIcon"
+  | "EnergyIcon"
+  | "ArrowToIcon"
+  | "MiniHalfCircle";
 
 export interface IconType {
   width: string;

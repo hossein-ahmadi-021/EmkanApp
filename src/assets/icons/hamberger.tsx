@@ -1,11 +1,6 @@
 import { IconType } from "@/types/public/icon.types";
 
-export default function HambergerIcon({
-  width,
-  height,
-  color,
-  className,
-}: IconType) {
+export default function HambergerIcon({ width, height, className }: IconType) {
   return (
     <svg
       className={className}
@@ -15,24 +10,9 @@ export default function HambergerIcon({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M31 1L1 0.999998"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M31 17L1 17"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M31 9L1 9"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <path d="M31 1L1 0.999998" strokeWidth="2" strokeLinecap="round" />
+      <path d="M31 17L1 17" strokeWidth="2" strokeLinecap="round" />
+      <path d="M31 9L1 9" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

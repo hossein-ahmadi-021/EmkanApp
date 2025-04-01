@@ -28,7 +28,9 @@ const LocationPoint = ({
   const isActive = activeId === pointId;
 
   const pointClasses = twMerge(
-    "flex flex-col items-center w-fit font-normal text-tiny absolute cursor-pointer",
+    `flex flex-col items-center w-fit font-normal text-tiny absolute cursor-pointer select-none ${
+      isActive && "z-10"
+    }`,
     className,
   );
 

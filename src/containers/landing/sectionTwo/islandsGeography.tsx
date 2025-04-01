@@ -24,7 +24,7 @@ export default function IslandsGeography({ activeId, setActiveConfig }: Props) {
       initial="hidden"
       animate="visible"
       variants={opacityVariant}
-      transition={{ duration: 2 }}
+      transition={{ duration: 1 }}
     >
       <LocationPoint
         location="islands"
