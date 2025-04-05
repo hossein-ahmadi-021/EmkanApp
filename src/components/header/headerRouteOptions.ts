@@ -10,7 +10,7 @@ export const headerRouteOptions: Record<existRoutes, HeaderRouteAccessType> = {
     },
     options: [],
   },
-  "/about": {
+  "/contactUs": {
     type: "main",
     theme: "primary",
     onBack: () => {

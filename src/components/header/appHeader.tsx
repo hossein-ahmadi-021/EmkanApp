@@ -101,7 +101,10 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                   height="32px"
                 />
               )}
-              <div className="flex items-center gap-2.5">
+              <div
+                onClick={() => router.push(`/${lang}`)}
+                className="flex items-center gap-2.5 cursor-pointer"
+              >
                 <AppIcon
                   color={isPrimary ? "primary" : "white"}
                   name="LogoIcon"
@@ -154,7 +157,12 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                   height="24px"
                 />
               </DialogTrigger>
-              <AppButton icon="InsideIcon">{dict.contactUs}</AppButton>
+              <AppButton
+                onClick={() => router.push(`/${lang}/contactUs`)}
+                icon="InsideIcon"
+              >
+                {dict.contactUs}
+              </AppButton>
             </div>
           </div>
           <DialogContent>

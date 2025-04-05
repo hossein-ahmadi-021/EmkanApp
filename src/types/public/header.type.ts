@@ -1,4 +1,4 @@
-export type existRoutes = "/" | "/about";
+export type existRoutes = "/" | "/contactUs";
 export type HeaderOptionType = "";
 
 export interface HeaderRouteAccessType {
