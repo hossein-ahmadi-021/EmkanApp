@@ -13,14 +13,14 @@ export default function ArrowToIcon({ width, height, className }: IconType) {
       <g clipPath="url(#clip0_205_5851)">
         <path
           d="M10.0031 19.6V10H19.5928"
-          stroke="#FDFBF5"
+          stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M10.0002 10L21.9873 22"
-          stroke="#FDFBF5"
+          stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"

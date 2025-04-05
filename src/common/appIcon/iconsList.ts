@@ -17,6 +17,7 @@ import LocationIcon from "@/assets/icons/location";
 import EnergyIcon from "@/assets/icons/energy";
 import ArrowToIcon from "@/assets/icons/arrowTo";
 import MiniHalfCircle from "@/assets/icons/miniHalfCircle";
+import FireIcon from "@/assets/icons/fire";
 
 export const iconList: Record<
   IconNames,
@@ -39,4 +40,5 @@ export const iconList: Record<
   EnergyIcon,
   ArrowToIcon,
   MiniHalfCircle,
+  FireIcon,
 };

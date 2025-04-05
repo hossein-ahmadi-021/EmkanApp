@@ -96,28 +96,6 @@ export default function LandingSectionThree(props: Props) {
           />
         </div>
       </div>
-      {/*<div className="flex items-center gap-8">*/}
-      {/*  <div className="flex items-center gap-2 mt-[5.83vh]">*/}
-      {/*    <AppIcon color="primary" name="MiniHalfCircle" width="54" height="36" />*/}
-      {/*    <div className="text-[4.35vh] font-medium">توسعه سرزمینی</div>*/}
-      {/*  </div>{" "}*/}
-      {/*  <div className="flex items-center gap-2 mt-[5.83vh]">*/}
-      {/*    <AppIcon color="primary" name="MiniHalfCircle" width="54" height="36" />*/}
-      {/*    <div className="text-[4.35vh] font-medium">توسعه سرزمینی</div>*/}
-      {/*  </div>{" "}*/}
-      {/*  <div className="flex items-center gap-2 mt-[5.83vh]">*/}
-      {/*    <AppIcon color="primary" name="MiniHalfCircle" width="54" height="36" />*/}
-      {/*    <div className="text-[4.35vh] font-medium">توسعه سرزمینی</div>*/}
-      {/*  </div>{" "}*/}
-      {/*  <div className="flex items-center gap-2 mt-[5.83vh]">*/}
-      {/*    <AppIcon color="primary" name="MiniHalfCircle" width="54" height="36" />*/}
-      {/*    <div className="text-[4.35vh] font-medium">توسعه سرزمینی</div>*/}
-      {/*  </div>{" "}*/}
-      {/*  <div className="flex items-center gap-2 mt-[5.83vh]">*/}
-      {/*    <AppIcon color="primary" name="MiniHalfCircle" width="54" height="36" />*/}
-      {/*    <div className="text-[4.35vh] font-medium">توسعه سرزمینی</div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
       <MarqueeSlider />
     </ResponsiveLayout>
   );

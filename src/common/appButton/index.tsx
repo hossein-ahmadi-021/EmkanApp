@@ -12,7 +12,8 @@ interface Props {
   icon?: IconNames;
   className?: string;
   type?: "normal" | "dashed";
-  theme?: "primary" | "gold";
+  theme?: "primary" | "gold" | "gray";
+  parentClass?: string;
 }
 
 export default function AppButton({
@@ -22,6 +23,7 @@ export default function AppButton({
   className,
   type = "normal",
   theme = "primary",
+  parentClass,
 }: Props) {
   const isDashed = type === "dashed";
   const isGold = theme === "gold";
@@ -40,23 +42,35 @@ export default function AppButton({
     onClick && onClick();
   };
 
+  const THEMES = {
+    gold: clsx({
+      ...{
+        "bg-[#BDAA88] text-white": !isDashed,
+        "bg-white border border-[#BDAA88] text-[#BDAA88]": isDashed,
+      },
+    }),
+    primary: clsx({
+      ...{
+        "bg-primary text-white": !isDashed,
+        "bg-[#10494633] border border-primary text-primary": isDashed,
+      },
+    }),
+    gray: clsx({
+      ...{
+        "bg-[#ADA795] text-white": !isDashed,
+        "bg-white border border-[#E4E1D6] text-[#ADA795]": isDashed,
+      },
+    }),
+  };
+
   const buttonClasses = twMerge(
     "rounded-full cursor-pointer flex items-center justify-between gap-3 relative overflow-hidden text-lg font-normal",
-    clsx({
-      ...(isGold
-        ? {
-            "bg-[#BDAA88] text-white": !isDashed,
-            "bg-white border border-[#BDAA88] text-[#BDAA88]": isDashed,
-          }
-        : {
-            "bg-primary text-white": !isDashed,
-            "bg-[#10494633] border border-primary text-primary": isDashed,
-          }),
-    }),
+    THEMES[theme],
     clsx({
       "ps-6": icon,
       "px-4 py-[15px]": !icon,
     }),
+    parentClass,
   );
   return (
     <button onClick={handleClick}>

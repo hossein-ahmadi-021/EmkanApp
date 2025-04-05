@@ -7,6 +7,8 @@ import { homeSectionDictTypes } from "@/types/landing/landing.types";
 import { useHeaderStore } from "@/store/headerStore";
 import LandingSectionTwo from "@/containers/landing/sectionTwo/landingSectionTwo";
 import LandingSectionThree from "@/containers/landing/sectionThree/landingSectionThree";
+import LandingSectionFour from "@/containers/landing/sectionFour/landingSectionFour";
+import LandingSectionFive from "@/containers/landing/sectionFive/landingSectionFive";
 
 interface Props {
   rtl: boolean;
@@ -102,14 +104,14 @@ export default function Landing({ dict, rtl }: Props) {
         </motion.section>
 
         {/* Section 4 */}
-        <motion.section className="w-full h-screen flex justify-center items-center bg-teal-500 text-white relative">
-          Section 4
+        <motion.section className="w-full h-screen flex justify-center items-center relative">
+          <LandingSectionFour rtl={rtl} dict={dict} />
           <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>
 
         {/* Section 5 */}
-        <motion.section className="w-full h-screen flex justify-center items-center bg-blue-500 text-white relative">
-          Section 5
+        <motion.section className="w-full h-screen flex justify-center items-center text-white relative">
+          <LandingSectionFive />
         </motion.section>
       </motion.div>
     </motion.div>
