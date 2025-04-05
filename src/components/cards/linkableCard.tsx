@@ -28,8 +28,8 @@ export default function LinkableCard({
         alt="clean-energy"
         className="w-full h-full object-cover transition-all duration-600 ease-in-out group-hover:scale-115 transform-gpu"
       />
-      <div className="duration-600 rounded-full w-[9vh] h-[9vh] bg-[#C3B293] blur-xl z-10 absolute top-6.5 start-[-75] group-hover:start-[-47]" />
-      <div className="duration-600 rounded-full w-[22.65vh] h-[22.65vh] bg-primary blur-2xl absolute top-[-34] start-[-70] group-hover:inset-0 group-hover:scale-180" />
+      <div className="duration-600 rounded-full w-[9vh] h-[9vh] bg-[#C3B293] blur-xl z-10 absolute top-6.5 start-[-11vh] group-hover:start-[-8.2vh]" />
+      <div className="duration-600 rounded-full w-[22.65vh] h-[22.65vh] bg-primary blur-2xl absolute top-[-34] start-[-10vh] group-hover:inset-0 group-hover:scale-180" />
       <AppIcon
         className="absolute top-5 start-4 z-20"
         name="EnergyIcon"

@@ -2,6 +2,7 @@ import AppIcon from "@/common/appIcon";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import AppButton from "@/common/appButton";
 import NewsGallery from "@/containers/landing/sectionFive/newsGallery";
+import ResponsiveLayout from "@/layout/responsiveLayout";
 
 interface Props {}
 
@@ -10,7 +11,7 @@ export default function LandingSectionFive(props: Props) {
   const [activeFilter, setActiveFilter] = useState(0);
 
   return (
-    <div className="flex items-center w-full pt-68 px-32 text-primary">
+    <ResponsiveLayout className="flex items-center w-full pt-68 px-32 text-primary">
       <div className="w-[60%] h-screen">
         <div className="flex flex-col gap-4">
           <TabTextSelect
@@ -152,7 +153,7 @@ export default function LandingSectionFive(props: Props) {
         </div>
       </div>
       <NewsGallery />
-    </div>
+    </ResponsiveLayout>
   );
 }
 
