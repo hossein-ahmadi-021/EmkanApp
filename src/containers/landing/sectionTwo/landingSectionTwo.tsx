@@ -271,12 +271,27 @@ export default function LandingSectionTwo({ dict, rtl, isActive }: Props) {
           stiffness: 120,
           mass: 0.5,
         }}
-        className="w-full h-[72vh] relative"
+        className="w-full relative"
         style={{
+          aspectRatio: 794 / 828,
+          height: "537px",
           overflow: "hidden",
           willChange: "transform",
         }}
       >
+        <Image
+          src={iranMapBg}
+          alt="iranMap"
+          fill={true}
+          quality={50}
+          priority
+          className="object-contain"
+          sizes="(max-width: 768px) 90vw, 67.04vh"
+          style={{
+            aspectRatio: 794 / 828,
+            transform: "translateZ(0)",
+          }}
+        />
         <Image
           src={iranMapBg}
           alt="iranMap"
