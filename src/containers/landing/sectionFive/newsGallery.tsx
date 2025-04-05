@@ -8,23 +8,14 @@ import AppIcon from "@/common/appIcon";
 import natureImage from "@/assets/images/landing/nature.png";
 import Image from "next/image";
 
-SwiperCore.use([Navigation, Controller]);
-
-interface Props {}
-
-export default function NewsGallery(props: Props) {
+export default function NewsGallery() {
   const [swiperRef, setSwiperRef] = useState<SwiperCore | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  const handleSwiper = (swiper: SwiperCore) => {
-    setSwiperRef(swiper);
-    setIsBeginning(swiper.isBeginning);
-    setIsEnd(swiper.isEnd);
-  };
-
   return (
     <div className="w-[40%] h-screen flex items-start gap-5">
+      {/* Navigation buttons remain unchanged */}
       <div className="mt-12">
         <button
           className={`duration-700 w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer ${
@@ -81,7 +72,7 @@ export default function NewsGallery(props: Props) {
           slidesPerGroup={1}
           resistanceRatio={0}
           watchSlidesProgress={true}
-          modules={[FreeMode, Controller]}
+          modules={[FreeMode, Controller, Navigation]} // Added Navigation here
           onSlideChange={(swiper) => {
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);
@@ -98,6 +89,7 @@ export default function NewsGallery(props: Props) {
   );
 }
 
+// NewsCard component remains unchanged
 const NewsCard = () => {
   return (
     <div>

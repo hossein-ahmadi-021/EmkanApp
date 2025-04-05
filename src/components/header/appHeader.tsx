@@ -18,16 +18,12 @@ import { headerRouteOptions } from "@/components/header/headerRouteOptions";
 import { existRoutes } from "@/types/public/header.type";
 import { clsx } from "clsx";
 import { useHeaderStore } from "@/store/headerStore";
+import { headerSectionDictType } from "@/types/header/header.type";
 
 interface Props {
   dir: "rtl" | "ltr";
   lang: reagonTypes;
-  dict: {
-    company: string;
-    links: { id: number; name: string; link: string }[];
-    contactUs: string;
-    modalTitle: string;
-  };
+  dict: headerSectionDictType;
 }
 
 export default function AppHeader({ dict, dir, lang }: Props) {

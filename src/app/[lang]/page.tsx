@@ -2,6 +2,7 @@ import { getDictionary } from "@/lib/dictionaries/dictionary";
 import { checkRtl } from "@/lib/utils/lang";
 import Landing from "@/containers/landing";
 import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
+import { homeSectionDictTypes } from "@/types/landing/landing.types";
 
 export default async function Home({
   params,
@@ -10,7 +11,7 @@ export default async function Home({
 }) {
   const { lang } = await params;
   const isRtl = checkRtl(lang);
-  const dict = await getDictionary(lang, "home");
+  const dict = (await getDictionary(lang, "home")) as homeSectionDictTypes;
 
   return <Landing rtl={isRtl} dict={dict} />;
 }

@@ -69,7 +69,7 @@ export default function Landing({ dict, rtl }: Props) {
     return () => {
       resetHeaderColor();
     };
-  }, []);
+  }, [resetHeaderColor]);
 
   return (
     <motion.div
@@ -89,11 +89,7 @@ export default function Landing({ dict, rtl }: Props) {
 
         {/* Section 2 */}
         <motion.section className="w-full h-screen flex justify-center items-center text-white relative overflow-hidden">
-          <LandingSectionTwo
-            isActive={currentSection === 1}
-            rtl={rtl}
-            dict={dict}
-          />
+          <LandingSectionTwo isActive={currentSection === 1} rtl={rtl} />
           <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
         </motion.section>
 

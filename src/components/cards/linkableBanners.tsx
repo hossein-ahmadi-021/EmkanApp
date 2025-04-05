@@ -10,12 +10,7 @@ interface Props {
   className?: string;
 }
 
-export default function LinkableBanners({
-  title,
-  subTitle,
-  bg,
-  className,
-}: Props) {
+export default function LinkableBanners({ bg, className }: Props) {
   return (
     <div
       className={`relative overflow-hidden group text-white cursor-pointer ${className}`}

@@ -4,9 +4,7 @@ import AppButton from "@/common/appButton";
 import NewsGallery from "@/containers/landing/sectionFive/newsGallery";
 import ResponsiveLayout from "@/layout/responsiveLayout";
 
-interface Props {}
-
-export default function LandingSectionFive(props: Props) {
+export default function LandingSectionFive() {
   const [activeState, setActiveState] = useState(0);
   const [activeFilter, setActiveFilter] = useState(0);
 
@@ -157,17 +155,19 @@ export default function LandingSectionFive(props: Props) {
   );
 }
 
+interface TabTextSelectProps {
+  title: string;
+  activeState: number;
+  state: number;
+  setActiveState: Dispatch<SetStateAction<number>>;
+}
+
 const TabTextSelect = ({
   title,
   activeState,
   state,
   setActiveState,
-}: {
-  title: string;
-  activeState: number;
-  state: number;
-  setActiveState: Dispatch<SetStateAction<number>>;
-}) => {
+}: TabTextSelectProps) => {
   return (
     <div
       onClick={() => setActiveState(state)}

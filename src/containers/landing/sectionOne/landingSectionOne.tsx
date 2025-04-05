@@ -14,6 +14,11 @@ interface Props {
   dict: homeSectionDictTypes;
 }
 
+interface TabItemType {
+  id: number;
+  title: string;
+}
+
 const clickTabsVariant = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
@@ -121,7 +126,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
             </div>
           </div>
           <div className="flex items-center mt-[1.74vh]">
-            {dict.tabs.map((item: any) => {
+            {dict.tabs.map((item: TabItemType) => {
               const isActive = item.id === activeTab;
 
               const titleClass = twMerge(

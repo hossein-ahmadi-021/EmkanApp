@@ -9,7 +9,7 @@ interface Props {
   dict: homeSectionDictTypes;
 }
 
-export default function LandingSectionFour(props: Props) {
+export default function LandingSectionFour({}: Props) {
   return (
     <ResponsiveLayout>
       <div className="bg-[#F8F4EC] h-screen py-27 px-20">

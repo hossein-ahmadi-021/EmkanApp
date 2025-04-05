@@ -1,7 +1,5 @@
 import * as React from "react";
 import { Dispatch, SetStateAction } from "react";
-import AppIcon from "@/common/appIcon";
-import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
 import LocationPoint from "@/containers/landing/sectionTwo/locationPoint";
 

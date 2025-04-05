@@ -26,7 +26,6 @@ export default function AppButton({
   parentClass,
 }: Props) {
   const isDashed = type === "dashed";
-  const isGold = theme === "gold";
   const { isRTL } = useLangStore();
   const [ripple, setRipple] = useState<{
     key: number;
@@ -39,27 +38,22 @@ export default function AppButton({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setRipple({ key: Date.now(), x, y });
-    onClick && onClick();
+    onClick?.();
   };
 
+  // Fixed THEMES configuration
   const THEMES = {
     gold: clsx({
-      ...{
-        "bg-[#BDAA88] text-white": !isDashed,
-        "bg-white border border-[#BDAA88] text-[#BDAA88]": isDashed,
-      },
+      "bg-[#BDAA88] text-white": !isDashed,
+      "bg-white border border-[#BDAA88] text-[#BDAA88]": isDashed,
     }),
     primary: clsx({
-      ...{
-        "bg-primary text-white": !isDashed,
-        "bg-[#10494633] border border-primary text-primary": isDashed,
-      },
+      "bg-primary text-white": !isDashed,
+      "bg-[#10494633] border border-primary text-primary": isDashed,
     }),
     gray: clsx({
-      ...{
-        "bg-[#ADA795] text-white": !isDashed,
-        "bg-white border border-[#E4E1D6] text-[#ADA795]": isDashed,
-      },
+      "bg-[#ADA795] text-white": !isDashed,
+      "bg-white border border-[#E4E1D6] text-[#ADA795]": isDashed,
     }),
   };
 
@@ -71,22 +65,18 @@ export default function AppButton({
       "px-4 py-[15px]": !icon,
     }),
     parentClass,
+    className, // Moved className here for proper merging
   );
+
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick} className={parentClass}>
       <motion.div className={buttonClasses} whileTap={{ scale: 0.95 }}>
         {ripple && (
           <motion.span
             key={ripple.key}
             className="absolute bg-white/30 rounded-full pointer-events-none"
-            initial={{
-              scale: 0,
-              opacity: 1,
-            }}
-            animate={{
-              scale: 4,
-              opacity: 0,
-            }}
+            initial={{ scale: 0, opacity: 1 }}
+            animate={{ scale: 4, opacity: 0 }}
             transition={{ duration: 0.5 }}
             style={{
               width: "100px",
@@ -97,12 +87,14 @@ export default function AppButton({
             onAnimationComplete={() => setRipple(null)}
           />
         )}
-        <div className={className}>{children}</div>
-        {icon && (
-          <div className={isRTL ? "" : "rotate-180"}>
-            <AppIcon name={icon} width="48px" height="48px" />
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {children}
+          {icon && (
+            <div className={isRTL ? "" : "rotate-180"}>
+              <AppIcon name={icon} width="48px" height="48px" />
+            </div>
+          )}
+        </div>
       </motion.div>
     </button>
   );

@@ -2,7 +2,6 @@ import ResponsiveLayout from "@/layout/responsiveLayout";
 import { homeSectionDictTypes } from "@/types/landing/landing.types";
 import LinkableCard from "@/components/cards/linkableCard";
 import cleanEnergyBanner from "@/assets/images/landing/cleanEnergyBanner.png";
-import AppIcon from "@/common/appIcon";
 import MarqueeSlider from "@/components/sliders/marquee/marqueeSlider";
 import React from "react";
 
@@ -11,7 +10,7 @@ interface Props {
   dict: homeSectionDictTypes;
 }
 
-export default function LandingSectionThree(props: Props) {
+export default function LandingSectionThree({}: Props) {
   return (
     <div className="z-10 h-full pt-30 text-primary">
       <div className="px-20">

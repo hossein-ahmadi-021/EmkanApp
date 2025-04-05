@@ -1,10 +1,9 @@
-import { homeSectionDictTypes } from "@/types/landing/landing.types";
 import ResponsiveLayout from "@/layout/responsiveLayout";
 import iranMapBg from "@/assets/images/landing/iranMap.svg";
 import Image from "next/image";
 import AppIcon from "@/common/appIcon";
 import AppButton from "@/common/appButton";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   freeLocs,
@@ -18,11 +17,14 @@ import IslandsGeography from "@/containers/landing/sectionTwo/islandsGeography";
 
 interface Props {
   rtl: boolean;
-  dict: homeSectionDictTypes;
   isActive: boolean;
 }
 
 type LocationKey = "makran" | "azad" | "islands";
+interface LocationItem {
+  id: number;
+  name: string;
+}
 
 const defaultTransform = {
   scale: 1.4,
@@ -30,25 +32,27 @@ const defaultTransform = {
   translateY: -20,
 };
 
-export default function LandingSectionTwo({ dict, rtl, isActive }: Props) {
-  //constants
-  const transformConfigs = {
-    makran: {
-      scale: 2.5,
-      originX: rtl ? 25 : -25,
-      originY: 41,
-    },
-    azad: {
-      scale: 1.12,
-      originX: rtl ? 28 : -28,
-      originY: -57,
-    },
-    islands: {
-      scale: 2.4,
-      originX: rtl ? 9 : -9,
-      originY: 40,
-    },
-  };
+export default function LandingSectionTwo({ rtl, isActive }: Props) {
+  const transformConfigs = useMemo(
+    () => ({
+      makran: {
+        scale: 2.5,
+        originX: rtl ? 25 : -25,
+        originY: 41,
+      },
+      azad: {
+        scale: 1.12,
+        originX: rtl ? 28 : -28,
+        originY: -57,
+      },
+      islands: {
+        scale: 2.4,
+        originX: rtl ? 9 : -9,
+        originY: 40,
+      },
+    }),
+    [rtl],
+  );
 
   const animateStart = {
     hidden: {
@@ -63,51 +67,52 @@ export default function LandingSectionTwo({ dict, rtl, isActive }: Props) {
     },
   };
 
-  const locationInfos: Record<LocationKey, any> = {
+  const locationInfos: Record<LocationKey, LocationItem[]> = {
     makran: makranLocs,
     azad: freeLocs,
     islands: islandLocs,
   };
 
-  //states
   const [transform, setTransform] = useState({
     scale: 1.4,
     translateX: rtl ? -20 : 20,
     translateY: rtl ? -20 : 20,
   });
   const [activeConfig, setActiveConfig] = useState<{
-    location: keyof typeof transformConfigs;
+    location: LocationKey;
     activeLatLng: number;
   }>({
     location: "makran",
     activeLatLng: 1,
   });
 
-  //actions
-  const handleZoom = (config: keyof typeof transformConfigs) => {
-    const { scale, originX, originY } = transformConfigs[config];
-    setTransform({
-      scale,
-      translateX: (1 - scale) * originX,
-      translateY: (1 - scale) * originY,
-    });
-    setActiveConfig({
-      location: config,
-      activeLatLng: 1,
-    });
-  };
-  const resetZoom = () => {
-    setTransform(defaultTransform);
-  };
+  const handleZoom = useCallback(
+    (config: LocationKey) => {
+      const { scale, originX, originY } = transformConfigs[config];
+      setTransform({
+        scale,
+        translateX: (1 - scale) * originX,
+        translateY: (1 - scale) * originY,
+      });
+      setActiveConfig({
+        location: config,
+        activeLatLng: 1,
+      });
+    },
+    [transformConfigs],
+  );
 
-  //default handle zoom
+  const resetZoom = useCallback(() => {
+    setTransform(defaultTransform);
+  }, []);
+
   useEffect(() => {
     if (isActive) {
       handleZoom("makran");
     } else {
       resetZoom();
     }
-  }, [isActive]);
+  }, [isActive, handleZoom, resetZoom]);
 
   return (
     <ResponsiveLayout className="z-10 text-primary flex items-center h-screen font-medium">
@@ -181,29 +186,25 @@ export default function LandingSectionTwo({ dict, rtl, isActive }: Props) {
         </div>
         <div>
           <MotionScrollableWidth isRTL={rtl}>
-            {locationInfos[activeConfig.location].map(
-              (item: { id: number; name: string }) => {
-                const isActive = activeConfig.activeLatLng === item.id;
-                return (
-                  <AppButton
-                    key={item.id}
-                    theme={isActive ? "primary" : "gold"}
-                    type="dashed"
-                    className="text-xBase font-medium flex-shrink-0"
-                    onClick={() => {
-                      setActiveConfig((prev) => {
-                        return {
-                          location: prev.location,
-                          activeLatLng: item.id,
-                        };
-                      });
-                    }}
-                  >
-                    {item.name}
-                  </AppButton>
-                );
-              },
-            )}
+            {locationInfos[activeConfig.location].map((item) => {
+              const isActive = activeConfig.activeLatLng === item.id;
+              return (
+                <AppButton
+                  key={item.id}
+                  theme={isActive ? "primary" : "gold"}
+                  type="dashed"
+                  className="text-xBase font-medium flex-shrink-0"
+                  onClick={() => {
+                    setActiveConfig((prev) => ({
+                      ...prev,
+                      activeLatLng: item.id,
+                    }));
+                  }}
+                >
+                  {item.name}
+                </AppButton>
+              );
+            })}
           </MotionScrollableWidth>
           <div className="bg-dimPrimary px-[30px] py-[24px] mt-[0.96vh] max-w-[378px] flex-wrap">
             <div className="flex items-start justify-between">

@@ -2,7 +2,6 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
 import { locales } from "@/lib/constants/public";
 
 const defaultLocale = "fa";

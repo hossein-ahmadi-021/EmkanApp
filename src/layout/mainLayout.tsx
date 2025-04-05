@@ -3,6 +3,7 @@ import { LangProvider } from "@/layout/langProvider";
 import ResponsiveLayout from "@/layout/responsiveLayout";
 import { getDictionary } from "@/lib/dictionaries/dictionary";
 import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
+import { headerSectionDictType } from "@/types/header/header.type";
 
 interface Props {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export async function MainLayout({ children, lang, dir }: Props) {
-  const dict = await getDictionary(lang, "header");
+  const dict = (await getDictionary(lang, "header")) as headerSectionDictType;
 
   return (
     <LangProvider lang={lang}>
