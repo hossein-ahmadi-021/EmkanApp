@@ -12,10 +12,10 @@ interface Props {
 
 export default function LandingSectionThree({}: Props) {
   return (
-    <div className="z-10 h-full pt-30 text-primary">
-      <div className="px-20">
+    <div className="z-10 h-full pt-28 text-primary">
+      <div>
         <ResponsiveLayout>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between px-16">
             <h1 className="text-[6.43vh]">بخش‌های اقتصادی</h1>
             <p className="text-[1.58vh] max-w-[34%] text-justify line-clamp-3 leading-7">
               ایران با ظرفیت‌های بی‌نظیر در زمینه‌های مختلف اقتصادی، آماده است
@@ -24,80 +24,84 @@ export default function LandingSectionThree({}: Props) {
               برای سرمایه‌گذاری و رشد پایدار فراهم می‌آورد.
             </p>
           </div>
+          {/*cards*/}
+          <div className="grid w-full mx-auto grid-cols-4 grid-rows-3 gap-[2.61vh] cursor-pointer mt-[3vh] px-16">
+            <LinkableCard
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+              className="w-full"
+            />
+            <LinkableCard
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+              className="w-full"
+            />
+            <LinkableCard
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+              className="w-full"
+            />
+            <LinkableCard
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+              className="w-full"
+            />
+            <LinkableCard
+              className="row-start-2 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+            <LinkableCard
+              className="row-start-2 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+            <LinkableCard
+              className="row-start-2 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+            <LinkableCard
+              className="row-start-2 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+            <LinkableCard
+              className="row-start-3 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+            <LinkableCard
+              className="row-start-3 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+            <LinkableCard
+              className="row-start-3 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+            <LinkableCard
+              className="row-start-3 w-full"
+              title="نو انرژی‌ها"
+              subTitle="New Energies"
+              bg={cleanEnergyBanner}
+            />
+          </div>
         </ResponsiveLayout>
-        {/*cards*/}
-        <div className="grid w-fit mx-auto grid-cols-4 grid-rows-3 gap-[2.61vh] cursor-pointer mt-[4.35vh]">
-          <LinkableCard
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-2"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-2"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-2"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-2"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-3"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-3"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-3"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-          <LinkableCard
-            className="row-start-3"
-            title="نو انرژی‌ها"
-            subTitle="New Energies"
-            bg={cleanEnergyBanner}
-          />
-        </div>
       </div>
-      <MarqueeSlider />
+      <MarqueeSlider className="mt-[3.3vh]" />
     </div>
   );
 }

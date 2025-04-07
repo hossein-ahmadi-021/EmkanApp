@@ -6,7 +6,11 @@ import "swiper/css";
 import AppIcon from "@/common/appIcon";
 import "./marqueeSlider.css";
 
-export default function MarqueeSlider() {
+interface Props {
+  className: string;
+}
+
+export default function MarqueeSlider({ className }: Props) {
   return (
     <Swiper
       modules={[Autoplay]}
@@ -21,18 +25,18 @@ export default function MarqueeSlider() {
       spaceBetween={30}
       allowTouchMove={false}
       freeMode={true}
-      className="marquee-container"
+      className={`marquee-container ${className}`}
     >
       {slidesList.map((item) => (
         <SwiperSlide key={item.id} className="slide-item">
-          <div className="flex items-center gap-2 mt-[5.83vh]">
+          <div className="flex items-center gap-2">
             <AppIcon
               color="primary"
               name="MiniHalfCircle"
-              width="54"
-              height="36"
+              width="5.5vh"
+              height="5.5vh"
             />
-            <div className="text-[4.35vh] font-medium">{item.name}</div>
+            <div className="text-[4vh] font-medium">{item.name}</div>
           </div>
         </SwiperSlide>
       ))}
