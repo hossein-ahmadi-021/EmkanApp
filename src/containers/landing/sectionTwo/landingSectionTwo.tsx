@@ -14,6 +14,7 @@ import MotionScrollableWidth from "@/components/motion/motionScrollableWidth";
 import MakranGeography from "@/containers/landing/sectionTwo/makranGeography";
 import AzadGeography from "@/containers/landing/sectionTwo/azadGeography";
 import IslandsGeography from "@/containers/landing/sectionTwo/islandsGeography";
+import { numberSplit } from "@/lib/utils/numbers";
 
 interface Props {
   rtl: boolean;
@@ -21,6 +22,7 @@ interface Props {
 }
 
 type LocationKey = "makran" | "azad" | "islands";
+
 interface LocationItem {
   id: number;
   name: string;
@@ -193,7 +195,8 @@ export default function LandingSectionTwo({ rtl, isActive }: Props) {
                   key={item.id}
                   theme={isActive ? "primary" : "gold"}
                   type="dashed"
-                  className="text-xBase font-medium flex-shrink-0"
+                  parentClass="py-2.5"
+                  className="text-base font-medium"
                   onClick={() => {
                     setActiveConfig((prev) => ({
                       ...prev,
@@ -209,33 +212,41 @@ export default function LandingSectionTwo({ rtl, isActive }: Props) {
           <div className="bg-dimPrimary px-[30px] py-[24px] mt-[0.96vh] max-w-[378px] flex-wrap">
             <div className="flex items-start justify-between">
               <div className="w-100">
-                <div className="text-[1.39vh] opacity-60">مساحت</div>
+                <div className="text-[1.62vh] opacity-60">مساحت</div>
                 <div className="flex items-center gap-2">
-                  <div className="text-[1.39vh]">km2</div>
-                  <div className="text-[2.78vh] font-medium">187502</div>
+                  <div className="text-[1.62vh]">km2</div>
+                  <div className="text-[2.88vh] font-medium">
+                    {numberSplit(187502)}
+                  </div>
                 </div>
               </div>
               <div className="w-100">
-                <div className="text-[1.39vh] opacity-60">طول خط ساحلی</div>
+                <div className="text-[1.62vh] opacity-60">طول خط ساحلی</div>
                 <div className="flex items-center gap-2">
-                  <div className="text-[1.39vh]">KM</div>
-                  <div className="text-[2.78vh] font-medium">1000</div>
+                  <div className="text-[1.62vh]">KM</div>
+                  <div className="text-[2.88vh] font-medium">
+                    {numberSplit(1000)}
+                  </div>
                 </div>
               </div>
             </div>
             <div className="flex items-start justify-between mt-5">
               <div className="w-50">
-                <div className="text-[1.39vh] opacity-60">جمعیت</div>
+                <div className="text-[1.62vh] opacity-60">جمعیت</div>
                 <div className="flex items-center gap-2">
-                  <div className="text-[1.39vh]">KM</div>
-                  <div className="text-[2.78vh] font-medium">1000</div>
+                  <div className="text-[1.62vh]">KM</div>
+                  <div className="text-[2.88vh] font-medium">
+                    {numberSplit(1000)}
+                  </div>
                 </div>
               </div>
               <div className="w-50">
-                <div className="text-[1.39vh] opacity-60">شهر ها</div>
+                <div className="text-[1.62vh] opacity-60">شهر ها</div>
                 <div className="flex items-center gap-2">
-                  <div className="text-[1.39vh]">KM</div>
-                  <div className="text-[2.78vh] font-medium">1000</div>
+                  <div className="text-[1.62vh]">KM</div>
+                  <div className="text-[2.88vh] font-medium">
+                    {numberSplit(1000)}
+                  </div>
                 </div>
               </div>
             </div>
@@ -306,7 +317,12 @@ export default function LandingSectionTwo({ rtl, isActive }: Props) {
             transform: "translateZ(0)",
           }}
         />
-        {activeConfig.location === "makran" && <MakranGeography />}
+        {activeConfig.location === "makran" && (
+          <MakranGeography
+            activeTab={activeConfig.activeLatLng}
+            setActiveConfig={setActiveConfig}
+          />
+        )}
         {activeConfig.location === "azad" && (
           <AzadGeography
             activeId={activeConfig.activeLatLng}

@@ -59,13 +59,13 @@ export default function AppButton({
 
   const buttonClasses = twMerge(
     "rounded-full cursor-pointer flex items-center justify-between gap-3 relative overflow-hidden text-lg font-normal",
-    THEMES[theme],
     clsx({
       "ps-6": icon,
       "px-4 py-[15px]": !icon,
     }),
     parentClass,
-    className, // Moved className here for proper merging
+    className,
+    THEMES[theme],
   );
 
   return (
@@ -87,7 +87,7 @@ export default function AppButton({
             onAnimationComplete={() => setRipple(null)}
           />
         )}
-        <div className="flex items-center gap-2">
+        <div className="flex justify-between w-full items-center gap-2">
           {children}
           {icon && (
             <div className={isRTL ? "" : "rotate-180"}>
