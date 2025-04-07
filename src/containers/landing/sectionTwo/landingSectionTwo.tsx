@@ -195,8 +195,7 @@ export default function LandingSectionTwo({ rtl, isActive }: Props) {
                   key={item.id}
                   theme={isActive ? "primary" : "gold"}
                   type="dashed"
-                  parentClass="py-2.5"
-                  className="text-base font-medium"
+                  className="text-base font-medium py-2.5"
                   onClick={() => {
                     setActiveConfig((prev) => ({
                       ...prev,

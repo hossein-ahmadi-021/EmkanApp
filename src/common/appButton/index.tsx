@@ -13,7 +13,6 @@ interface Props {
   className?: string;
   type?: "normal" | "dashed";
   theme?: "primary" | "gold" | "gray";
-  parentClass?: string;
 }
 
 export default function AppButton({
@@ -23,7 +22,6 @@ export default function AppButton({
   className,
   type = "normal",
   theme = "primary",
-  parentClass,
 }: Props) {
   const isDashed = type === "dashed";
   const { isRTL } = useLangStore();
@@ -63,13 +61,12 @@ export default function AppButton({
       "ps-6": icon,
       "px-4 py-[15px]": !icon,
     }),
-    parentClass,
     className,
     THEMES[theme],
   );
 
   return (
-    <button onClick={handleClick} className={parentClass}>
+    <button onClick={handleClick}>
       <motion.div className={buttonClasses} whileTap={{ scale: 0.95 }}>
         {ripple && (
           <motion.span

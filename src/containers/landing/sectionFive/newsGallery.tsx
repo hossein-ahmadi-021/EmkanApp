@@ -14,7 +14,7 @@ export default function NewsGallery() {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <div className="w-[40%] h-screen flex items-start gap-5">
+    <div className="w-[34%] h-screen flex items-start gap-5">
       {/* Navigation buttons remain unchanged */}
       <div className="mt-12">
         <button
@@ -104,11 +104,11 @@ const NewsCard = () => {
           راه‌اندازی مسیرهای جدید گردشگری در مناطق کمتر شناخته‌شده ایران
         </div>
         <AppIcon
-          className="me-[-11px] mt-[-10px]"
+          className="absolute end-[-12px] mt-[-9px]"
           color="primary"
           name="ArrowToIcon"
-          width="57px"
-          height="57px"
+          width="45px"
+          height="45px"
         />
       </div>
       <p className="text-sm font-light w-[80%]">

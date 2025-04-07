@@ -74,6 +74,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
         <source src="/videos/landing-bg-1.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <div className="bg-[#0E0E0E80] fixed inset-0 w-full h-full -z-9"></div>
       <ResponsiveLayout className="z-10 text-white">
         {dict.infoCards.map((item) => {
           if (item.id !== activeTab) return null;
