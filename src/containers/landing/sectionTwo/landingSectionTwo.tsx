@@ -30,12 +30,6 @@ interface LocationItem {
   name: string;
 }
 
-const defaultTransform = {
-  scale: 1.4,
-  translateX: -20,
-  translateY: -20,
-};
-
 export default function LandingSectionTwo({
   rtl,
   isActive,
