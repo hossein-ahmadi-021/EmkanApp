@@ -100,35 +100,79 @@ export default function LandingSectionTwo({
     islands: islandLocs,
   };
 
-  const handleScroll = useCallback((direction: "up" | "down") => {
-    if (isScrolling.current) return;
-    isScrolling.current = true;
+  const handleZoom = useCallback(
+    (config: LocationKey) => {
+      const { scale, originX, originY } = transformConfigs[config];
+      setTransform({
+        scale,
+        translateX: (1 - scale) * originX,
+        translateY: (1 - scale) * originY,
+      });
+      setActiveConfig({
+        location: config,
+        activeLatLng: 1,
+      });
+    },
+    [transformConfigs]
+  );
 
-    setCurrentZoom((prev) => {
-      if (direction === "down" && prev < 2) {
-        const nextZoom = prev + 1;
-        const locations: LocationKey[] = ["makran", "azad", "islands"];
-        handleZoom(locations[nextZoom]);
-        return nextZoom;
-      } else if (direction === "up" && prev > 0) {
-        const prevZoom = prev - 1;
-        const locations: LocationKey[] = ["makran", "azad", "islands"];
-        handleZoom(locations[prevZoom]);
-        return prevZoom;
-      } else if (direction === "up" && prev === 0) {
-        setPendingAction("back");
-        return prev;
-      } else if (direction === "down" && prev === 2) {
-        setPendingAction("complete");
-        return prev;
-      }
-      return prev;
+  const resetZoom = useCallback(() => {
+    setTransform({
+      scale: 1.4,
+      translateX: rtl ? -20 : 20,
+      translateY: rtl ? -20 : 20,
     });
+    setActiveConfig({
+      location: "makran",
+      activeLatLng: 1,
+    });
+  }, [rtl]);
 
-    setTimeout(() => {
-      isScrolling.current = false;
-    }, 700);
-  }, []);
+  useEffect(() => {
+    if (isActive) {
+      if (currentZoom === 0) {
+        handleZoom("makran");
+      } else {
+        const locations: LocationKey[] = ["makran", "azad", "islands"];
+        handleZoom(locations[currentZoom]);
+      }
+    } else {
+      resetZoom();
+    }
+  }, [isActive, handleZoom, resetZoom, currentZoom]);
+
+  const handleScroll = useCallback(
+    (direction: "up" | "down") => {
+      if (isScrolling.current) return;
+      isScrolling.current = true;
+
+      setCurrentZoom((prev) => {
+        if (direction === "down" && prev < 2) {
+          const nextZoom = prev + 1;
+          const locations: LocationKey[] = ["makran", "azad", "islands"];
+          handleZoom(locations[nextZoom]);
+          return nextZoom;
+        } else if (direction === "up" && prev > 0) {
+          const prevZoom = prev - 1;
+          const locations: LocationKey[] = ["makran", "azad", "islands"];
+          handleZoom(locations[prevZoom]);
+          return prevZoom;
+        } else if (direction === "up" && prev === 0) {
+          setPendingAction("back");
+          return prev;
+        } else if (direction === "down" && prev === 2) {
+          setPendingAction("complete");
+          return prev;
+        }
+        return prev;
+      });
+
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 700);
+    },
+    [handleZoom]
+  );
 
   useEffect(() => {
     if (pendingAction === "complete") {
@@ -151,22 +195,6 @@ export default function LandingSectionTwo({
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
   }, [isActive, handleScroll]);
-
-  const handleZoom = useCallback(
-    (config: LocationKey) => {
-      const { scale, originX, originY } = transformConfigs[config];
-      setTransform({
-        scale,
-        translateX: (1 - scale) * originX,
-        translateY: (1 - scale) * originY,
-      });
-      setActiveConfig({
-        location: config,
-        activeLatLng: 1,
-      });
-    },
-    [transformConfigs]
-  );
 
   return (
     <ResponsiveLayout className="z-10 text-primary flex items-center h-screen font-medium">
