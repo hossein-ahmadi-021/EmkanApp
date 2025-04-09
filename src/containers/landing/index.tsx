@@ -18,6 +18,7 @@ interface Props {
 export default function Landing({ dict, rtl }: Props) {
   const resetHeaderColor = useHeaderStore((state) => state.reset);
   const [currentSection, setCurrentSection] = useState(0);
+  const [isSectionTwoScrolling, setIsSectionTwoScrolling] = useState(false);
   const totalSections = 5;
   const isScrolling = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,21 +42,36 @@ export default function Landing({ dict, rtl }: Props) {
         isScrolling.current = false;
       }, 700);
     },
-    [totalSections],
+    [totalSections]
   );
+
+  const handleSectionTwoComplete = useCallback(() => {
+    setIsSectionTwoScrolling(false);
+    handleScroll("down");
+  }, [handleScroll]);
+
+  const handleSectionTwoBack = useCallback(() => {
+    setIsSectionTwoScrolling(false);
+    handleScroll("up");
+  }, [handleScroll]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
+      if (currentSection === 1) {
+        setIsSectionTwoScrolling(true);
+        return;
+      }
+
       e.preventDefault();
       handleScroll(e.deltaY > 0 ? "down" : "up");
     };
 
     container.addEventListener("wheel", handleWheel, { passive: false });
     return () => container.removeEventListener("wheel", handleWheel);
-  }, [handleScroll]);
+  }, [handleScroll, currentSection]);
 
   useEffect(() => {
     if (currentSection === 0) {
@@ -89,8 +105,15 @@ export default function Landing({ dict, rtl }: Props) {
 
         {/* Section 2 */}
         <motion.section className="w-full h-screen flex justify-center items-center text-white relative overflow-hidden">
-          <LandingSectionTwo isActive={currentSection === 1} rtl={rtl} />
-          <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
+          <LandingSectionTwo
+            isActive={currentSection === 1}
+            rtl={rtl}
+            onSubSectionComplete={handleSectionTwoComplete}
+            onSubSectionBack={handleSectionTwoBack}
+          />
+          {!isSectionTwoScrolling && (
+            <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
+          )}
         </motion.section>
 
         {/* Section 3 */}

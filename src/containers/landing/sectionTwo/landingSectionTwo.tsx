@@ -3,7 +3,7 @@ import iranMapBg from "@/assets/images/landing/iranMap.svg";
 import Image from "next/image";
 import AppIcon from "@/common/appIcon";
 import AppButton from "@/common/appButton";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   freeLocs,
@@ -19,6 +19,8 @@ import { numberSplit } from "@/lib/utils/numbers";
 interface Props {
   rtl: boolean;
   isActive: boolean;
+  onSubSectionComplete: () => void;
+  onSubSectionBack: () => void;
 }
 
 type LocationKey = "makran" | "azad" | "islands";
@@ -34,7 +36,30 @@ const defaultTransform = {
   translateY: -20,
 };
 
-export default function LandingSectionTwo({ rtl, isActive }: Props) {
+export default function LandingSectionTwo({
+  rtl,
+  isActive,
+  onSubSectionComplete,
+  onSubSectionBack,
+}: Props) {
+  const [currentZoom, setCurrentZoom] = useState<number>(0);
+  const [pendingAction, setPendingAction] = useState<
+    "complete" | "back" | null
+  >(null);
+  const isScrolling = useRef(false);
+  const [transform, setTransform] = useState({
+    scale: 1.4,
+    translateX: rtl ? -20 : 20,
+    translateY: rtl ? -20 : 20,
+  });
+  const [activeConfig, setActiveConfig] = useState<{
+    location: LocationKey;
+    activeLatLng: number;
+  }>({
+    location: "makran",
+    activeLatLng: 1,
+  });
+
   const transformConfigs = useMemo(
     () => ({
       makran: {
@@ -53,7 +78,7 @@ export default function LandingSectionTwo({ rtl, isActive }: Props) {
         originY: 40,
       },
     }),
-    [rtl],
+    [rtl]
   );
 
   const animateStart = {
@@ -75,18 +100,57 @@ export default function LandingSectionTwo({ rtl, isActive }: Props) {
     islands: islandLocs,
   };
 
-  const [transform, setTransform] = useState({
-    scale: 1.4,
-    translateX: rtl ? -20 : 20,
-    translateY: rtl ? -20 : 20,
-  });
-  const [activeConfig, setActiveConfig] = useState<{
-    location: LocationKey;
-    activeLatLng: number;
-  }>({
-    location: "makran",
-    activeLatLng: 1,
-  });
+  const handleScroll = useCallback((direction: "up" | "down") => {
+    if (isScrolling.current) return;
+    isScrolling.current = true;
+
+    setCurrentZoom((prev) => {
+      if (direction === "down" && prev < 2) {
+        const nextZoom = prev + 1;
+        const locations: LocationKey[] = ["makran", "azad", "islands"];
+        handleZoom(locations[nextZoom]);
+        return nextZoom;
+      } else if (direction === "up" && prev > 0) {
+        const prevZoom = prev - 1;
+        const locations: LocationKey[] = ["makran", "azad", "islands"];
+        handleZoom(locations[prevZoom]);
+        return prevZoom;
+      } else if (direction === "up" && prev === 0) {
+        setPendingAction("back");
+        return prev;
+      } else if (direction === "down" && prev === 2) {
+        setPendingAction("complete");
+        return prev;
+      }
+      return prev;
+    });
+
+    setTimeout(() => {
+      isScrolling.current = false;
+    }, 700);
+  }, []);
+
+  useEffect(() => {
+    if (pendingAction === "complete") {
+      onSubSectionComplete();
+      setPendingAction(null);
+    } else if (pendingAction === "back") {
+      onSubSectionBack();
+      setPendingAction(null);
+    }
+  }, [pendingAction, onSubSectionComplete, onSubSectionBack]);
+
+  useEffect(() => {
+    if (!isActive) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      handleScroll(e.deltaY > 0 ? "down" : "up");
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [isActive, handleScroll]);
 
   const handleZoom = useCallback(
     (config: LocationKey) => {
@@ -101,20 +165,8 @@ export default function LandingSectionTwo({ rtl, isActive }: Props) {
         activeLatLng: 1,
       });
     },
-    [transformConfigs],
+    [transformConfigs]
   );
-
-  const resetZoom = useCallback(() => {
-    setTransform(defaultTransform);
-  }, []);
-
-  useEffect(() => {
-    if (isActive) {
-      handleZoom("makran");
-    } else {
-      resetZoom();
-    }
-  }, [isActive, handleZoom, resetZoom]);
 
   return (
     <ResponsiveLayout className="z-10 text-primary flex items-center h-screen font-medium">

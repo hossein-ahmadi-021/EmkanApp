@@ -135,7 +135,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
                 clsx({
                   "font-bold": isActive,
                   "font-normal": !isActive,
-                }),
+                })
               );
 
               return (
