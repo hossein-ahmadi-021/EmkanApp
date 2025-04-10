@@ -122,19 +122,6 @@ export default function LandingSectionTwo({
     });
   }, [rtl]);
 
-  useEffect(() => {
-    if (isActive) {
-      if (currentZoom === 0) {
-        handleZoom("makran");
-      } else {
-        const locations: LocationKey[] = ["makran", "azad", "islands"];
-        handleZoom(locations[currentZoom]);
-      }
-    } else {
-      resetZoom();
-    }
-  }, [isActive, handleZoom, resetZoom, currentZoom]);
-
   const handleScroll = useCallback(
     (direction: "up" | "down") => {
       if (isScrolling.current) return;
@@ -144,11 +131,17 @@ export default function LandingSectionTwo({
         if (direction === "down" && prev < 2) {
           const nextZoom = prev + 1;
           const locations: LocationKey[] = ["makran", "azad", "islands"];
+          console.log(
+            `Moving from ${locations[prev]} to ${locations[nextZoom]}`
+          );
           handleZoom(locations[nextZoom]);
           return nextZoom;
         } else if (direction === "up" && prev > 0) {
           const prevZoom = prev - 1;
           const locations: LocationKey[] = ["makran", "azad", "islands"];
+          console.log(
+            `Moving from ${locations[prev]} to ${locations[prevZoom]}`
+          );
           handleZoom(locations[prevZoom]);
           return prevZoom;
         } else if (direction === "up" && prev === 0) {
@@ -167,6 +160,24 @@ export default function LandingSectionTwo({
     },
     [handleZoom]
   );
+
+  useEffect(() => {
+    if (isActive) {
+      if (currentZoom === 0) {
+        console.log("Section activated - Starting at makran (0)");
+        handleZoom("makran");
+      } else {
+        const locations: LocationKey[] = ["makran", "azad", "islands"];
+        console.log(
+          `Section activated - Restoring to ${locations[currentZoom]} (${currentZoom})`
+        );
+        handleZoom(locations[currentZoom]);
+      }
+    } else {
+      console.log("Section deactivated - Resetting zoom");
+      resetZoom();
+    }
+  }, [isActive, handleZoom, resetZoom, currentZoom]);
 
   useEffect(() => {
     if (pendingAction === "complete") {
