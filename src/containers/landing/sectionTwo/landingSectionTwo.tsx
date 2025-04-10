@@ -15,6 +15,10 @@ import MakranGeography from "@/containers/landing/sectionTwo/makranGeography";
 import AzadGeography from "@/containers/landing/sectionTwo/azadGeography";
 import IslandsGeography from "@/containers/landing/sectionTwo/islandsGeography";
 import { numberSplit } from "@/lib/utils/numbers";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
 
 interface Props {
   rtl: boolean;
@@ -290,62 +294,74 @@ export default function LandingSectionTwo({
         <div>
           <h1 className="text-[6.43vh] font-medium">مناطق پیشران اقتصاد</h1>
           <div className="mt-[2.608vh] flex flex-col gap-2.5">
-            <div className="mt-[2.608vh] flex flex-col gap-2.5">
-              <div
-                onClick={() => handleZoom("makran")}
-                className={`flex items-center gap-2 cursor-pointer select-none ${
-                  activeConfig.location === "makran"
-                    ? "text-[1.74vh] font-semibold"
-                    : "text-[1.74vh] text-disablePrimary font-semibold"
-                }`}
-              >
-                {activeConfig.location === "makran" && (
-                  <AppIcon
-                    color="primary"
-                    name="HalfCircleIcon"
-                    width="30"
-                    height="30"
-                  />
-                )}
-                <h4>منطقه مکران</h4>
-              </div>
-              <div
-                onClick={() => handleZoom("azad")}
-                className={`flex items-center gap-2 cursor-pointer select-none ${
-                  activeConfig.location === "azad"
-                    ? "text-[1.74vh] font-semibold"
-                    : "text-[1.74vh] text-disablePrimary font-semibold"
-                }`}
-              >
-                {activeConfig.location === "azad" && (
-                  <AppIcon
-                    color="primary"
-                    name="HalfCircleIcon"
-                    width="30"
-                    height="30"
-                  />
-                )}
-                <h4 className="text-[1.74vh] font-semibold">مناطق آزاد</h4>
-              </div>
-              <div
-                onClick={() => handleZoom("islands")}
-                className={`flex items-center gap-2 cursor-pointer select-none ${
-                  activeConfig.location === "islands"
-                    ? "text-[1.74vh] font-semibold"
-                    : "text-[1.74vh] text-disablePrimary font-semibold"
-                }`}
-              >
-                {activeConfig.location === "islands" && (
-                  <AppIcon
-                    color="primary"
-                    name="HalfCircleIcon"
-                    width="30"
-                    height="30"
-                  />
-                )}
-                <h4 className="text-[1.74vh] font-semibold">جزایر</h4>
-              </div>
-            </div>
+            <Swiper
+              modules={[FreeMode]}
+              freeMode={true}
+              slidesPerView="auto"
+              spaceBetween={20}
+              className="mt-[2.608vh]"
+            >
+              <SwiperSlide className="!w-auto">
+                <div
+                  onClick={() => handleZoom("makran")}
+                  className={`flex items-center gap-2 cursor-pointer select-none ${
+                    activeConfig.location === "makran"
+                      ? "text-[1.74vh] font-semibold"
+                      : "text-[1.74vh] text-disablePrimary font-semibold"
+                  }`}
+                >
+                  {activeConfig.location === "makran" && (
+                    <AppIcon
+                      color="primary"
+                      name="HalfCircleIcon"
+                      width="30"
+                      height="30"
+                    />
+                  )}
+                  <h4>منطقه مکران</h4>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="!w-auto">
+                <div
+                  onClick={() => handleZoom("azad")}
+                  className={`flex items-center gap-2 cursor-pointer select-none ${
+                    activeConfig.location === "azad"
+                      ? "text-[1.74vh] font-semibold"
+                      : "text-[1.74vh] text-disablePrimary font-semibold"
+                  }`}
+                >
+                  {activeConfig.location === "azad" && (
+                    <AppIcon
+                      color="primary"
+                      name="HalfCircleIcon"
+                      width="30"
+                      height="30"
+                    />
+                  )}
+                  <h4 className="text-[1.74vh] font-semibold">مناطق آزاد</h4>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="!w-auto">
+                <div
+                  onClick={() => handleZoom("islands")}
+                  className={`flex items-center gap-2 cursor-pointer select-none ${
+                    activeConfig.location === "islands"
+                      ? "text-[1.74vh] font-semibold"
+                      : "text-[1.74vh] text-disablePrimary font-semibold"
+                  }`}
+                >
+                  {activeConfig.location === "islands" && (
+                    <AppIcon
+                      color="primary"
+                      name="HalfCircleIcon"
+                      width="30"
+                      height="30"
+                    />
+                  )}
+                  <h4 className="text-[1.74vh] font-semibold">جزایر</h4>
+                </div>
+              </SwiperSlide>
+            </Swiper>
           </div>
         </div>
         <div>

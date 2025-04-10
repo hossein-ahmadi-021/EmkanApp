@@ -8,6 +8,7 @@ import LandingInfoBox from "@/containers/landing/sectionOne/landingInfoBox";
 import AppIcon from "@/common/appIcon";
 import clsx from "clsx";
 import { homeSectionDictTypes } from "@/types/landing/landing.types";
+import MotionScrollableWidth from "@/components/motion/motionScrollableWidth";
 
 interface Props {
   rtl: boolean;
@@ -77,7 +78,40 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
       <div className="bg-[#0E0E0E80] fixed inset-0 w-full h-full -z-9"></div>
       <ResponsiveLayout className="z-10 text-white">
         <div className="mt-64 md:mt-[12.38vh]">
-          <div className="text-xl text-red-500 md:hidden">sdfsfsfsfs</div>
+          <MotionScrollableWidth isRTL={rtl} hasBlur={false}>
+            {dict.tabs.map((item: TabItemType) => {
+              const isActive = item.id === activeTab;
+
+              const titleClass = twMerge(
+                "text-2xl",
+                clsx({
+                  "font-bold": isActive,
+                  "font-normal": !isActive,
+                })
+              );
+
+              return (
+                <div
+                  key={item.title}
+                  onClick={() => setActiveTab(item.id)}
+                  className="flex items-center justify-center gap-5 cursor-pointer px-4 select-none font-normal text-2xl flex-shrink-0"
+                >
+                  {isActive && (
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      variants={clickTabsVariant}
+                      transition={{ duration: 0.7 }}
+                      className={rtl ? "" : "rotate-180"}
+                    >
+                      <AppIcon name="SymbolIcon" width="12px" height="24px" />
+                    </motion.div>
+                  )}
+                  <div className={titleClass}>{item.title}</div>
+                </div>
+              );
+            })}
+          </MotionScrollableWidth>
           {dict.infoCards.map((item) => {
             if (item.id !== activeTab) return null;
             return (

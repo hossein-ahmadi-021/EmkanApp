@@ -4,9 +4,14 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 interface Props {
   children: ReactNode;
   isRTL?: boolean;
+  hasBlur?: boolean;
 }
 
-const MotionScrollableWidth = ({ children, isRTL = false }: Props) => {
+const MotionScrollableWidth = ({
+  children,
+  isRTL = false,
+  hasBlur = true,
+}: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const [constraint, setConstraint] = useState(0);
@@ -53,7 +58,9 @@ const MotionScrollableWidth = ({ children, isRTL = false }: Props) => {
       >
         {children}
       </motion.div>
-      <div className="h-[80px] w-[80px] blur-lg absolute end-[-30px] top-[-12] bg-white"></div>
+      {hasBlur && (
+        <div className="h-[80px] w-[80px] blur-lg absolute end-[-30px] top-[-12px] bg-white"></div>
+      )}
     </motion.div>
   );
 };
