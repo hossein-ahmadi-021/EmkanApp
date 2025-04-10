@@ -76,21 +76,24 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
       </video>
       <div className="bg-[#0E0E0E80] fixed inset-0 w-full h-full -z-9"></div>
       <ResponsiveLayout className="z-10 text-white">
-        {dict.infoCards.map((item) => {
-          if (item.id !== activeTab) return null;
-          return (
-            <LandingInfoBox
-              rtl={rtl}
-              key={item.id}
-              data={{
-                title: item.title,
-                subTitle: item.subTitle,
-                desc: item.desc,
-                btnTitle: item.btnTitle,
-              }}
-            />
-          );
-        })}
+        <div className="mt-64 md:mt-[12.38vh]">
+          <div className="text-xl text-red-500 md:hidden">sdfsfsfsfs</div>
+          {dict.infoCards.map((item) => {
+            if (item.id !== activeTab) return null;
+            return (
+              <LandingInfoBox
+                rtl={rtl}
+                key={item.id}
+                data={{
+                  title: item.title,
+                  subTitle: item.subTitle,
+                  desc: item.desc,
+                  btnTitle: item.btnTitle,
+                }}
+              />
+            );
+          })}
+        </div>
         <motion.div
           initial="hidden"
           animate="visible"
@@ -126,7 +129,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
               />
             </div>
           </div>
-          <div className="flex items-center mt-[1.74vh]">
+          <div className="flex items-center mt-[1.74vh] hidden md:flex">
             {dict.tabs.map((item: TabItemType) => {
               const isActive = item.id === activeTab;
 

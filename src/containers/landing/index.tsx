@@ -22,6 +22,7 @@ export default function Landing({ dict, rtl }: Props) {
   const totalSections = 5;
   const isScrolling = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartY = useRef(0);
 
   const handleScroll = useCallback(
     (direction: "up" | "down") => {
@@ -69,8 +70,39 @@ export default function Landing({ dict, rtl }: Props) {
       handleScroll(e.deltaY > 0 ? "down" : "up");
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (currentSection === 1) {
+        setIsSectionTwoScrolling(true);
+        return;
+      }
+
+      e.preventDefault();
+      const touchEndY = e.touches[0].clientY;
+      const diff = touchStartY.current - touchEndY;
+
+      // Only trigger if the swipe is significant enough
+      if (Math.abs(diff) > 50) {
+        handleScroll(diff > 0 ? "down" : "up");
+      }
+    };
+
     container.addEventListener("wheel", handleWheel, { passive: false });
-    return () => container.removeEventListener("wheel", handleWheel);
+    container.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    container.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+    });
+
+    return () => {
+      container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("touchstart", handleTouchStart);
+      container.removeEventListener("touchmove", handleTouchMove);
+    };
   }, [handleScroll, currentSection]);
 
   useEffect(() => {

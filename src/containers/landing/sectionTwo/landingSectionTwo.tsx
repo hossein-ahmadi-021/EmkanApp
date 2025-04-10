@@ -181,14 +181,91 @@ export default function LandingSectionTwo({
   useEffect(() => {
     if (!isActive) return;
 
+    let lastScrollTime = 0;
+    const scrollCooldown = 1500;
+    let scrollTimeout: NodeJS.Timeout;
+    let touchStartY = 0;
+    let touchStartX = 0;
+
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      handleScroll(e.deltaY > 0 ? "down" : "up");
+      const now = Date.now();
+
+      if (now - lastScrollTime < scrollCooldown) {
+        console.log("Scroll blocked - cooldown period");
+        return;
+      }
+
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+
+      lastScrollTime = now;
+      const direction = e.deltaY > 0 ? "down" : "up";
+      console.log("Wheel event:", direction, "currentZoom:", currentZoom);
+
+      scrollTimeout = setTimeout(() => {
+        handleScroll(direction);
+      }, 100);
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      const now = Date.now();
+
+      if (now - lastScrollTime < scrollCooldown) {
+        return;
+      }
+
+      const touchEndY = e.touches[0].clientY;
+      const touchEndX = e.touches[0].clientX;
+
+      // Calculate vertical and horizontal movement
+      const diffY = touchStartY - touchEndY;
+      const diffX = touchStartX - touchEndX;
+
+      // Only process if vertical movement is greater than horizontal (to distinguish from horizontal scroll)
+      if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 30) {
+        lastScrollTime = now;
+        const direction = diffY > 0 ? "down" : "up";
+        console.log("Touch event:", direction, "currentZoom:", currentZoom);
+
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout);
+        }
+
+        scrollTimeout = setTimeout(() => {
+          handleScroll(direction);
+        }, 100);
+      }
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
+    // Add event listeners with passive: false to ensure preventDefault works
     window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, [isActive, handleScroll]);
+    window.addEventListener("touchstart", handleTouchStart, { passive: false });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+    };
+  }, [isActive, handleScroll, currentZoom]);
 
   return (
     <ResponsiveLayout className="z-10 text-primary flex items-center h-screen font-medium">
