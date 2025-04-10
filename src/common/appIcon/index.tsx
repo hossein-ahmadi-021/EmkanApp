@@ -18,7 +18,7 @@ export default function AppIcon({
 
   const iconClassNames = twMerge(
     `transition-colors duration-700 ${theme[color]}`,
-    className,
+    className
   );
 
   return <IconComponent className={iconClassNames} {...rest} />;

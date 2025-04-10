@@ -19,6 +19,14 @@ import { existRoutes } from "@/types/public/header.type";
 import { clsx } from "clsx";
 import { useHeaderStore } from "@/store/headerStore";
 import { headerSectionDictType } from "@/types/header/header.type";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface Props {
   dir: "rtl" | "ltr";
@@ -69,7 +77,7 @@ export default function AppHeader({ dict, dir, lang }: Props) {
             "bg-[#13595733] text-primary": importantColor === "primary",
             "bg-[#FDFBF533] text-white": importantColor === "white",
           }),
-    }),
+    })
   );
 
   const variants = {
@@ -88,7 +96,7 @@ export default function AppHeader({ dict, dir, lang }: Props) {
           className={headerClasses}
         >
           <div className="p-4 w-full flex items-center justify-between h-20 duration-700">
-            <div className="flex items-center gap-[75px]">
+            <div className="flex items-center flex-row-reverse md:flex-row">
               {isSub && (
                 <AppIcon
                   color={isPrimary ? "primary" : "white"}
@@ -115,29 +123,56 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                 </div>
               </div>
               {!isSub && (
-                <div className="flex items-center gap-10">
-                  <AppIcon
-                    color={isPrimary ? "primary" : "white"}
-                    name="HambergerIcon"
-                    width="30px"
-                    height="16px"
-                  />
-                  {dict.links.map((item) => {
-                    const fullPath = `/${currentLang}${item.link}`;
-                    return (
-                      <Link
-                        key={item.id}
-                        href={fullPath}
-                        className={twMerge("cursor-pointer")}
-                      >
-                        {item.name}
-                      </Link>
-                    );
-                  })}
+                <div className="md:ms-[74px] me-9">
+                  <div className="xl:hidden">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <AppIcon
+                          color={isPrimary ? "primary" : "white"}
+                          name="HambergerIcon"
+                          width="32px"
+                          height="32px"
+                        />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuSeparator />
+                        {dict.links.map((item) => {
+                          const fullPath = `/${currentLang}${item.link}`;
+                          return (
+                            <DropdownMenuItem
+                              className="text-start"
+                              key={item.id}
+                            >
+                              <Link
+                                href={fullPath}
+                                className={twMerge("cursor-pointer")}
+                              >
+                                {item.name}
+                              </Link>
+                            </DropdownMenuItem>
+                          );
+                        })}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                  <div className="flex items-center gap-10 hidden xl:flex">
+                    {dict.links.map((item) => {
+                      const fullPath = `/${currentLang}${item.link}`;
+                      return (
+                        <Link
+                          key={item.id}
+                          href={fullPath}
+                          className={twMerge("cursor-pointer")}
+                        >
+                          {item.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-[30px]">
+            <div className="flex items-center gap-[30px] hidden md:flex">
               <AppIcon
                 color={isPrimary ? "primary" : "white"}
                 name="SearchIcon"
@@ -176,7 +211,7 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                   onClick={() => switchLanguage(locale as reagonTypes)}
                   className={twMerge(
                     "border py-1 px-2 rounded-md cursor-pointer",
-                    currentLang === locale && "bg-blue-500 text-white",
+                    currentLang === locale && "bg-blue-500 text-white"
                   )}
                 >
                   {langNames[locale as reagonTypes]}
