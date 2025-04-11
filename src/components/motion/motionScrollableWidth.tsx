@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils/classnames";
 import { motion, useMotionValue } from "framer-motion";
 import { ReactNode, useEffect, useRef, useState } from "react";
 
@@ -5,12 +6,21 @@ interface Props {
   children: ReactNode;
   isRTL?: boolean;
   hasBlur?: boolean;
+  className?: string;
+  childClassName?: string;
 }
+
+const clickTabsVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
 const MotionScrollableWidth = ({
   children,
   isRTL = false,
   hasBlur = true,
+  className,
+  childClassName,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -34,12 +44,19 @@ const MotionScrollableWidth = ({
 
   return (
     <motion.div
-      className="overflow-x-auto w-full relative overflow-y-hidden"
+      className={cn(
+        "overflow-x-auto w-full relative overflow-y-hidden",
+        className
+      )}
       dir={isRTL ? "rtl" : "ltr"}
+      initial="hidden"
+      animate="visible"
+      variants={clickTabsVariant}
+      transition={{ duration: 1.5 }}
     >
       <motion.div
         ref={containerRef}
-        className="gap-[5px] flex items-center"
+        className={`gap-[5px] flex items-center ${childClassName}`}
         drag="x"
         dragConstraints={{
           right: isRTL ? constraint : 0,

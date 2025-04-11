@@ -24,7 +24,7 @@ export default function LandingInfoBox({ data, rtl }: Props) {
   };
 
   return (
-    <section className="grid grid-cols-2 grid-rows-2 gap-x-0 gap-y-5">
+    <section className="grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-x-0 gap-y-5 px-10 md:px-0">
       <div>
         <motion.div
           variants={animateStart}
@@ -32,11 +32,13 @@ export default function LandingInfoBox({ data, rtl }: Props) {
           animate="visible"
           transition={{ duration: 0.7 }}
         >
-          <h1 className="mb-[15px] text-[7.3vh] text-nowrap">{data.title}</h1>
-          <h2 className="text-[6.09vh]">{data.subTitle}</h2>
+          <h1 className="mb-[15px] text-[7vh] md:text-[7.3vh] text-nowrap">
+            {data.title}
+          </h1>
+          <h2 className="text-[3.5vh] md:text-[6.09vh]">{data.subTitle}</h2>
         </motion.div>
       </div>
-      <div></div>
+      <div className="md:flex hidden"></div>
       <div>
         <motion.div
           variants={animateStart}

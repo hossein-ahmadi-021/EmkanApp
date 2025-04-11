@@ -283,7 +283,7 @@ export default function LandingSectionTwo({
   }, [isActive, handleScroll, currentZoom]);
 
   return (
-    <ResponsiveLayout className="z-10 text-primary flex items-center h-screen font-medium">
+    <ResponsiveLayout className="z-10 text-primary flex items-center h-screen font-medium w-full">
       <motion.div
         variants={animateStart}
         initial="hidden"

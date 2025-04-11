@@ -77,13 +77,18 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
       </video>
       <div className="bg-[#0E0E0E80] fixed inset-0 w-full h-full -z-9"></div>
       <ResponsiveLayout className="z-10 text-white">
-        <div className="mt-64 md:mt-[12.38vh]">
-          <MotionScrollableWidth isRTL={rtl} hasBlur={false}>
+        <div className="md:mt-[12.38vh]">
+          <MotionScrollableWidth
+            className="md:hidden mt-[200px] px-10"
+            isRTL={rtl}
+            hasBlur={false}
+            childClassName="!gap-2.5"
+          >
             {dict.tabs.map((item: TabItemType) => {
               const isActive = item.id === activeTab;
 
               const titleClass = twMerge(
-                "text-2xl",
+                "text-lg",
                 clsx({
                   "font-bold": isActive,
                   "font-normal": !isActive,
@@ -94,7 +99,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
                 <div
                   key={item.title}
                   onClick={() => setActiveTab(item.id)}
-                  className="flex items-center justify-center gap-5 cursor-pointer px-4 select-none font-normal text-2xl flex-shrink-0"
+                  className="flex items-center justify-center gap-2.5 cursor-pointer px-4 select-none font-normal text-2xl rounded-full bg-[#FFFFFF33] text-nowrap p-4"
                 >
                   {isActive && (
                     <motion.div
@@ -104,7 +109,12 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
                       transition={{ duration: 0.7 }}
                       className={rtl ? "" : "rotate-180"}
                     >
-                      <AppIcon name="SymbolIcon" width="12px" height="24px" />
+                      <AppIcon
+                        name="HalfCircleIcon"
+                        width="3.2vh"
+                        height="3.2vh"
+                        className="!animate-[spin_0.4s_linear_1]"
+                      />
                     </motion.div>
                   )}
                   <div className={titleClass}>{item.title}</div>
