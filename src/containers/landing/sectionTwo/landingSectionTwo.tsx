@@ -283,13 +283,13 @@ export default function LandingSectionTwo({
   }, [isActive, handleScroll, currentZoom]);
 
   return (
-    <ResponsiveLayout className="z-10 text-primary flex items-center h-screen font-medium w-full">
+    <ResponsiveLayout className="z-10 text-primary flex flex-col md:flex-row items-center h-screen font-medium w-full">
       <motion.div
         variants={animateStart}
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
         transition={{ duration: 0.7 }}
-        className="w-6/12 ps-16 whitespace-nowrap relative z-10 flex flex-col h-full pt-28 pb-8 justify-between overflow-hidden"
+        className="w-full md:w-6/12 md:ps-16 whitespace-nowrap relative z-10 flex flex-col h-full pt-28 pb-8 justify-between overflow-hidden"
       >
         <div>
           <h1 className="text-[6.43vh] font-medium">مناطق پیشران اقتصاد</h1>
@@ -446,7 +446,7 @@ export default function LandingSectionTwo({
           stiffness: 120,
           mass: 0.5,
         }}
-        className="w-full relative"
+        className="w-full"
         style={{
           aspectRatio: 794 / 828,
           height: "537px",
