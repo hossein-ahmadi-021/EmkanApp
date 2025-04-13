@@ -21,113 +21,129 @@ interface Props {
   >;
 }
 
+interface MapImageProps {
+  src: string;
+  alt: string;
+  position: {
+    start: string;
+    bottom: string;
+  };
+  size: {
+    width: string;
+    height: string;
+  };
+  isActive: boolean;
+  onClick: () => void;
+  zIndex?: number;
+}
+
+const MapImage: React.FC<MapImageProps> = ({
+  src,
+  alt,
+  position,
+  size,
+  isActive,
+  onClick,
+  zIndex = 0,
+}) => (
+  <motion.div
+    onClick={onClick}
+    initial="hidden"
+    animate={isActive ? "visible" : "hidden"}
+    variants={opacityVariant}
+    transition={{ duration: 0.6 }}
+    className="absolute w-full h-full"
+  >
+    <div
+      className={`absolute ${position.start} ${position.bottom} ${
+        zIndex ? "z-10" : ""
+      } ${size.width} ${size.height}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        quality={50}
+        priority
+        className="object-contain select-none"
+        fill
+        sizes="(max-width: 768px) 90vw, 67.04vh"
+        style={{
+          transform: "translateZ(0)",
+        }}
+      />
+    </div>
+  </motion.div>
+);
+
 export default function MakranGeography({ activeTab, setActiveConfig }: Props) {
+  const handleSistanClick = () =>
+    setActiveConfig({
+      location: "makran",
+      activeLatLng: 2,
+    });
+
+  const handleHormozClick = () =>
+    setActiveConfig({
+      location: "makran",
+      activeLatLng: 1,
+    });
+
+  const sistanPosition = {
+    start: "start-[23.2%]",
+    bottom: "bottom-[-1.1%]",
+  };
+
+  const hormozPosition = {
+    start: "start-[35.80%]",
+    bottom: "bottom-[-1.2%]",
+  };
+
+  const imageSize = {
+    width: "w-[14%]",
+    height: "h-[34.5%]",
+  };
+
+  const hormozSize = {
+    width: "w-[7.1%]",
+    height: "h-[34.5%]",
+  };
+
   return (
     <>
-      <motion.div
-        onClick={() =>
-          setActiveConfig({
-            location: "makran",
-            activeLatLng: 2,
-          })
-        }
-        initial="hidden"
-        animate={activeTab === 1 ? "visible" : "hidden"}
-        variants={opacityVariant}
-        transition={{ duration: 0.6 }}
-      >
-        <Image
-          src={sistanGold}
-          alt="Makran geographical location"
-          quality={50}
-          priority
-          className="object-contain absolute start-[20.27%] bottom-[9.19%] z-10 select-none"
-          width={185}
-          sizes="(max-width: 768px) 90vw, 67.04vh"
-          style={{
-            aspectRatio: 696 / 286,
-            transform: "translateZ(0)",
-          }}
-        />
-      </motion.div>
-      <motion.div
-        onClick={() =>
-          setActiveConfig({
-            location: "makran",
-            activeLatLng: 2,
-          })
-        }
-        initial="hidden"
-        animate={activeTab === 1 ? "hidden" : "visible"}
-        variants={opacityVariant}
-        transition={{ duration: 0.6 }}
-      >
-        <Image
-          src={sistanPrimary}
-          alt="Makran geographical location"
-          quality={50}
-          priority
-          className="object-contain absolute start-[20.27%] bottom-[9.19%] select-none"
-          width={185}
-          sizes="(max-width: 768px) 90vw, 67.04vh"
-          style={{
-            aspectRatio: 696 / 286,
-            transform: "translateZ(0)",
-          }}
-        />
-      </motion.div>
-      <motion.div
-        onClick={() =>
-          setActiveConfig({
-            location: "makran",
-            activeLatLng: 1,
-          })
-        }
-        initial="hidden"
-        animate={activeTab === 1 ? "hidden" : "visible"}
-        variants={opacityVariant}
-        transition={{ duration: 0.6 }}
-      >
-        <Image
-          src={hormozGold}
-          alt="Makran geographical location"
-          quality={50}
-          priority
-          className="object-contain absolute start-[31.1904%] bottom-[10.245%] z-10 select-none"
-          width={154}
-          sizes="(max-width: 768px) 90vw, 67.04vh"
-          style={{
-            aspectRatio: 696 / 286,
-            transform: "translateZ(0)",
-          }}
-        />
-      </motion.div>
-      <motion.div
-        onClick={() =>
-          setActiveConfig({
-            location: "makran",
-            activeLatLng: 1,
-          })
-        }
-        initial="hidden"
-        animate={activeTab === 1 ? "visible" : "hidden"}
-        variants={opacityVariant}
-        transition={{ duration: 0.6 }}
-      >
-        <Image
-          src={hormozPrimary}
-          alt="Makran geographical location"
-          quality={50}
-          priority
-          className="object-contain absolute start-[31.1904%] bottom-[10.245%] select-none"
-          width={154}
-          sizes="(max-width: 768px) 90vw, 67.04vh"
-          style={{
-            aspectRatio: 696 / 286,
-            transform: "translateZ(0)",
-          }}
-        />
-      </motion.div>
+      <MapImage
+        src={sistanGold}
+        alt="Sistan geographical location"
+        position={sistanPosition}
+        size={imageSize}
+        isActive={activeTab === 1}
+        onClick={handleSistanClick}
+        zIndex={10}
+      />
+      <MapImage
+        src={sistanPrimary}
+        alt="Sistan geographical location"
+        position={sistanPosition}
+        size={imageSize}
+        isActive={activeTab !== 1}
+        onClick={handleSistanClick}
+      />
+      <MapImage
+        src={hormozGold}
+        alt="Hormoz geographical location"
+        position={hormozPosition}
+        size={hormozSize}
+        isActive={activeTab !== 1}
+        onClick={handleHormozClick}
+        zIndex={10}
+      />
+      <MapImage
+        src={hormozPrimary}
+        alt="Hormoz geographical location"
+        position={hormozPosition}
+        size={hormozSize}
+        isActive={activeTab === 1}
+        onClick={handleHormozClick}
+      />
     </>
   );
 }
