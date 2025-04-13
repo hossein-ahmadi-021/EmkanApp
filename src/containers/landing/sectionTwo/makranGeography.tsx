@@ -32,7 +32,6 @@ interface MapImageProps {
   };
   isActive: boolean;
   onClick: () => void;
-  zIndex?: number;
 }
 
 const MapImage: React.FC<MapImageProps> = ({
@@ -42,7 +41,6 @@ const MapImage: React.FC<MapImageProps> = ({
   size,
   isActive,
   onClick,
-  zIndex = 0,
 }) => (
   <motion.div
     onClick={onClick}
@@ -53,7 +51,7 @@ const MapImage: React.FC<MapImageProps> = ({
     className="absolute w-full h-full"
   >
     <div
-      className={`absolute ${position.className} ${zIndex ? "z-10" : ""} ${
+      className={`absolute ${position.className} ${isActive ? "z-10" : ""} ${
         size.className || ""
       }`}
       style={{
@@ -97,21 +95,19 @@ export default function MakranGeography({ activeTab, setActiveConfig }: Props) {
     });
 
   const imageSize = {
-    className:
-      "w-[129px] h-[200px] max-[1400px]:w-[200px] max-[1400px]:h-[200px] max-[1200px]:w-[180px] max-[1200px]:h-[180px] max-[992px]:w-[160px] max-[992px]:h-[160px] max-[768px]:w-[140px] max-[768px]:h-[140px]",
+    className: "w-[129px] h-[200px]",
   };
   const sistanPosition = {
     className:
-      "start-[23.3%] bottom-[-2.4%] max-[1400px]:start-[25%] max-[1400px]:bottom-[-1.5%] max-[1200px]:start-[27%] max-[1200px]:bottom-[-2%] max-[992px]:start-[29%] max-[992px]:bottom-[-2.5%] max-[768px]:start-[31%] max-[768px]:bottom-[-3%]",
+      "start-[23.3%] bottom-[-2.4%] max-[1536px]:start-[17.2%] max-[1280px]:start-[9.1%]",
   };
 
   const hormozSize = {
-    className:
-      "w-[65.5px] h-[100px] max-[1400px]:w-[100px] max-[1400px]:h-[100px] max-[1200px]:w-[90px] max-[1200px]:h-[90px] max-[992px]:w-[80px] max-[992px]:h-[80px] max-[768px]:w-[70px] max-[768px]:h-[70px]",
+    className: "w-[65.5px] h-[100px]",
   };
   const hormozPosition = {
     className:
-      "start-[35.81%] bottom-[6.7%] max-[1400px]:start-[37%] max-[1400px]:bottom-[-1.6%] max-[1200px]:start-[39%] max-[1200px]:bottom-[-2.1%] max-[992px]:start-[41%] max-[992px]:bottom-[-2.6%] max-[768px]:start-[43%] max-[768px]:bottom-[-3.1%]",
+      "start-[35.81%] bottom-[6.7%] max-[1536px]:start-[32.5%] max-[1280px]:start-[28.2%]",
   };
 
   return (
@@ -132,7 +128,6 @@ export default function MakranGeography({ activeTab, setActiveConfig }: Props) {
         size={imageSize}
         isActive={activeTab === 1}
         onClick={handleSistanClick}
-        zIndex={10}
       />
       <MapImage
         src={sistanPrimary}
@@ -149,7 +144,6 @@ export default function MakranGeography({ activeTab, setActiveConfig }: Props) {
         size={hormozSize}
         isActive={activeTab !== 1}
         onClick={handleHormozClick}
-        zIndex={10}
       />
       <MapImage
         src={hormozPrimary}
