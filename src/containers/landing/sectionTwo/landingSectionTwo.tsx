@@ -450,42 +450,32 @@ export default function LandingSectionTwo({
         style={{
           aspectRatio: 794 / 828,
           height: "537px",
+          width: "100%",
           overflow: "hidden",
           willChange: "transform",
         }}
       >
-        <Image
-          src={iranMapBg}
-          alt="iranMap"
-          fill={true}
-          quality={50}
-          priority
-          className="object-contain"
-          sizes="(max-width: 768px) 90vw, 67.04vh"
-          style={{
-            aspectRatio: 794 / 828,
-            transform: "translateZ(0)",
-          }}
-        />
-        <Image
-          src={iranMapBg}
-          alt="iranMap"
-          fill={true}
-          quality={50}
-          priority
-          className={"object-contain"}
-          sizes="(max-width: 768px) 90vw, 67.04vh"
-          style={{
-            aspectRatio: 794 / 828,
-            transform: "translateZ(0)",
-          }}
-        />
-        {activeConfig.location === "makran" && (
-          <MakranGeography
-            activeTab={activeConfig.activeLatLng}
-            setActiveConfig={setActiveConfig}
+        <div className="relative w-full h-full">
+          <Image
+            src={iranMapBg}
+            alt="iranMap"
+            fill={true}
+            quality={50}
+            priority
+            className="object-contain"
+            sizes="(max-width: 768px) 90vw, 67.04vh"
+            style={{
+              aspectRatio: 794 / 828,
+              transform: "translateZ(0)",
+            }}
           />
-        )}
+          {activeConfig.location === "makran" && (
+            <MakranGeography
+              activeTab={activeConfig.activeLatLng}
+              setActiveConfig={setActiveConfig}
+            />
+          )}
+        </div>
         {activeConfig.location === "azad" && (
           <AzadGeography
             activeId={activeConfig.activeLatLng}
