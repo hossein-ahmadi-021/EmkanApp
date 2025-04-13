@@ -13,6 +13,7 @@ interface Props {
   className?: string;
   type?: "normal" | "dashed";
   theme?: "primary" | "gold" | "gray";
+  iconClass?: string;
 }
 
 export default function AppButton({
@@ -22,6 +23,7 @@ export default function AppButton({
   className,
   type = "normal",
   theme = "primary",
+  iconClass,
 }: Props) {
   const isDashed = type === "dashed";
   const { isRTL } = useLangStore();
@@ -62,7 +64,7 @@ export default function AppButton({
       "px-4 py-[15px]": !icon,
     }),
     className,
-    THEMES[theme],
+    THEMES[theme]
   );
 
   return (
@@ -88,7 +90,12 @@ export default function AppButton({
           {children}
           {icon && (
             <div className={isRTL ? "" : "rotate-180"}>
-              <AppIcon name={icon} width="48px" height="48px" />
+              <AppIcon
+                className={iconClass}
+                name={icon}
+                width="48px"
+                height="48px"
+              />
             </div>
           )}
         </div>

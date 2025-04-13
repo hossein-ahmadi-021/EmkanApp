@@ -188,10 +188,15 @@ function ScrollButton({
       variants={variants}
       transition={{ duration: 3 }}
       onClick={onClick}
-      className="absolute bottom-2 left-1/2 transform -translate-x-1/2 px-5 py-3 text-[1.13vh] text-white rounded-md cursor-pointer transition-all"
+      className="absolute bottom-0 md:bottom-2 left-1/2 transform -translate-x-1/2 px-5 py-3 text-xs md:text-[1.13vh] text-white rounded-md cursor-pointer transition-all"
     >
       <div className="absolute left-1/2 -translate-x-1/2 animate-bounce-slow">
-        <AppIcon name="ArrowIcon" width="24px" height="24px" />
+        <AppIcon
+          className="w-[16px] h-[16px] md:w-[24px] md:h-[24px]"
+          name="ArrowIcon"
+          width="24px"
+          height="24px"
+        />
       </div>
       <div>{dict?.scrollTitle}</div>
     </motion.div>

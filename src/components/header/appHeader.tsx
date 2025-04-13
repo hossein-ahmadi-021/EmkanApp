@@ -95,7 +95,7 @@ export default function AppHeader({ dict, dir, lang }: Props) {
           transition={{ duration: 0.7 }}
           className={headerClasses}
         >
-          <div className="p-4 w-full flex items-center justify-between h-20 duration-700">
+          <div className="p-4 w-full flex items-center justify-between h-16 md:h-20 duration-700">
             <div className="flex items-center flex-row-reverse md:flex-row">
               {isSub && (
                 <AppIcon
@@ -110,24 +110,28 @@ export default function AppHeader({ dict, dir, lang }: Props) {
                 className="flex items-center gap-2.5 cursor-pointer"
               >
                 <AppIcon
+                  className="w-[35px] md:w-[44px]"
                   color={isPrimary ? "primary" : "white"}
                   name="LogoIcon"
                   width="44px"
                   height="44px"
                 />
                 <div>
-                  <h1 className="text-lg font-semibold">{dict.company}</h1>
-                  <h4 className="text-tiny">
+                  <h1 className="text-base md:text-lg font-semibold">
+                    {dict.company}
+                  </h1>
+                  <h4 className="text-[9px] md:text-tiny">
                     Emkan Development Experience Group
                   </h4>
                 </div>
               </div>
               {!isSub && (
-                <div className="md:ms-[74px] me-9">
+                <div className="md:ms-[74px] me-7">
                   <div className="xl:hidden">
                     <DropdownMenu>
                       <DropdownMenuTrigger>
                         <AppIcon
+                          className="w-[27px] md:w-[32px] mt-2"
                           color={isPrimary ? "primary" : "white"}
                           name="HambergerIcon"
                           width="32px"

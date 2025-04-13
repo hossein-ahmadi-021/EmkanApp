@@ -64,7 +64,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
   };
 
   return (
-    <div>
+    <div className="h-full md:h-fit w-full">
       <video
         ref={videoRef}
         autoPlay
@@ -79,7 +79,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
       <ResponsiveLayout className="z-10 text-white">
         <div className="md:mt-[12.38vh]">
           <MotionScrollableWidth
-            className="md:hidden mt-[200px] px-10"
+            className="md:hidden mt-[12vh]"
             isRTL={rtl}
             hasBlur={false}
             childClassName="!gap-2.5"
@@ -88,7 +88,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
               const isActive = item.id === activeTab;
 
               const titleClass = twMerge(
-                "text-lg",
+                "text-[1.57vh]",
                 clsx({
                   "font-bold": isActive,
                   "font-normal": !isActive,
@@ -99,7 +99,9 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
                 <div
                   key={item.title}
                   onClick={() => setActiveTab(item.id)}
-                  className="flex items-center justify-center gap-2.5 cursor-pointer px-4 select-none font-normal text-2xl rounded-full bg-[#FFFFFF33] text-nowrap p-4"
+                  className={`flex items-center justify-center gap-2.5 cursor-pointer px-4 select-none font-normal text-2xl rounded-full text-nowrap p-3 ${
+                    isActive && "bg-[#FFFFFF33]"
+                  }`}
                 >
                   {isActive && (
                     <motion.div
@@ -111,8 +113,8 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
                     >
                       <AppIcon
                         name="HalfCircleIcon"
-                        width="3.2vh"
-                        height="3.2vh"
+                        width="2.5vh"
+                        height="2.5vh"
                         className="!animate-[spin_0.4s_linear_1]"
                       />
                     </motion.div>
@@ -144,7 +146,7 @@ export default function LandingSectionOne({ dict, rtl }: Props) {
           variants={loadTabsVariants}
           transition={{ duration: 0.7 }}
         >
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 hidden md:flex">
             <div
               onClick={pause ? handlePlay : handlePause}
               className="cursor-pointer"
