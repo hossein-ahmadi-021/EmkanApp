@@ -302,8 +302,10 @@ export default function LandingSectionTwo({
 
   const renderLocationInfo = (title: string, value: number, unit: string) => (
     <div className="flex items-center gap-2">
-      <div className="text-[1.62vh]">{unit}</div>
-      <div className="text-[2.88vh] font-medium">{numberSplit(value)}</div>
+      <div className="text-[1.12vh] md:text-[1.62vh]">{unit}</div>
+      <div className="text-[2.38vh] font-medium md:text-[2.88vh]">
+        {numberSplit(value)}
+      </div>
     </div>
   );
 
@@ -314,20 +316,20 @@ export default function LandingSectionTwo({
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
         transition={{ duration: 0.7 }}
-        className="w-full md:w-6/12 md:ps-16 md:whitespace-nowrap relative z-10 flex flex-col h-full pt-20 md:pt-28 pb-8 justify-between overflow-hidden bg-white"
+        className="w-full md:w-6/12 md:ps-16 md:whitespace-nowrap relative z-10 flex flex-col h-7/12 md:h-full pt-20 md:pt-28 pb-8 md:justify-between md:overflow-hidden bg-white"
       >
         <div>
           <h1 className="text-[4vh] md:text-[6.43vh] font-medium text-center">
             مناطق پیشران اقتصاد
           </h1>
-          <div className="mt-[2.608vh] flex flex-row md:flex-col md:gap-2.5 mb-4 w-full [&>*]:md:w-full [&>*]:w-full [&>*]:transition-colors [&>*]:duration-300 [&>*]:pb-2 [&>*]:md:pb-0 [&>*]:flex-1">
+          <div className="mt-[1vh] md:mt-[2.608vh] flex flex-row md:flex-col md:gap-2.5 mb-2 md:mb-4 w-full [&>*]:md:w-full [&>*]:w-full [&>*]:transition-colors [&>*]:duration-300 [&>*]:pb-1 [&>*]:md:pb-0 [&>*]:flex-1">
             {renderLocationButton("makran", "منطقه مکران")}
             {renderLocationButton("azad", "مناطق آزاد")}
             {renderLocationButton("islands", "جزایر")}
           </div>
         </div>
         <div>
-          <MotionScrollableWidth isRTL={rtl}>
+          <MotionScrollableWidth className="px-3 md:px-auto" isRTL={rtl}>
             {locationInfos[activeConfig.location].map((item) => (
               <AppButton
                 key={item.id}
@@ -335,7 +337,7 @@ export default function LandingSectionTwo({
                   activeConfig.activeLatLng === item.id ? "primary" : "gold"
                 }
                 type="dashed"
-                className="text-base font-medium py-2.5 text-nowrap"
+                className="text-[1.6vh] md:text-base font-medium py-1.5 md:py-2.5 text-nowrap"
                 onClick={() => {
                   setActiveConfig((prev) => ({
                     ...prev,
@@ -347,24 +349,32 @@ export default function LandingSectionTwo({
               </AppButton>
             ))}
           </MotionScrollableWidth>
-          <div className="bg-dimPrimary px-[30px] py-[24px] mt-[0.96vh] max-w-[378px] flex-wrap">
+          <div className="bg-dimPrimary px-[30px] py-[18px] md:py-[24px] mt-[0.96vh] max-w-[378px] flex-wrap mx-3">
             <div className="flex items-start justify-between">
               <div className="w-100">
-                <div className="text-[1.62vh] opacity-60">مساحت</div>
+                <div className="text-[1.3vh] md:text-[1.62vh] opacity-60">
+                  مساحت
+                </div>
                 {renderLocationInfo("مساحت", 187502, "km2")}
               </div>
               <div className="w-100">
-                <div className="text-[1.62vh] opacity-60">طول خط ساحلی</div>
+                <div className="text-[1.3vh] md:text-[1.62vh] opacity-60">
+                  طول خط ساحلی
+                </div>
                 {renderLocationInfo("طول خط ساحلی", 1000, "KM")}
               </div>
             </div>
             <div className="flex items-start justify-between mt-5">
               <div className="w-50">
-                <div className="text-[1.62vh] opacity-60">جمعیت</div>
+                <div className="text-[1.3vh] md:text-[1.62vh] opacity-60">
+                  جمعیت
+                </div>
                 {renderLocationInfo("جمعیت", 1000, "KM")}
               </div>
               <div className="w-50">
-                <div className="text-[1.62vh] opacity-60">شهر ها</div>
+                <div className="text-[1.3vh] md:text-[1.62vh] opacity-60">
+                  شهر ها
+                </div>
                 {renderLocationInfo("شهر ها", 1000, "KM")}
               </div>
             </div>
@@ -377,13 +387,19 @@ export default function LandingSectionTwo({
               width="50"
               height="50"
             />
-            <h2 className="text-[5.39vh]">
+            <h2 className="text-[3.5vh] md:text-[5.39vh]">
               {activeConfig.location === "makran" && "منطقه مکران"}
               {activeConfig.location === "azad" && "مناطق آزاد"}
               {activeConfig.location === "islands" && "جزایر"}
             </h2>
           </div>
-          <AppButton theme="primary" icon="InsideIcon">
+          <AppButton
+            parentClassName="w-full mx-auto md:w-fit mt-2 md:mt-0 px-3 md:px-0"
+            className="text-[2.1vh] md:text-lg py-0"
+            iconClass="w-[38px] h-[38px] md:w-[48px] md:h-[48px]"
+            theme="primary"
+            icon="InsideIcon"
+          >
             {activeConfig.location === "makran" &&
               "درباره منطقه مکران بیشتر بدانید"}
             {activeConfig.location === "azad" &&

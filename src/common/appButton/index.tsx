@@ -14,6 +14,7 @@ interface Props {
   type?: "normal" | "dashed";
   theme?: "primary" | "gold" | "gray";
   iconClass?: string;
+  parentClassName?: string;
 }
 
 export default function AppButton({
@@ -24,6 +25,7 @@ export default function AppButton({
   type = "normal",
   theme = "primary",
   iconClass,
+  parentClassName,
 }: Props) {
   const isDashed = type === "dashed";
   const { isRTL } = useLangStore();
@@ -68,7 +70,7 @@ export default function AppButton({
   );
 
   return (
-    <button onClick={handleClick}>
+    <button className={parentClassName} onClick={handleClick}>
       <motion.div className={buttonClasses} whileTap={{ scale: 0.95 }}>
         {ripple && (
           <motion.span
