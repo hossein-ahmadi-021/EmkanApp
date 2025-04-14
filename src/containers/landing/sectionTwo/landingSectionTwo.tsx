@@ -15,10 +15,16 @@ import MakranGeography from "@/containers/landing/sectionTwo/makranGeography";
 import AzadGeography from "@/containers/landing/sectionTwo/azadGeography";
 import IslandsGeography from "@/containers/landing/sectionTwo/islandsGeography";
 import { numberSplit } from "@/lib/utils/numbers";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
+
+// Types
+type LocationKey = "makran" | "azad" | "islands";
+
+interface LocationItem {
+  id: number;
+  name: string;
+}
 
 interface Props {
   rtl: boolean;
@@ -27,12 +33,25 @@ interface Props {
   onSubSectionBack: () => void;
 }
 
-type LocationKey = "makran" | "azad" | "islands";
-
-interface LocationItem {
-  id: number;
-  name: string;
+interface TransformState {
+  scale: number;
+  translateX: number;
+  translateY: number;
 }
+
+interface ActiveConfig {
+  location: LocationKey;
+  activeLatLng: number;
+}
+
+// Constants
+const SCROLL_COOLDOWN = 1500;
+const ANIMATION_DURATION = 700;
+const DEFAULT_TRANSFORM: TransformState = {
+  scale: 1.4,
+  translateX: 20,
+  translateY: 20,
+};
 
 export default function LandingSectionTwo({
   rtl,
@@ -40,24 +59,27 @@ export default function LandingSectionTwo({
   onSubSectionComplete,
   onSubSectionBack,
 }: Props) {
+  // State
   const [currentZoom, setCurrentZoom] = useState<number>(0);
   const [pendingAction, setPendingAction] = useState<
     "complete" | "back" | null
   >(null);
   const isScrolling = useRef(false);
-  const [transform, setTransform] = useState({
-    scale: 1.4,
-    translateX: rtl ? -20 : 20,
-    translateY: rtl ? -20 : 20,
+  const [transform, setTransform] = useState<TransformState>({
+    ...DEFAULT_TRANSFORM,
+    translateX: rtl
+      ? -DEFAULT_TRANSFORM.translateX
+      : DEFAULT_TRANSFORM.translateX,
+    translateY: rtl
+      ? -DEFAULT_TRANSFORM.translateY
+      : DEFAULT_TRANSFORM.translateY,
   });
-  const [activeConfig, setActiveConfig] = useState<{
-    location: LocationKey;
-    activeLatLng: number;
-  }>({
+  const [activeConfig, setActiveConfig] = useState<ActiveConfig>({
     location: "makran",
     activeLatLng: 1,
   });
 
+  // Memoized values
   const transformConfigs = useMemo(
     () => ({
       makran: {
@@ -79,6 +101,13 @@ export default function LandingSectionTwo({
     [rtl]
   );
 
+  const locationInfos: Record<LocationKey, LocationItem[]> = {
+    makran: makranLocs,
+    azad: freeLocs,
+    islands: islandLocs,
+  };
+
+  // Animation variants
   const animateStart = {
     hidden: {
       opacity: 0,
@@ -92,12 +121,7 @@ export default function LandingSectionTwo({
     },
   };
 
-  const locationInfos: Record<LocationKey, LocationItem[]> = {
-    makran: makranLocs,
-    azad: freeLocs,
-    islands: islandLocs,
-  };
-
+  // Handlers
   const handleZoom = useCallback(
     (config: LocationKey) => {
       const { scale, originX, originY } = transformConfigs[config];
@@ -116,9 +140,13 @@ export default function LandingSectionTwo({
 
   const resetZoom = useCallback(() => {
     setTransform({
-      scale: 1.4,
-      translateX: rtl ? -20 : 20,
-      translateY: rtl ? -20 : 20,
+      ...DEFAULT_TRANSFORM,
+      translateX: rtl
+        ? -DEFAULT_TRANSFORM.translateX
+        : DEFAULT_TRANSFORM.translateX,
+      translateY: rtl
+        ? -DEFAULT_TRANSFORM.translateY
+        : DEFAULT_TRANSFORM.translateY,
     });
     setActiveConfig({
       location: "makran",
@@ -132,53 +160,37 @@ export default function LandingSectionTwo({
       isScrolling.current = true;
 
       setCurrentZoom((prev) => {
+        const locations: LocationKey[] = ["makran", "azad", "islands"];
+
         if (direction === "down" && prev < 2) {
           const nextZoom = prev + 1;
-          const locations: LocationKey[] = ["makran", "azad", "islands"];
-          console.log(
-            `Moving from ${locations[prev]} to ${locations[nextZoom]}`
-          );
           handleZoom(locations[nextZoom]);
           return nextZoom;
         } else if (direction === "up" && prev > 0) {
           const prevZoom = prev - 1;
-          const locations: LocationKey[] = ["makran", "azad", "islands"];
-          console.log(
-            `Moving from ${locations[prev]} to ${locations[prevZoom]}`
-          );
           handleZoom(locations[prevZoom]);
           return prevZoom;
         } else if (direction === "up" && prev === 0) {
           setPendingAction("back");
-          return prev;
         } else if (direction === "down" && prev === 2) {
           setPendingAction("complete");
-          return prev;
         }
         return prev;
       });
 
       setTimeout(() => {
         isScrolling.current = false;
-      }, 700);
+      }, ANIMATION_DURATION);
     },
     [handleZoom]
   );
 
+  // Effects
   useEffect(() => {
     if (isActive) {
-      if (currentZoom === 0) {
-        console.log("Section activated - Starting at makran (0)");
-        handleZoom("makran");
-      } else {
-        const locations: LocationKey[] = ["makran", "azad", "islands"];
-        console.log(
-          `Section activated - Restoring to ${locations[currentZoom]} (${currentZoom})`
-        );
-        handleZoom(locations[currentZoom]);
-      }
+      const locations: LocationKey[] = ["makran", "azad", "islands"];
+      handleZoom(locations[currentZoom]);
     } else {
-      console.log("Section deactivated - Resetting zoom");
       resetZoom();
     }
   }, [isActive, handleZoom, resetZoom, currentZoom]);
@@ -197,7 +209,6 @@ export default function LandingSectionTwo({
     if (!isActive) return;
 
     let lastScrollTime = 0;
-    const scrollCooldown = 1500;
     let scrollTimeout: NodeJS.Timeout;
     let touchStartY = 0;
     let touchStartX = 0;
@@ -206,18 +217,11 @@ export default function LandingSectionTwo({
       e.preventDefault();
       const now = Date.now();
 
-      if (now - lastScrollTime < scrollCooldown) {
-        console.log("Scroll blocked - cooldown period");
-        return;
-      }
-
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
+      if (now - lastScrollTime < SCROLL_COOLDOWN) return;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
 
       lastScrollTime = now;
       const direction = e.deltaY > 0 ? "down" : "up";
-      console.log("Wheel event:", direction, "currentZoom:", currentZoom);
 
       scrollTimeout = setTimeout(() => {
         handleScroll(direction);
@@ -234,27 +238,18 @@ export default function LandingSectionTwo({
       e.preventDefault();
       const now = Date.now();
 
-      if (now - lastScrollTime < scrollCooldown) {
-        return;
-      }
+      if (now - lastScrollTime < SCROLL_COOLDOWN) return;
 
       const touchEndY = e.touches[0].clientY;
       const touchEndX = e.touches[0].clientX;
-
-      // Calculate vertical and horizontal movement
       const diffY = touchStartY - touchEndY;
       const diffX = touchStartX - touchEndX;
 
-      // Only process if vertical movement is greater than horizontal (to distinguish from horizontal scroll)
       if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 30) {
         lastScrollTime = now;
         const direction = diffY > 0 ? "down" : "up";
-        console.log("Touch event:", direction, "currentZoom:", currentZoom);
 
-        if (scrollTimeout) {
-          clearTimeout(scrollTimeout);
-        }
-
+        if (scrollTimeout) clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
           handleScroll(direction);
         }, 100);
@@ -265,163 +260,124 @@ export default function LandingSectionTwo({
       e.preventDefault();
     };
 
-    // Add event listeners with passive: false to ensure preventDefault works
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: false });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+    const options = { passive: false };
+    window.addEventListener("wheel", handleWheel, options);
+    window.addEventListener("touchstart", handleTouchStart, options);
+    window.addEventListener("touchmove", handleTouchMove, options);
+    window.addEventListener("touchend", handleTouchEnd, options);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
+      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
-  }, [isActive, handleScroll, currentZoom]);
+  }, [isActive, handleScroll]);
+
+  // Render helpers
+  const renderLocationButton = (location: LocationKey, label: string) => (
+    <div
+      onClick={() => handleZoom(location)}
+      className={`flex md:justify-start justify-center w-full cursor-pointer select-none ${
+        activeConfig.location === location
+          ? "text-[1.74vh] font-semibold border-b-2 md:border-b-0 border-primary"
+          : "text-[1.74vh] text-disablePrimary font-semibold border-b md:border-none"
+      }`}
+    >
+      <div className="flex items-center gap-2">
+        {activeConfig.location === location && (
+          <AppIcon
+            className="w-[2.3vh] md:w-[30px]"
+            color="primary"
+            name="HalfCircleIcon"
+            width="30"
+            height="30"
+          />
+        )}
+        <h4>{label}</h4>
+      </div>
+    </div>
+  );
+
+  const renderLocationInfo = (title: string, value: number, unit: string) => (
+    <div className="flex items-center gap-2">
+      <div className="text-[1.62vh]">{unit}</div>
+      <div className="text-[2.88vh] font-medium">{numberSplit(value)}</div>
+    </div>
+  );
 
   return (
-    <ResponsiveLayout className="z-10 text-primary flex flex-col md:flex-row items-center h-screen font-medium w-full">
+    <ResponsiveLayout className="z-10 text-primary flex flex-col md:flex-row items-center h-screen font-medium w-full p-0 md:p-auto">
       <motion.div
         variants={animateStart}
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
         transition={{ duration: 0.7 }}
-        className="w-full md:w-6/12 md:ps-16 whitespace-nowrap relative z-10 flex flex-col h-full pt-28 pb-8 justify-between overflow-hidden"
+        className="w-full md:w-6/12 md:ps-16 md:whitespace-nowrap relative z-10 flex flex-col h-full pt-20 md:pt-28 pb-8 justify-between overflow-hidden bg-white"
       >
         <div>
-          <h1 className="text-[6.43vh] font-medium">مناطق پیشران اقتصاد</h1>
-          <div className="mt-[2.608vh] flex flex-col gap-2.5">
-            <div
-              onClick={() => handleZoom("makran")}
-              className={`flex items-center gap-2 cursor-pointer select-none ${
-                activeConfig.location === "makran"
-                  ? "text-[1.74vh] font-semibold"
-                  : "text-[1.74vh] text-disablePrimary font-semibold"
-              }`}
-            >
-              {activeConfig.location === "makran" && (
-                <AppIcon
-                  color="primary"
-                  name="HalfCircleIcon"
-                  width="30"
-                  height="30"
-                />
-              )}
-              <h4>منطقه مکران</h4>
-            </div>
-            <div
-              onClick={() => handleZoom("azad")}
-              className={`flex items-center gap-2 cursor-pointer select-none ${
-                activeConfig.location === "azad"
-                  ? "text-[1.74vh] font-semibold"
-                  : "text-[1.74vh] text-disablePrimary font-semibold"
-              }`}
-            >
-              {activeConfig.location === "azad" && (
-                <AppIcon
-                  color="primary"
-                  name="HalfCircleIcon"
-                  width="30"
-                  height="30"
-                />
-              )}
-              <h4 className="text-[1.74vh] font-semibold">مناطق آزاد</h4>
-            </div>
-            <div
-              onClick={() => handleZoom("islands")}
-              className={`flex items-center gap-2 cursor-pointer select-none ${
-                activeConfig.location === "islands"
-                  ? "text-[1.74vh] font-semibold"
-                  : "text-[1.74vh] text-disablePrimary font-semibold"
-              }`}
-            >
-              {activeConfig.location === "islands" && (
-                <AppIcon
-                  color="primary"
-                  name="HalfCircleIcon"
-                  width="30"
-                  height="30"
-                />
-              )}
-              <h4 className="text-[1.74vh] font-semibold">جزایر</h4>
-            </div>
+          <h1 className="text-[4vh] md:text-[6.43vh] font-medium text-center">
+            مناطق پیشران اقتصاد
+          </h1>
+          <div className="mt-[2.608vh] flex flex-row md:flex-col md:gap-2.5 mb-4 w-full [&>*]:md:w-full [&>*]:w-full [&>*]:transition-colors [&>*]:duration-300 [&>*]:pb-2 [&>*]:md:pb-0 [&>*]:flex-1">
+            {renderLocationButton("makran", "منطقه مکران")}
+            {renderLocationButton("azad", "مناطق آزاد")}
+            {renderLocationButton("islands", "جزایر")}
           </div>
         </div>
         <div>
           <MotionScrollableWidth isRTL={rtl}>
-            {locationInfos[activeConfig.location].map((item) => {
-              const isActive = activeConfig.activeLatLng === item.id;
-              return (
-                <AppButton
-                  key={item.id}
-                  theme={isActive ? "primary" : "gold"}
-                  type="dashed"
-                  className="text-base font-medium py-2.5"
-                  onClick={() => {
-                    setActiveConfig((prev) => ({
-                      ...prev,
-                      activeLatLng: item.id,
-                    }));
-                  }}
-                >
-                  {item.name}
-                </AppButton>
-              );
-            })}
+            {locationInfos[activeConfig.location].map((item) => (
+              <AppButton
+                key={item.id}
+                theme={
+                  activeConfig.activeLatLng === item.id ? "primary" : "gold"
+                }
+                type="dashed"
+                className="text-base font-medium py-2.5 text-nowrap"
+                onClick={() => {
+                  setActiveConfig((prev) => ({
+                    ...prev,
+                    activeLatLng: item.id,
+                  }));
+                }}
+              >
+                {item.name}
+              </AppButton>
+            ))}
           </MotionScrollableWidth>
           <div className="bg-dimPrimary px-[30px] py-[24px] mt-[0.96vh] max-w-[378px] flex-wrap">
             <div className="flex items-start justify-between">
               <div className="w-100">
                 <div className="text-[1.62vh] opacity-60">مساحت</div>
-                <div className="flex items-center gap-2">
-                  <div className="text-[1.62vh]">km2</div>
-                  <div className="text-[2.88vh] font-medium">
-                    {numberSplit(187502)}
-                  </div>
-                </div>
+                {renderLocationInfo("مساحت", 187502, "km2")}
               </div>
               <div className="w-100">
                 <div className="text-[1.62vh] opacity-60">طول خط ساحلی</div>
-                <div className="flex items-center gap-2">
-                  <div className="text-[1.62vh]">KM</div>
-                  <div className="text-[2.88vh] font-medium">
-                    {numberSplit(1000)}
-                  </div>
-                </div>
+                {renderLocationInfo("طول خط ساحلی", 1000, "KM")}
               </div>
             </div>
             <div className="flex items-start justify-between mt-5">
               <div className="w-50">
                 <div className="text-[1.62vh] opacity-60">جمعیت</div>
-                <div className="flex items-center gap-2">
-                  <div className="text-[1.62vh]">KM</div>
-                  <div className="text-[2.88vh] font-medium">
-                    {numberSplit(1000)}
-                  </div>
-                </div>
+                {renderLocationInfo("جمعیت", 1000, "KM")}
               </div>
               <div className="w-50">
                 <div className="text-[1.62vh] opacity-60">شهر ها</div>
-                <div className="flex items-center gap-2">
-                  <div className="text-[1.62vh]">KM</div>
-                  <div className="text-[2.88vh] font-medium">
-                    {numberSplit(1000)}
-                  </div>
-                </div>
+                {renderLocationInfo("شهر ها", 1000, "KM")}
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-5 mt-[2.61vh] mb-5">
+          <div className="flex items-center gap-5 mt-[2.61vh] mb-5 hidden md:flex">
             <AppIcon
+              className="md:w-[30px]"
               color="primary"
               name="HalfCircleIcon"
               width="50"
               height="50"
             />
-            <h2 className=" text-[5.39vh]">
+            <h2 className="text-[5.39vh]">
               {activeConfig.location === "makran" && "منطقه مکران"}
               {activeConfig.location === "azad" && "مناطق آزاد"}
               {activeConfig.location === "islands" && "جزایر"}
@@ -446,7 +402,7 @@ export default function LandingSectionTwo({
           stiffness: 120,
           mass: 0.5,
         }}
-        className="w-full"
+        className="w-full  h-fit"
         style={{
           aspectRatio: 794 / 828,
           height: "537px",
