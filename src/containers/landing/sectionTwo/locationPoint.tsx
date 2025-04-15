@@ -11,6 +11,7 @@ const LocationPoint = ({
   size = "large",
   location = "azad",
   setActiveConfig,
+  iconClassName,
 }: {
   title: string;
   pointId: number;
@@ -18,6 +19,7 @@ const LocationPoint = ({
   className?: string;
   size?: "large" | "small";
   location?: "azad" | "islands";
+  iconClassName?: string;
   setActiveConfig: Dispatch<
     SetStateAction<{
       location: "makran" | "azad" | "islands";
@@ -59,7 +61,7 @@ const LocationPoint = ({
         name="LocationIcon"
         className={`${
           isActive ? "w-[0.97vh] h-[0.97vh]" : "w-[0.84vh] h-[0.84vh]"
-        } md:w-auto md:h-auto`}
+        } md:w-auto md:h-auto ${iconClassName}`}
         width={isActive ? sizes[size].active : sizes[size].deActive}
         height={isActive ? sizes[size].active : sizes[size].deActive}
         color={isActive ? "primary" : "gold"}
@@ -68,7 +70,7 @@ const LocationPoint = ({
         className={
           size === "small"
             ? "text-[0.44vh] md:text-[5.2px] mt-0.4"
-            : "text-tiny"
+            : "text-[0.9vh] md:text-tiny"
         }
       >
         {title}
