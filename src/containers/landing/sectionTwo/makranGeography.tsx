@@ -95,19 +95,19 @@ export default function MakranGeography({ activeTab, setActiveConfig }: Props) {
     });
 
   const imageSize = {
-    className: "w-[129px] h-[200px]",
+    className: "w-[129px] h-[200px] max-[768px]:w-[18%]",
   };
   const sistanPosition = {
     className:
-      "start-[23.3%] bottom-[-2.4%] max-[1536px]:start-[17.2%] max-[1280px]:start-[9.1%]",
+      "start-[23.3%] bottom-[-2.4%] max-[1536px]:start-[17.2%] max-[1280px]:start-[9.1%] max-[768px]:bottom-[37.9%] max-[768px]:start-[16%]",
   };
 
   const hormozSize = {
-    className: "w-[65.5px] h-[100px]",
+    className: "w-[65.5px] h-[100px] max-[768px]:w-[8.8%]",
   };
   const hormozPosition = {
     className:
-      "start-[35.81%] bottom-[6.7%] max-[1536px]:start-[32.5%] max-[1280px]:start-[28.2%]",
+      "start-[35.81%] bottom-[6.7%] max-[1536px]:start-[32.5%] max-[1280px]:start-[28.2%] max-[768px]:bottom-[47.1%] max-[768px]:start-[32.1%]",
   };
 
   return (
