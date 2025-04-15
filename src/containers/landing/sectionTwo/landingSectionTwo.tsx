@@ -418,12 +418,11 @@ export default function LandingSectionTwo({
           stiffness: 120,
           mass: 0.5,
         }}
-        className="w-full"
+        className="w-full !h-[220px] md:!h-[537px] md:overflow-hidden"
         style={{
           aspectRatio: 794 / 828,
           height: "537px",
           width: "100%",
-          overflow: "hidden",
           willChange: "transform",
         }}
       >
