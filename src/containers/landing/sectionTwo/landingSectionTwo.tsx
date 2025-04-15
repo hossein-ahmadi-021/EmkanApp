@@ -418,7 +418,7 @@ export default function LandingSectionTwo({
           stiffness: 120,
           mass: 0.5,
         }}
-        className="w-full  h-fit"
+        className="w-full"
         style={{
           aspectRatio: 794 / 828,
           height: "537px",

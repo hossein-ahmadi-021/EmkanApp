@@ -30,7 +30,7 @@ export default function IslandsGeography({ activeId, setActiveConfig }: Props) {
         location="islands"
         size="small"
         setActiveConfig={setActiveConfig}
-        className="end-[37%] top-88"
+        className="end-[37%] max-[1536px]:end-[34%] max-[1280px]:end-[30%] top-88"
         title="خارگ"
         activeId={activeId}
         pointId={12}
@@ -39,7 +39,7 @@ export default function IslandsGeography({ activeId, setActiveConfig }: Props) {
         location="islands"
         size="small"
         setActiveConfig={setActiveConfig}
-        className="end-[38.6%] top-92"
+        className="end-[38.6%] max-[1536px]:end-[36%] max-[1280px]:end-[32.5%] top-92"
         title="صدرا"
         activeId={activeId}
         pointId={11}
@@ -48,7 +48,7 @@ export default function IslandsGeography({ activeId, setActiveConfig }: Props) {
         location="islands"
         size="small"
         setActiveConfig={setActiveConfig}
-        className="end-[41.5%] top-100"
+        className="end-[41.5%] max-[1536px]:end-[39.5%] max-[1280px]:end-[37.5%] top-100"
         title="لاوان"
         activeId={activeId}
         pointId={10}
@@ -57,7 +57,7 @@ export default function IslandsGeography({ activeId, setActiveConfig }: Props) {
         location="islands"
         size="small"
         setActiveConfig={setActiveConfig}
-        className="end-[43%] top-103"
+        className="end-[43%] max-[1536px]:end-[41.5%] max-[1280px]:end-[40%] top-103"
         title="هندورابی"
         activeId={activeId}
         pointId={9}
@@ -66,7 +66,7 @@ export default function IslandsGeography({ activeId, setActiveConfig }: Props) {
         location="islands"
         size="small"
         setActiveConfig={setActiveConfig}
-        className="end-[45.5%] top-106"
+        className="end-[45.5%] max-[1536px]:end-[44.5%] max-[1280px]:end-[43.5%] top-106"
         title="کیش"
         activeId={activeId}
         pointId={8}
