@@ -31,7 +31,7 @@ const LocationPoint = ({
     `flex flex-col items-center w-fit font-normal text-tiny absolute cursor-pointer select-none ${
       isActive && "z-10"
     }`,
-    className,
+    className
   );
 
   const sizes = {
@@ -57,11 +57,20 @@ const LocationPoint = ({
     >
       <AppIcon
         name="LocationIcon"
+        className={`${
+          isActive ? "w-[0.97vh] h-[0.97vh]" : "w-[0.84vh] h-[0.84vh]"
+        } md:w-auto md:h-auto`}
         width={isActive ? sizes[size].active : sizes[size].deActive}
         height={isActive ? sizes[size].active : sizes[size].deActive}
         color={isActive ? "primary" : "gold"}
       />
-      <h5 className={size === "small" ? "text-[5.2px] mt-0.4" : "text-tiny"}>
+      <h5
+        className={
+          size === "small"
+            ? "text-[0.44vh] md:text-[5.2px] mt-0.4"
+            : "text-tiny"
+        }
+      >
         {title}
       </h5>
     </div>

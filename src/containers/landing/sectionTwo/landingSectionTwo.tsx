@@ -316,7 +316,7 @@ export default function LandingSectionTwo({
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
         transition={{ duration: 0.7 }}
-        className="w-full md:w-6/12 md:ps-16 md:whitespace-nowrap relative z-10 flex flex-col h-7/12 md:h-full pt-20 md:pt-28 pb-8 md:justify-between md:overflow-hidden bg-white"
+        className="w-full md:w-6/12 md:ps-16 md:whitespace-nowrap relative z-10 flex flex-col h-fit md:h-full pt-20 md:pt-28 pb-8 md:justify-between md:overflow-hidden bg-white"
       >
         <div>
           <h1 className="text-[4vh] md:text-[6.43vh] font-medium text-center">
@@ -418,7 +418,9 @@ export default function LandingSectionTwo({
           stiffness: 120,
           mass: 0.5,
         }}
-        className="w-full !h-[220px] md:!h-[537px] md:overflow-hidden"
+        className={`w-full !h-[295px] md:!h-[537px] md:overflow-hidden ${
+          activeConfig.location === "islands" && "me-14 md:me-0"
+        }`}
         style={{
           aspectRatio: 794 / 828,
           height: "537px",
