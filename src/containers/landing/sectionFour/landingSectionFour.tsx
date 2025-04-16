@@ -11,31 +11,31 @@ interface Props {
 
 export default function LandingSectionFour({}: Props) {
   return (
-    <ResponsiveLayout>
-      <div className="bg-[#F8F4EC] h-screen py-27 px-20">
-        <div className="mt-[5vh] flex items-center gap-5 justify-center">
+    <ResponsiveLayout className="w-full">
+      <div className="bg-[#F8F4EC] h-screen py-14 md:py-27 md:px-20 w-full flex flex-col-reverse md:flex-col">
+        <div className="mt-[3vh] md:mt-[5vh] flex md:flex-row flex-col items-center gap-5 justify-center h-[90vh] md:h-fit overflow-y-auto w-full px-5 md:px-0">
           <LinkableBanners
-            className="h-[49vh] w-[44vh]"
+            className="min-h-[300px] md:h-[49vh] w-full md:w-[44vh]"
             bg={consultingBanner}
             title=""
             subTitle=""
           />
           <LinkableBanners
-            className="h-[49vh] w-[44vh]"
+            className="min-h-[300px] md:h-[49vh] w-full md:w-[44vh]"
             bg={consultingBanner}
             title=""
             subTitle=""
           />
           <LinkableBanners
-            className="h-[49vh] w-[44vh]"
+            className="min-h-[300px] md:h-[49vh] w-full md:w-[44vh]"
             bg={consultingBanner}
             title=""
             subTitle=""
           />
         </div>
-        <div className="flex items-center justify-between text-primary mt-[7.65vh]">
-          <h1 className="text-[6.43vh]">ساختار گروه امکان</h1>
-          <p className="text-[1.58vh] max-w-[45%] text-justify line-clamp-4 leading-7">
+        <div className="flex flex-col md:flex-row md:items-center justify-between text-primary mt-[3vh] md:mt-[7.65vh] px-5 md:px-0">
+          <h1 className="text-[4.2vh] md:text-[6.43vh]">ساختار گروه امکان</h1>
+          <p className="text-[1.58vh] md:max-w-[45%] text-justify line-clamp-4 leading-7">
             ما در امکان، مسیر توسعه را با رویکردی یکپارچه و آینده‌نگر پیش
             می‌بریم. از برنامه‌ریزی کلان و سیاست‌گذاری اقتصادی تا جذب
             سرمایه‌گذاری‌های بین‌المللی و اجرای پروژه‌های تحول‌آفرین، همه در
