@@ -319,17 +319,17 @@ export default function LandingSectionTwo({
         className="w-full md:w-6/12 md:ps-16 md:whitespace-nowrap relative z-10 flex flex-col h-fit md:h-full pt-20 md:pt-28 pb-8 md:justify-between md:overflow-hidden bg-white"
       >
         <div>
-          <h1 className="text-[4vh] md:text-[6.43vh] font-medium text-center">
+          <h1 className="text-[4vh] md:text-[6.43vh] font-medium text-center md:text-start">
             مناطق پیشران اقتصاد
           </h1>
-          <div className="mt-[1vh] md:mt-[2.608vh] flex flex-row md:flex-col md:gap-2.5 mb-2 md:mb-4 w-full [&>*]:md:w-full [&>*]:w-full [&>*]:transition-colors [&>*]:duration-300 [&>*]:pb-1 [&>*]:md:pb-0 [&>*]:flex-1">
+          <div className="mt-[1vh] md:mt-[4.608vh] flex flex-row md:flex-col md:gap-2.5 mb-2 md:mb-4 w-full [&>*]:md:w-full [&>*]:w-full [&>*]:transition-colors [&>*]:duration-300 [&>*]:pb-1 [&>*]:md:pb-0 [&>*]:flex-1">
             {renderLocationButton("makran", "منطقه مکران")}
             {renderLocationButton("azad", "مناطق آزاد")}
             {renderLocationButton("islands", "جزایر")}
           </div>
         </div>
         <div>
-          <MotionScrollableWidth className="px-3 md:px-auto" isRTL={rtl}>
+          <MotionScrollableWidth className="px-3 md:px-0" isRTL={rtl}>
             {locationInfos[activeConfig.location].map((item) => (
               <AppButton
                 key={item.id}
@@ -349,7 +349,7 @@ export default function LandingSectionTwo({
               </AppButton>
             ))}
           </MotionScrollableWidth>
-          <div className="bg-dimPrimary px-[30px] py-[18px] md:py-[24px] mt-[0.96vh] max-w-[378px] flex-wrap mx-3">
+          <div className="bg-dimPrimary px-[30px] py-[18px] md:py-[24px] mt-[0.96vh] max-w-[378px] flex-wrap mx-3 md:mx-0">
             <div className="flex items-start justify-between">
               <div className="w-100">
                 <div className="text-[1.3vh] md:text-[1.62vh] opacity-60">
@@ -381,7 +381,7 @@ export default function LandingSectionTwo({
           </div>
           <div className="flex items-center gap-5 mt-[2.61vh] mb-5 hidden md:flex">
             <AppIcon
-              className="md:w-[30px]"
+              className="w-[30px] md:w-[50px]"
               color="primary"
               name="HalfCircleIcon"
               width="50"

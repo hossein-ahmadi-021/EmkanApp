@@ -3,7 +3,7 @@ import { Controller, FreeMode, Navigation } from "swiper/modules";
 import SwiperCore from "swiper/core";
 import "swiper/css";
 import "swiper/css/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppIcon from "@/common/appIcon";
 import natureImage from "@/assets/images/landing/nature.png";
 import Image from "next/image";
@@ -12,40 +12,52 @@ export default function NewsGallery() {
   const [swiperRef, setSwiperRef] = useState<SwiperCore | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="w-[34%] h-screen flex items-start gap-5">
-      {/* Navigation buttons remain unchanged */}
-      <div className="mt-12">
-        <button
-          className={`duration-700 w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer ${
-            isBeginning ? "bg-white border" : "bg-[#CDD8D2]"
-          }`}
-          onClick={() => swiperRef?.slidePrev()}
-        >
-          <AppIcon
-            className={`rotate-180 ${isBeginning && "text-[#ADA795]"}`}
-            color="primary"
-            name="ArrowIcon"
-            width="19px"
-            height="19px"
-          />
-        </button>
-        <button
-          className={`duration-700 w-[50px] h-[50px] rounded-full flex items-center justify-center mt-[5px] cursor-pointer ${
-            isEnd ? "bg-white border" : "bg-[#CDD8D2]"
-          }`}
-          onClick={() => swiperRef?.slideNext()}
-        >
-          <AppIcon
-            className={`${isEnd && "text-[#ADA795]"}`}
-            color="primary"
-            name="ArrowIcon"
-            width="19px"
-            height="19px"
-          />
-        </button>
-      </div>
+    <div className="md:w-[34%] h-screen flex items-start gap-5">
+      {/* Desktop Navigation Buttons */}
+      {!isMobile && (
+        <div className="mt-12">
+          <button
+            className={`duration-700 w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer ${
+              isBeginning ? "bg-white border" : "bg-[#CDD8D2]"
+            }`}
+            onClick={() => swiperRef?.slidePrev()}
+          >
+            <AppIcon
+              className={`rotate-180 ${isBeginning && "text-[#ADA795]"}`}
+              color="primary"
+              name="ArrowIcon"
+              width="19px"
+              height="19px"
+            />
+          </button>
+          <button
+            className={`duration-700 w-[50px] h-[50px] rounded-full flex items-center justify-center mt-[5px] cursor-pointer ${
+              isEnd ? "bg-white border" : "bg-[#CDD8D2]"
+            }`}
+            onClick={() => swiperRef?.slideNext()}
+          >
+            <AppIcon
+              className={`${isEnd && "text-[#ADA795]"}`}
+              color="primary"
+              name="ArrowIcon"
+              width="19px"
+              height="19px"
+            />
+          </button>
+        </div>
+      )}
 
       <div className="w-full h-full">
         <div className="flex items-center gap-2.5 text-lg font-bold mb-6">
@@ -57,30 +69,46 @@ export default function NewsGallery() {
           />
           <div>آخرین محتوای توسعه سرزمینی</div>
         </div>
+
         <Swiper
-          direction="vertical"
-          slidesPerView={1.25}
+          direction={isMobile ? "horizontal" : "vertical"}
+          slidesPerView={isMobile ? "auto" : 1.25}
           spaceBetween={30}
           onSwiper={setSwiperRef}
-          className="h-[75vh]"
+          className={isMobile ? "h-[75vh]" : "h-[75vh]"}
           freeMode={{
-            enabled: true,
+            enabled: isMobile,
             sticky: true,
             momentumRatio: 0.5,
             momentumBounceRatio: 0.1,
           }}
+          breakpoints={{
+            768: {
+              direction: "vertical",
+              slidesPerView: 1.25,
+              freeMode: {
+                enabled: true,
+                sticky: true,
+                momentumRatio: 0.5,
+                momentumBounceRatio: 0.1,
+              },
+            },
+          }}
           slidesPerGroup={1}
           resistanceRatio={0}
           watchSlidesProgress={true}
-          modules={[FreeMode, Controller, Navigation]} // Added Navigation here
+          modules={[FreeMode, Controller, Navigation]}
           onSlideChange={(swiper) => {
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);
           }}
         >
           {[1, 2, 3].map((item) => (
-            <SwiperSlide key={item} className="!h-[calc((88vh-30px)/1.5)]">
-              <NewsCard />
+            <SwiperSlide
+              key={item}
+              className={isMobile ? "!w-[85vw]" : "!h-[calc((88vh-30px)/1.5)]"}
+            >
+              <NewsCard isMobile={isMobile} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -89,12 +117,18 @@ export default function NewsGallery() {
   );
 }
 
-// NewsCard component remains unchanged
-const NewsCard = () => {
+const NewsCard = ({ isMobile }: { isMobile: boolean }) => {
   return (
     <div>
       <div className="relative">
-        <Image src={natureImage} alt="nature banner" width={460} height={307} />
+        <Image
+          src={natureImage}
+          alt="nature banner"
+          width={460}
+          height={307}
+          layout={isMobile ? "responsive" : "fixed"}
+          className={isMobile ? "mobile-image" : ""}
+        />
         <div className="bg-white text-[#104946] p-2 absolute bottom-0 font-normal text-[13px]">
           گزارش ها و انتشارات
         </div>
