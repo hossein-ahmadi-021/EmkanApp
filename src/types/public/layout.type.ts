@@ -7,3 +7,6 @@ export interface HeaderRouteAccessType {
   onBack: () => void;
   options: HeaderOptionType[];
 }
+
+export interface FooterRouteAccessType {
+}

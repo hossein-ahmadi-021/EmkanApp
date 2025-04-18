@@ -15,7 +15,7 @@ import { locales } from "@/lib/constants/public";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { headerRouteOptions } from "@/components/header/headerRouteOptions";
-import { existRoutes } from "@/types/public/header.type";
+import { existRoutes } from "@/types/public/layout.type";
 import { clsx } from "clsx";
 import { useHeaderStore } from "@/store/headerStore";
 import { headerSectionDictType } from "@/types/header/header.type";
@@ -43,22 +43,12 @@ export default function AppHeader({ dict, dir, lang }: Props) {
   const currentLang = pathSegments[0] || "en";
   const routePath = `/${pathSegments.slice(1).join("/")}` as existRoutes;
 
-  const isValidRoute = (path: string) => {
-    return Object.keys(headerRouteOptions).includes(path);
-  };
-
-  const switchLanguage = (newLang: reagonTypes) => {
-    const basePath = routePath === "/" ? "" : routePath;
-    const targetPath = `/${newLang}${basePath}`;
-    if (isValidRoute(routePath)) {
-      router.push(targetPath);
-    } else {
-      router.push(`/${newLang}`);
-    }
-  };
-
-  //themes
   const headerOptions = headerRouteOptions[routePath];
+
+  if (!headerOptions) {
+    return null;
+  }
+
   const isPrimary =
     headerOptions.theme === "primary" || importantColor == "primary";
   const isSub = headerOptions.type === "sub";
@@ -82,6 +72,20 @@ export default function AppHeader({ dict, dir, lang }: Props) {
   const variants = {
     hidden: { y: "-110%" },
     visible: { y: 0 },
+  };
+
+  const isValidRoute = (path: string) => {
+    return Object.keys(headerRouteOptions).includes(path);
+  };
+
+  const switchLanguage = (newLang: reagonTypes) => {
+    const basePath = routePath === "/" ? "" : routePath;
+    const targetPath = `/${newLang}${basePath}`;
+    if (isValidRoute(routePath)) {
+      router.push(targetPath);
+    } else {
+      router.push(`/${newLang}`);
+    }
   };
 
   return (

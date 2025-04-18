@@ -1,7 +1,9 @@
 import { router } from "next/client";
-import { existRoutes, HeaderRouteAccessType } from "@/types/public/header.type";
+import { existRoutes, HeaderRouteAccessType } from "@/types/public/layout.type";
 
-export const headerRouteOptions: Record<existRoutes, HeaderRouteAccessType> = {
+type OptionalHeaderRoutes = Partial<Record<existRoutes, HeaderRouteAccessType>>;
+
+export const headerRouteOptions: OptionalHeaderRoutes = {
   "/": {
     type: "main",
     theme: "white",
