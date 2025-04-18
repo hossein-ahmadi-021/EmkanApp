@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import ProgressBar from "@/components/ProgressBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -91,6 +92,7 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${peydaFont.className} ${yekanFont.variable}`}>
+        <ProgressBar />
         {children}
       </body>
     </html>
