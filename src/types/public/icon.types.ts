@@ -16,7 +16,18 @@ export type IconNames =
   | "EnergyIcon"
   | "ArrowToIcon"
   | "MiniHalfCircle"
-  | "FireIcon";
+  | "FireIcon"
+  | "TransportationIcon"
+  | "TravelingIcon"
+  | "BuildingIcon"
+  | "AgricultureIcon"
+  | "MiningIcon"
+  | "MoneyIcon"
+  | "ManufacturingIcon"
+  | "PharmacyIcon"
+  | "HealthcareIcon"
+  | "HumansIcon"
+  | "EnvironmentalIcon";
 
 export interface IconType {
   width: string;

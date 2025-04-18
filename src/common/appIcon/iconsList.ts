@@ -18,7 +18,17 @@ import EnergyIcon from "@/assets/icons/energy";
 import ArrowToIcon from "@/assets/icons/arrowTo";
 import MiniHalfCircle from "@/assets/icons/miniHalfCircle";
 import FireIcon from "@/assets/icons/fire";
-
+import TransportationIcon from "@/assets/icons/transportation";
+import TravelingIcon from "@/assets/icons/traveling";
+import BuildingIcon from "@/assets/icons/building";
+import AgricultureIcon from "@/assets/icons/agriculture";
+import MiningIcon from "@/assets/icons/mining";
+import MoneyIcon from "@/assets/icons/money";
+import ManufacturingIcon from "@/assets/icons/manufacturing";
+import PharmacyIcon from "@/assets/icons/pharmacy";
+import HealthcareIcon from "@/assets/icons/healthcare";
+import HumansIcon from "@/assets/icons/humans";
+import EnvironmentalIcon from "@/assets/icons/environmental";
 export const iconList: Record<
   IconNames,
   ({ width, height, className }: IconType) => ReactElement
@@ -41,4 +51,15 @@ export const iconList: Record<
   ArrowToIcon,
   MiniHalfCircle,
   FireIcon,
+  TransportationIcon,
+  TravelingIcon,
+  BuildingIcon,
+  AgricultureIcon,
+  MiningIcon,
+  MoneyIcon,
+  ManufacturingIcon,
+  PharmacyIcon,
+  HealthcareIcon,
+  HumansIcon,
+  EnvironmentalIcon,
 };

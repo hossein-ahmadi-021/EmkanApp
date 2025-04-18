@@ -2,12 +2,14 @@ import * as React from "react";
 import Image from "next/image";
 import AppIcon from "@/common/appIcon";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { IconNames } from "@/types/public/icon.types";
 
 interface Props {
   title: string;
   subTitle: string;
   bg: string | StaticImport;
   className?: string;
+  icon: IconNames;
 }
 
 export default function LinkableCard({
@@ -15,6 +17,7 @@ export default function LinkableCard({
   subTitle,
   bg,
   className,
+  icon,
 }: Props) {
   return (
     <div
@@ -29,10 +32,10 @@ export default function LinkableCard({
         className="w-full h-full object-cover transition-all duration-600 ease-in-out group-hover:scale-115 transform-gpu"
       />
       <div className="duration-600 rounded-full w-[9vh] h-[9vh] bg-[#C3B293] blur-xl z-10 absolute top-6.5 start-[-11vh] group-hover:start-[-8.2vh]" />
-      <div className="duration-600 rounded-full w-[189px] h-[189px] bg-primary blur-2xl absolute top-[-34] start-[-75px] group-hover:inset-0 group-hover:scale-190" />
+      <div className="duration-600 rounded-full w-[189px] h-[189px] bg-primary blur-2xl absolute top-[-25] start-[-75px] group-hover:inset-0 group-hover:scale-190" />
       <AppIcon
         className="absolute top-5 start-4 z-20"
-        name="EnergyIcon"
+        name={icon}
         width="3.3vh"
         height="3.3vh"
       />
