@@ -5,7 +5,7 @@ export default async function ContactUs({}: {
   params: Promise<{ lang: reagonTypes }>;
 }) {
   return (
-    <div className="grid grid-cols-5 grid-rows-5 gap-4 text-primary">
+    <div className="grid grid-cols-5 grid-rows-5 gap-4 text-primary bg-yellow-500">
       <div className="col-span-3 p-16">
         <h1 className="text-xl font-medium mb-[30px]">
           لطفا جهت ارسال پیام به کارشناسان گروه تجربه توسعه امکان فرم زیر را
