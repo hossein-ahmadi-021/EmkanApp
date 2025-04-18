@@ -1,16 +1,19 @@
 import * as React from "react";
 import AppIcon from "@/common/appIcon";
+import { IconNames } from "@/types/public/icon.types";
 
 interface Props {
   title: string;
   subTitle: string;
   className?: string;
+  icon: IconNames;
 }
 
 export default function LinkableInlineCard({
   title,
   subTitle,
   className,
+  icon,
 }: Props) {
   return (
     <div
@@ -20,7 +23,7 @@ export default function LinkableInlineCard({
         <AppIcon
           color="primary"
           className=""
-          name="EnergyIcon"
+          name={icon}
           width="3.5vh"
           height="3.5vh"
         />

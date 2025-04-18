@@ -6,11 +6,18 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 interface Props {
   title: string;
   subTitle: string;
+  desc: string;
   bg: string | StaticImport;
   className?: string;
 }
 
-export default function LinkableBanners({ bg, className }: Props) {
+export default function LinkableBanners({
+  title,
+  subTitle,
+  desc,
+  bg,
+  className,
+}: Props) {
   return (
     <div
       className={`relative overflow-hidden group text-white cursor-pointer ${className}`}
@@ -37,16 +44,9 @@ export default function LinkableBanners({ bg, className }: Props) {
           width="4.3vh"
           height="4.3vh"
         />
-        <div className="text-[3vh] mt-[1.74vh]">
-          مشاوره برنامه‌ریزی و اقتصاد
-        </div>
-        <div className="text-[1.98vh] font-light">
-          Planing and economic consulting
-        </div>
-        <p className="text-[1.85vh] mt-[5.13vh] font-light">
-          ارائه مشاوره استراتژیک و تحلیل‌های اقتصادی برای شناسایی فرصت‌ها و
-          افزایش بهره‌وری پروژه‌ها.
-        </p>
+        <div className="text-[3vh] mt-[1.74vh]">{title}</div>
+        <div className="text-[1.98vh] font-light">{subTitle}</div>
+        <p className="text-[1.85vh] mt-[5.13vh] font-light">{desc}</p>
         <div className="border-t border-gray-400 w-full mt-[3vh] mb-[1.1vh]"></div>
         <div className="flex items-center justify-between">
           <div className="text-[1.85vh]">مشاوره با تیم امکان</div>

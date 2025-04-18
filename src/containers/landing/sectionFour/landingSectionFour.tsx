@@ -3,6 +3,8 @@ import { homeSectionDictTypes } from "@/types/landing/landing.types";
 import ResponsiveLayout from "@/layout/responsiveLayout";
 import LinkableBanners from "@/components/cards/linkableBanners";
 import consultingBanner from "@/assets/images/landing/consultingBanner.png";
+import meetingBanner from "@/assets/images/landing/meetingBanner.png";
+import conferenceBanner from "@/assets/images/landing/conferenceBanner.png";
 
 interface Props {
   rtl: boolean;
@@ -17,20 +19,23 @@ export default function LandingSectionFour({}: Props) {
           <LinkableBanners
             className="min-h-[300px] md:h-[49vh] w-full md:w-[44vh]"
             bg={consultingBanner}
-            title=""
-            subTitle=""
+            title="مشاوره برنامه‌ریزی و اقتصاد"
+            subTitle="Planing and economic consulting"
+            desc="ارائه مشاوره استراتژیک و تحلیل‌های اقتصادی برای شناسایی فرصت‌ها و افزایش بهره‌وری پروژه‌ها."
           />
           <LinkableBanners
             className="min-h-[300px] md:h-[49vh] w-full md:w-[44vh]"
-            bg={consultingBanner}
-            title=""
-            subTitle=""
+            bg={meetingBanner}
+            title="آژانس ترویج سرمایه‌گذاری"
+            subTitle="Investment promotion agency"
+            desc="تسهیل جذب سرمایه‌های داخلی و خارجی برای تحقق پروژه‌های اقتصادی کلان در سراسر ایران."
           />
           <LinkableBanners
             className="min-h-[300px] md:h-[49vh] w-full md:w-[44vh]"
-            bg={consultingBanner}
-            title=""
-            subTitle=""
+            bg={conferenceBanner}
+            title="توسعه‌دهنده ارشد"
+            subTitle="Master developer company"
+            desc="راهبری پروژه‌های توسعه‌ای بزرگ در ایران، با هدف ایجاد زیرساخت‌های پایدار و مناطق اقتصادی جدید."
           />
         </div>
         <div className="flex flex-col md:flex-row md:items-center justify-between text-primary mt-[3vh] md:mt-[7.65vh] px-5 md:px-0-1">

@@ -68,120 +68,132 @@ export default function LandingSectionThree({}: Props) {
             />
             <LinkableCard
               icon="AgricultureIcon"
-              className="row-start-2 w-full"
               title="کشاورزی و فرآوری مواد غذایی"
               subTitle="Agriculture and food processing"
+              className="row-start-2 w-full"
               bg={agricultureBanner}
             />
             <LinkableCard
               icon="MiningIcon"
-              className="row-start-2 w-full"
               title="معدن و فلزات"
               subTitle="Mining and metals"
+              className="row-start-2 w-full"
               bg={mineBanner}
             />
             <LinkableCard
               icon="MoneyIcon"
-              className="row-start-2 w-full"
               title="خدمات مالی"
               subTitle="Financial services"
+              className="row-start-2 w-full"
               bg={financialBanner}
             />
             <LinkableCard
               icon="ManufacturingIcon"
-              className="row-start-2 w-full"
               title="تولید پیشرفته"
               subTitle="Advanced manufacturing"
+              className="row-start-2 w-full"
               bg={manufacturingBanner}
             />
             <LinkableCard
               icon="PharmacyIcon"
-              className="row-start-3 w-full"
               title="داروسازی و زیست فناوری"
               subTitle="Pharmaceuticals and biotechnology"
+              className="row-start-3 w-full"
               bg={pharmacyBanner}
             />
             <LinkableCard
               icon="HealthcareIcon"
-              className="row-start-3 w-full"
               title="خدمات و تجهیزات بهداشت و درمان"
               subTitle="Healthcare services and equipment"
+              className="row-start-3 w-full"
               bg={servicesBanner}
             />
             <LinkableCard
               icon="HumansIcon"
-              className="row-start-3 w-full"
               title="سرمایه انسانی و نوآوری"
               subTitle="Human capital and innovation"
+              className="row-start-3 w-full"
               bg={humanCapitalBanner}
             />
             <LinkableCard
               icon="EnvironmentalIcon"
-              className="row-start-3 w-full"
               title="خدمات محیط زیست"
               subTitle="Environmental services"
+              className="row-start-3 w-full"
               bg={environmentBanner}
             />
           </div>
           <div className="px-5 py-4 bg-dimPrimary h-full w-full mt-[1.5vh] md:hidden overflow-y-auto relative">
             <LinkableInlineCard
+              icon="EnergyIcon"
               title="نو انرژی‌ها"
               subTitle="New Energies"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="TransportationIcon"
+              title="حمل و نقل و لجستیک"
+              subTitle="Transportation and Logistics"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="TravelingIcon"
+              title="گردشگری و کیفیت زندگی"
+              subTitle="Tourism and quality of life"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="BuildingIcon"
+              title="املاک  و ساخت و ساز"
+              subTitle="Real estate and construction"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="AgricultureIcon"
+              title="کشاورزی و فرآوری مواد غذایی"
+              subTitle="Agriculture and food processing"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="MiningIcon"
+              title="معدن و فلزات"
+              subTitle="Mining and metals"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="MoneyIcon"
+              title="خدمات مالی"
+              subTitle="Financial services"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="ManufacturingIcon"
+              title="تولید پیشرفته"
+              subTitle="Advanced manufacturing"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="PharmacyIcon"
+              title="داروسازی و زیست فناوری"
+              subTitle="Pharmaceuticals and biotechnology"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="HealthcareIcon"
+              title="خدمات و تجهیزات بهداشت و درمان"
+              subTitle="Healthcare services and equipment"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="HumansIcon"
+              title="سرمایه انسانی و نوآوری"
+              subTitle="Human capital and innovation"
               className="w-full border-b-2"
             />
             <LinkableInlineCard
-              title="نو انرژی‌ها"
-              subTitle="New Energies"
+              icon="EnvironmentalIcon"
+              title="خدمات محیط زیست"
+              subTitle="Environmental services"
               className="w-full border-b-2"
             />
           </div>
