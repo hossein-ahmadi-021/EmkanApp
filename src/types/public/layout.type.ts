@@ -9,4 +9,6 @@ export interface HeaderRouteAccessType {
 }
 
 export interface FooterRouteAccessType {
+  type: "main" | "sub";
+  theme: "white" | "primary";
 }

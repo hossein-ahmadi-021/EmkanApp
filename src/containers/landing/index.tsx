@@ -9,6 +9,7 @@ import LandingSectionTwo from "@/containers/landing/sectionTwo/landingSectionTwo
 import LandingSectionThree from "@/containers/landing/sectionThree/landingSectionThree";
 import LandingSectionFour from "@/containers/landing/sectionFour/landingSectionFour";
 import LandingSectionFive from "@/containers/landing/sectionFive/landingSectionFive";
+import LandingSectionSix from "./sectionSix/landingSectionSix";
 
 interface Props {
   rtl: boolean;
@@ -19,7 +20,7 @@ export default function Landing({ dict, rtl }: Props) {
   const resetHeaderColor = useHeaderStore((state) => state.reset);
   const [currentSection, setCurrentSection] = useState(0);
   const [isSectionTwoScrolling, setIsSectionTwoScrolling] = useState(false);
-  const totalSections = 5;
+  const totalSections = 6;
   const isScrolling = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartY = useRef(0);
@@ -163,6 +164,12 @@ export default function Landing({ dict, rtl }: Props) {
         {/* Section 5 */}
         <motion.section className="w-full h-screen flex justify-center items-center text-white relative">
           <LandingSectionFive />
+          <ScrollButton dict={dict} onClick={() => handleScroll("down")} />
+        </motion.section>
+
+        {/* Section 6 */}
+        <motion.section className="w-full h-screen flex justify-center items-center text-white relative">
+          <LandingSectionSix />
         </motion.section>
       </motion.div>
     </motion.div>

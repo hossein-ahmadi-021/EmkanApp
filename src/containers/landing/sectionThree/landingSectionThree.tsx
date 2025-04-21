@@ -29,7 +29,7 @@ export default function LandingSectionThree({}: Props) {
         <ResponsiveLayout className="h-[calc(100%_-_155px)]">
           <div className="flex md:items-center flex-col md:flex-row justify-between md:px-16">
             <h1 className="text-[4vh] md:text-[6.43vh]">بخش‌های اقتصادی</h1>
-            <p className="text-[1.5vh] md:text-[1.58vh] md:max-w-[34%] text-justify line-clamp-3 leading-7">
+            <p className="text-[1.5vh] md:text-[1.58vh] md:max-w-[34%] text-justify leading-7">
               ایران با ظرفیت‌های بی‌نظیر در زمینه‌های مختلف اقتصادی، آماده است
               تا به بزرگترین قطب‌ صنعتی، تجاری و خدماتی منطقه تبدیل شود. گروه
               تجربه توسعه امکان، با تمرکز بر حوزه‌های استراتژیک فرصتی بی‌نظیر

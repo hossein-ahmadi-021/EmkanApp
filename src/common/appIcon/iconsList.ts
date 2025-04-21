@@ -29,6 +29,12 @@ import PharmacyIcon from "@/assets/icons/pharmacy";
 import HealthcareIcon from "@/assets/icons/healthcare";
 import HumansIcon from "@/assets/icons/humans";
 import EnvironmentalIcon from "@/assets/icons/environmental";
+import PlaningIcon from "@/assets/icons/planing";
+import InvestmentIcon from "@/assets/icons/investment";
+import RocketIcon from "@/assets/icons/rocket";   
+import PhoneIcon from "@/assets/icons/phone";   
+import ArrowToX from "@/assets/icons/arrowToX";   
+
 export const iconList: Record<
   IconNames,
   ({ width, height, className }: IconType) => ReactElement
@@ -62,4 +68,9 @@ export const iconList: Record<
   HealthcareIcon,
   HumansIcon,
   EnvironmentalIcon,
+  PlaningIcon,
+  InvestmentIcon,
+  RocketIcon,
+  PhoneIcon,
+  ArrowToX
 };

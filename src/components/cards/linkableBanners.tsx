@@ -2,6 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import AppIcon from "@/common/appIcon";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { IconNames } from "@/types/public/icon.types";
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
   desc: string;
   bg: string | StaticImport;
   className?: string;
+  icon: IconNames;
 }
 
 export default function LinkableBanners({
@@ -17,6 +19,7 @@ export default function LinkableBanners({
   desc,
   bg,
   className,
+  icon,
 }: Props) {
   return (
     <div
@@ -40,7 +43,7 @@ export default function LinkableBanners({
       <div className="absolute duration-600 ease-in-out bottom-[-5.4vh] group-hover:bottom-5 inset-x-8 z-20">
         <AppIcon
           className="group-hover:text-gold"
-          name="EnergyIcon"
+          name={icon}
           width="4.3vh"
           height="4.3vh"
         />

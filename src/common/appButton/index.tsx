@@ -88,7 +88,11 @@ export default function AppButton({
             onAnimationComplete={() => setRipple(null)}
           />
         )}
-        <div className="flex justify-between w-full items-center gap-2">
+        <div
+          className={`flex w-full items-center gap-2 ${
+            icon ? "justify-between" : "justify-center"
+          }`}
+        >
           {children}
           {icon && (
             <div className={isRTL ? "" : "rotate-180"}>

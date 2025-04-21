@@ -4,5 +4,7 @@ type OptionalFooterRoutes = Partial<Record<existRoutes, FooterRouteAccessType>>;
 
 export const footerRouteOptions: OptionalFooterRoutes = {
   "/contactUs": {
+    type: "main",
+    theme: "primary"
   },
 };

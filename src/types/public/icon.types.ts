@@ -27,7 +27,12 @@ export type IconNames =
   | "PharmacyIcon"
   | "HealthcareIcon"
   | "HumansIcon"
-  | "EnvironmentalIcon";
+  | "EnvironmentalIcon"
+  | "PlaningIcon"
+  | "InvestmentIcon"
+  | "RocketIcon"
+  | "PhoneIcon"
+  | "ArrowToX";
 
 export interface IconType {
   width: string;
