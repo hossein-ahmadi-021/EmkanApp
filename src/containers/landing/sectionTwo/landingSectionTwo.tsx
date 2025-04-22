@@ -319,9 +319,11 @@ export default function LandingSectionTwo({
         className="w-full md:w-6/12 md:ps-16 md:whitespace-nowrap relative z-10 flex flex-col h-fit md:h-full pt-20 md:pt-28 pb-8 md:justify-between md:overflow-hidden bg-white"
       >
         <div>
-          <h1 className="text-[4vh] md:text-[6.43vh] font-medium text-center md:text-start">
-            مناطق پیشران اقتصاد
-          </h1>
+          <div className="h-[10vh]">
+            <h1 className="text-[4vh] md:text-[6.43vh] font-medium text-center md:text-start fixed">
+              مناطق پیشران اقتصاد
+            </h1>
+          </div>
           <div className="mt-[1vh] md:mt-[4.608vh] flex flex-row md:flex-col md:gap-2.5 mb-2 md:mb-4 w-full [&>*]:md:w-full [&>*]:w-full [&>*]:transition-colors [&>*]:duration-300 [&>*]:pb-1 [&>*]:md:pb-0 [&>*]:flex-1">
             {renderLocationButton("makran", "منطقه مکران")}
             {renderLocationButton("azad", "مناطق آزاد")}
