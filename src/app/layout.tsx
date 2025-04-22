@@ -19,7 +19,7 @@ const peydaFont = localFont({
       weight: "200",
     },
     {
-      path: "/_fonts/peyda/peyda-light.ttf",
+      path: "/_fonts/peyda/Peyda-light.ttf",
       weight: "300",
     },
     {
