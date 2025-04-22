@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { MainLayout } from "@/layout/mainLayout";
-import { getDictionary } from "@/lib/dictionary";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +12,7 @@ export default async function Layout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: reagonTypes }>;
 }) {
   const { lang } = await params;
   const isRTL = lang === "fa";

@@ -1,28 +1,17 @@
-import { getDictionary } from "@/lib/dictionary";
+import { getDictionary } from "@/lib/dictionaries/dictionary";
+import { checkRtl } from "@/lib/utils/lang";
+import Landing from "@/containers/landing";
+import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
+import { homeSectionDictTypes } from "@/types/landing/landing.types";
 
 export default async function Home({
   params,
 }: {
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: reagonTypes }>;
 }) {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
+  const isRtl = checkRtl(lang);
+  const dict = (await getDictionary(lang, "home")) as homeSectionDictTypes;
 
-  return (
-    <div className="relative min-h-screen overflow-hidden">
-      <video
-        autoPlay
-        muted
-        loop
-        className="fixed inset-0 w-screen h-screen object-cover -z-10"
-      >
-        <source src="/videos/landing-bg-1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="relative z-10 pt-24">
-        <div className="text-red-500">{dict.home.title}</div>
-        <div className="">{dict.home.description}</div>
-      </div>
-    </div>
-  );
+  return <Landing rtl={isRtl} dict={dict} />;
 }

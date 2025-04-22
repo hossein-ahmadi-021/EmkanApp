@@ -1,0 +1,31 @@
+Explanation:
+Your Figma height (1150px) represents the full viewport height (100vh).
+
+The calculation scales the Figma pixel value proportionally to the screen height.
+
+For other values, apply the same formula:
+(Figma px / 1150) * 100 = Xvh → Use text-[Xvh].
+
+
+sample :
+figmaHeight = 1150
+vh = (Figma px / Figma max height) * 100
+vh = (13px / 1150) * 100 ≈ 1.13vh  ===> for responsive size in landing page
+
+
+
+
+//******** usage sizes ********//
+
+Figma Pixel (px)  Calculated vh	  Tailwind Class
+    84px	        ≈ 7.30vh	   text-[7.30vh]
+    70px	        ≈ 6.09vh	   text-[6.09vh]
+    74px	        ≈ 6.43vh	   text-[6.43vh]
+    62px	        ≈ 5.39vh	   text-[5.39vh]
+    24px	        ≈ 2.09vh	   text-[2.09vh]
+    22px	        ≈ 1.91vh	   text-[1.91vh]
+    20px	        ≈ 1.74vh	   text-[1.74vh]
+    18px	        ≈ 1.57vh	   text-[1.57vh]
+    17px	        ≈ 1.48vh	   text-[1.48vh]
+    16px	        ≈ 1.39vh	   text-[1.39vh]
+    13px	        ≈ 1.13vh	   text-[1.13vh]

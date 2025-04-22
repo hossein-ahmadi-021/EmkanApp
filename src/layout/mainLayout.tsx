@@ -1,23 +1,29 @@
 import AppHeader from "@/components/header/appHeader";
+import { LangProvider } from "@/layout/langProvider";
+import ResponsiveLayout from "@/layout/responsiveLayout";
+import { getDictionary } from "@/lib/dictionaries/dictionary";
+import { reagonTypes } from "@/types/public/Dictionaries/dictionaries.types";
+import { headerSectionDictType } from "@/types/header/header.type";
+import AppFooter from "@/components/footer/appFooter";
 
 interface Props {
   children: React.ReactNode;
-  lang: string;
+  lang: reagonTypes;
   dir: "rtl" | "ltr";
 }
 
-export function MainLayout({ children, lang, dir }: Props) {
+export async function MainLayout({ children, lang, dir }: Props) {
+  const dict = (await getDictionary(lang, "header")) as headerSectionDictType;
+
   return (
-    <div lang={lang} dir={dir}>
-      <div className="flex-1 w-full max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-        <AppHeader />
-        <main className="h-screen">{children}</main>
+    <LangProvider lang={lang}>
+      <div lang={lang} dir={dir}>
+        <ResponsiveLayout>
+          <AppHeader lang={lang} dict={dict} dir={dir} />
+          <main className="pt-20">{children}</main>
+        </ResponsiveLayout>
+        <AppFooter />
       </div>
-      <footer className="bg-white h-20">
-        <div className="flex-1 w-full max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-          <span className="text-red-500">footer</span>
-        </div>
-      </footer>
-    </div>
+    </LangProvider>
   );
 }
