@@ -21,7 +21,7 @@ const peydaFont = localFont({
       style: "normal",
     },
     {
-      path: "../../public/fonts/peyda/Peyda-light.ttf",
+      path: "../../public/fonts/peyda/Peyda-Light.ttf",
       weight: "300",
       style: "normal",
     },
