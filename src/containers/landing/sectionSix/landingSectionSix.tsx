@@ -61,7 +61,7 @@ const LandingSectionSix = () => {
                     height="20px"
                     name="PhoneIcon"
                   />
-                  <div dir="ltr">[ ۰۲۱ ] ۲۲۵۸۰۶۹۵</div>
+                  <div dir="ltr">[ ۰۲۱ ] ۲۲۸۰۶۵۵۵</div>
                   <AppIcon
                     color="primary"
                     width="20px"
@@ -82,7 +82,7 @@ const LandingSectionSix = () => {
                     height="20px"
                     name="PhoneIcon"
                   />
-                  <div dir="ltr">info@emkan.world</div>
+                  <div dir="ltr">contact@emkan.world</div>
                   <AppIcon
                     color="primary"
                     width="20px"
