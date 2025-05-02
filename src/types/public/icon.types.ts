@@ -32,7 +32,8 @@ export type IconNames =
   | "InvestmentIcon"
   | "RocketIcon"
   | "PhoneIcon"
-  | "ArrowToX";
+  | "ArrowToX"
+  | "LocationDashedIcon";
 
 export interface IconType {
   width: string;

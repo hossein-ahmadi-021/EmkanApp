@@ -34,7 +34,7 @@ import InvestmentIcon from "@/assets/icons/investment";
 import RocketIcon from "@/assets/icons/rocket";   
 import PhoneIcon from "@/assets/icons/phone";   
 import ArrowToX from "@/assets/icons/arrowToX";   
-
+import LocationDashedIcon from "@/assets/icons/locationDashed";
 export const iconList: Record<
   IconNames,
   ({ width, height, className }: IconType) => ReactElement
@@ -72,5 +72,6 @@ export const iconList: Record<
   InvestmentIcon,
   RocketIcon,
   PhoneIcon,
-  ArrowToX
+  ArrowToX,
+  LocationDashedIcon,
 };
